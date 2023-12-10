@@ -15,13 +15,13 @@ public class NewYear extends JPanel{
         f.setVisible(true);
     }
 
-    
-    
     public void paintComponent(Graphics g) {
         // sky
         sky(g);
         // graass
         grass(g);
+        // table
+        table(g);
     }
     
     public void plot(Graphics g, int x, int y) {
@@ -30,14 +30,21 @@ public class NewYear extends JPanel{
     
     private static void sky(Graphics g) {
         g.setColor(new Color(9, 30, 60));
-        g.fillRect(0, 0, 600, 250);
+        g.fillRect(0, 0, 600, 300);
     }
     
     private static void grass(Graphics g) {
     // g.setColor(new Color(128, 192, 20));
         g.setColor(Color.decode("#80C014"));
-        g.fillRect(0, 250, 600, 600);
+        g.fillRect(0, 300, 600, 600);
         
+    }
+
+    private void table(Graphics g) {
+        // body
+        g.setColor(Color.decode("#AF6329"));
+        // g.drawRoundRect(1,460 ,300 , 20 ,10 , 10);
+        g.fillRoundRect(1, 460, 300, 20, 10, 10);
     }
     
 }
