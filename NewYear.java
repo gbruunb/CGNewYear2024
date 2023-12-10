@@ -34,7 +34,8 @@ public class NewYear extends JPanel{
     }
     
     private static void grass(Graphics g) {
-        g.setColor(new Color(128, 192, 20));
+    // g.setColor(new Color(128, 192, 20));
+        g.setColor(Color.decode("#80C014"));
         g.fillRect(0, 250, 600, 600);
         
     }
