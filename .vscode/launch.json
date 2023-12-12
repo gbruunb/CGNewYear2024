@@ -9,6 +9,13 @@
             "name": "NewYear",
             "request": "launch",
             "mainClass": "NewYear",
+            "projectName": "CGNewYear2024_22d491d"
+        },
+        {
+            "type": "java",
+            "name": "NewYear",
+            "request": "launch",
+            "mainClass": "NewYear",
             "projectName": "CGNewYear2024_4cacf8c1"
         },
         {

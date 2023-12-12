@@ -3,10 +3,10 @@ import javax.swing.JPanel;
 
 import java.awt.*;
 
-public class NewYear extends JPanel{
+public class NewYear extends JPanel {
     public static void main(String[] args) {
         NewYear m = new NewYear();
-        
+
         JFrame f = new JFrame();
         f.add(m);
         f.setTitle("First Swing");
@@ -29,24 +29,29 @@ public class NewYear extends JPanel{
 
         //cup
         cup(g);
+    
+    
+    
+    
+        // mattress
+        mattress(g);
+
     }
-    
-    
-    
+
     public void plot(Graphics g, int x, int y) {
         g.fillRect(x, y, 1, 1);
     }
-    
+
     private static void sky(Graphics g) {
         g.setColor(new Color(9, 30, 60));
         g.fillRect(0, 0, 600, 350);
     }
-    
+
     private static void grass(Graphics g) {
         // g.setColor(new Color(128, 192, 20));
         g.setColor(Color.decode("#80C014"));
         g.fillRect(0, 350, 600, 240);
-        
+
     }
     
     private void table(Graphics g) {
@@ -185,4 +190,26 @@ public class NewYear extends JPanel{
         // g.fillArc(210, 398-30, 60, 70, 180, 60);
 
     }
+    
+    
+    private void mattress(Graphics g) {
+        g.setColor(Color.decode("#6F4E25"));
+        // g.drawArc(220, 530, 200, 5, 0, 100);
+
+        g.drawArc(330, 530, 100, 30, 0, 180); // line top
+        g.drawArc(330, 525, 30, 40, 180, 30); // line left
+        g.drawArc(332, 540, 100, 30, 180, 180); // line bottom
+        g.drawArc(427, 545, 5, 15, 270, 180); // line bottom
+        // g.drawRect(427, 545, 10, 10);
+      
+    }
+
+    private void cat(Graphics g) {
+
+    }
+
+    private void firework(Graphics g) {
+
+    }
+
 }
