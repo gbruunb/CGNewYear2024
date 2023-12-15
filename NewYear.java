@@ -199,13 +199,56 @@ public class NewYear extends JPanel {
 
     private void cat(Graphics g) {
         g.setColor(Color.black);
-        g.drawArc(330, 440, 5, 25, 90, 180);
-        g.drawArc(331, 465, 3, 15, 85, 175);
-        g.drawArc(330, 480, 3, 50, 220, 50);
+        g.drawPolygon(new int[] { 330, 335, 331 }, new int[] { 510, 513, 519 }, 3);
+        g.drawPolygon(new int[] { 331, 334, 329 }, new int[] { 519, 523, 527 }, 3);
+
     }
 
     private void firework(Graphics g) {
 
+    }
+
+    public void bresenhamLine(Graphics g, int x1, int y1, int x2, int y2) {
+        double dx = Math.abs(x2 - x1);
+        double dy = Math.abs(y2 - y1);
+
+        double sx = (x1 < x2) ? 1 : -1;
+        double sy = (y1 < y2) ? 1 : -1;
+        boolean isSwap = false;
+        if (dy > dx) {
+            double tmp = dy;
+            dy = dx;
+            dx = tmp;
+            isSwap = true;
+        }
+
+        double D = 2 * dy - dx;
+
+        int x = x1;
+        int y = y1;
+
+        for (int i = 1; i <= dx; i++) {
+            plot(g, x, y, 1);
+            if (D >= 0) {
+                if (isSwap)
+                    x += sx;
+                else
+                    y += sy;
+
+                D -= 2 * dx;
+            }
+
+            if (isSwap)
+                y += sy;
+            else
+                x += sx;
+
+            D += 2 * dy;
+        }
+    }
+
+    public void plot(Graphics g, int x, int y, int size) {
+        g.fillRect(x, y, size, size);
     }
 
 }
