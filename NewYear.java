@@ -13,7 +13,7 @@ public class NewYear extends JPanel {
         JFrame f = new JFrame();
         f.add(m);
         f.setTitle("First Swing");
-        f.setSize(600, 600);
+        f.setSize(600, 650);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
         f.setResizable(false);
@@ -37,8 +37,6 @@ public class NewYear extends JPanel {
         // mattress
         mattress(g);
 
-        // firework
-        firework(g);
     }
 
     public void plot(Graphics g, int x, int y) {
@@ -46,14 +44,16 @@ public class NewYear extends JPanel {
     }
 
     private static void sky(Graphics g) {
-        g.setColor(new Color(9, 30, 60));
-        g.fillRect(0, 0, 600, 350);
-    }
+        // g.setColor(new Color(9, 30, 60));
+        // g.fillRect(0, 0, 600, 350);
+        bresenhamLine(g, 0, 350, 600, 350);
+   }
 
     private static void grass(Graphics g) {
         // g.setColor(new Color(128, 192, 20));
-        g.setColor(Color.decode("#80C014"));
-        g.fillRect(0, 350, 600, 240);
+        // g.setColor(Color.decode("#80C014"));
+        // g.fillRect(0, 350, 600, 240);
+        bresenhamLine(g, 0, 700, 600, 700);
 
     }
 
@@ -134,9 +134,15 @@ public class NewYear extends JPanel {
         // g.fillOval(218, 428-30, 12, 12);
 
         g.setColor(Color.red);
-        g.drawArc(210, 430 - 30, 20, 15, -80, 180);
-        // outside cup handle
-        g.drawArc(210, 430 - 30, 25, 16, -90, 180);
+        g.drawArc(210, 430-30, 20, 15, -80, 180);
+        //outside cup handle
+        g.drawArc(210, 430-30, 25, 16, -90, 180);
+
+        // try outside cup handle fk this too hard
+        // g.fillArc(220, 430-30, 20, 16, -90, 180);
+        
+
+
 
         g.setColor(Color.black);
         g.fillRect(180, 424 - 30, 46, 2);
@@ -146,17 +152,49 @@ public class NewYear extends JPanel {
         // right of cup
         g.fillArc(200, 398 - 30, 25, 55, 270, 90);
         // under of cup
-        g.fillRect(193, 454 - 30, 20, -30);
-        g.fillRect(190, 424 - 30, 25, 30);
+        g.fillRect(193, 454-30, 20, -30);
+
+
+        g.fillRect(190, 424-30, 25, 30);
         // eye
         g.setColor(Color.red);
         g.fillRect(210, 430 - 30, 2, 2);
         g.fillRect(190, 430 - 30, 2, 2);
 
         // lip
-        g.drawArc(197, 440 - 30, 10, 10, 180, 180);
-    }
+        g.drawArc(197, 440-30, 10, 10, 180, 180);
 
+
+        // left of cup
+        // g.drawArc(177, 398-30, 25, 55, 180, 90);
+        // g.fillArc(177, 398-30, 25, 55, 180, 90);
+
+        // right of cup
+        // g.drawArc(210, 398-30, 25, 55, 0, -180);
+        // g.fillArc(206, 398-30, 28, 55, 270, 90);
+
+        // g.drawArc(210, 398-30, 60, 55, 0, -180);
+        // g.fillArc(210, 398-30, 60, 70, 0, -180);
+
+        // middle of cup
+        // g.setColor(Color.black);
+        // g.fillRect(188, 425-30, 40, 30);
+
+        // g.drawRect(20, 20, 30, 30);
+        // g.drawArc(20, 20, 30, 30,0 , 360);
+
+        // handle base
+        // g.setColor(Color.red);
+        // g.drawArc(225, 430-30, 9*2, 9*2, 267, 180);
+
+
+        //  test
+        // g.fillArc(210, 398-30, 60, 70, 0, -60);
+        // g.fillArc(210, 398-30, 60, 70, 180, 60);
+
+    }
+    
+    
     private void mattress(Graphics g) {
         g.setColor(Color.decode("#6F4E25"));
         // g.drawArc(220, 530, 200, 5, 0, 100);
@@ -170,49 +208,53 @@ public class NewYear extends JPanel {
     }
 
     private void cat(Graphics g) {
+        g.setColor(Color.black);
+        g.drawPolygon(new int[] { 330, 335, 331 }, new int[] { 510, 513, 519 }, 3);
+        g.drawPolygon(new int[] { 331, 334, 329 }, new int[] { 519, 523, 527 }, 3);
 
     }
 
-    private void firework(Graphics g) {
-        Random random = new Random();
-        for (int i = 0; i < 10; i++) {
-            int x = random.nextInt(600);
-            int y = random.nextInt(400);
-            // int x = 100;
-            // int y = 100;
-            drawExplosion(g, x, y);
+    public static void bresenhamLine(Graphics g, int x1, int y1, int x2, int y2) {
+        double dx = Math.abs(x2 - x1);
+        double dy = Math.abs(y2 - y1);
+
+        double sx = (x1 < x2) ? 1 : -1;
+        double sy = (y1 < y2) ? 1 : -1;
+        boolean isSwap = false;
+        if (dy > dx) {
+            double tmp = dy;
+            dy = dx;
+            dx = tmp;
+            isSwap = true;
         }
 
+        double D = 2 * dy - dx;
+
+        int x = x1;
+        int y = y1;
+
+        for (int i = 1; i <= dx; i++) {
+            plot(g, x, y, 1);
+            if (D >= 0) {
+                if (isSwap)
+                    x += sx;
+                else
+                    y += sy;
+
+                D -= 2 * dx;
+            }
+
+            if (isSwap)
+                y += sy;
+            else
+                x += sx;
+
+            D += 2 * dy;
+        }
     }
 
-    private void drawExplosion(Graphics g, int x, int y) {
-    int centerX = x;
-    int centerY = y;
-    int r = 20;
-
-    // Draw the explosion using drawOval
-    g.setColor(Color.RED);
-    g.drawOval(centerX - r / 2, centerY - r / 2, r, r);
-
-    // Draw lines to represent sparks
-    for (int i = 0; i < 8; i++) {
-        double angle = i * Math.PI / 4;
-        int x1 = centerX;
-        int y1 = centerY;
-        int x2 = centerX + (int) (5 * Math.cos(angle));
-        int y2 = centerY + (int) (5 * Math.sin(angle));
-
-        g.drawLine(x1, y1, x2, y2);
+    public static void plot(Graphics g, int x, int y, int size) {
+        g.fillRect(x, y, size, size);
     }
-       
-       
-       
-       
-       
-       
-       
-       
-    }
-   
 
 }
