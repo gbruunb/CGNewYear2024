@@ -28,7 +28,7 @@ public class Expe extends JPanel {
         g2d.setColor(Color.WHITE);
         g2d.fillRect(0, 0, 600, 600);
         // sky
-        // sky(g2d,buffer);
+        sky(g2d,buffer);
         // graass
         grass(g2d, buffer);
         // table
@@ -318,25 +318,25 @@ public class Expe extends JPanel {
             int x1 = currentPos[0];
             int y1 = currentPos[1];
 
-            if (m.getRGB(x1, y1) != replaceRGB) {
+            if (m.getRGB(x1, y1) == targetRGB) {
                 m.setRGB(x1, y1, replaceRGB);
                 // south
-                if (isInBound(x1, y1+1) && m.getRGB(x1, y1+1) != replaceRGB) {
+                if (isInBound(x1, y1+1) && m.getRGB(x1, y1+1) == targetRGB) {
                     q.add(new int[]{x1, y1+1});
                     // System.out.println("firsy");
                 }
                 // north
-                if (isInBound(x1, y1-1) && m.getRGB(x1, y1-1) != replaceRGB) {
+                if (isInBound(x1, y1-1) && m.getRGB(x1, y1-1) == targetRGB) {
                     q.add(new int[]{x1, y1-1});
                     // System.out.println("f2irsy");
                 }
                 // east
-                if (isInBound(x1+1, y1) && m.getRGB(x1+1, y1) != replaceRGB) {
+                if (isInBound(x1+1, y1) && m.getRGB(x1+1, y1) == targetRGB) {
                     q.add(new int[]{x1+1, y1});
                     // System.out.println("f3irsy");
                 }
                 // west
-                if (isInBound(x1-1, y1) && m.getRGB(x1-1, y1) != replaceRGB) {
+                if (isInBound(x1-1, y1) && m.getRGB(x1-1, y1) == targetRGB) {
                     q.add(new int[]{x1-1, y1});
                     // System.out.println("fir4sy");
                 }
