@@ -28,7 +28,7 @@ public class Expe extends JPanel {
         g2d.setColor(Color.WHITE);
         g2d.fillRect(0, 0, 600, 600);
         // sky
-        sky(g2d,buffer);
+        sky(g2d, buffer);
         // graass
         grass(g2d, buffer);
         // table
@@ -52,15 +52,15 @@ public class Expe extends JPanel {
         g.setColor(new Color(9, 30, 60));
         bresenhamLine(g, 0, 350, 600, 350);
         buffer = floodFill(buffer, 0, 10, Color.WHITE, new Color(9, 30, 60));
-   }
+    }
 
     private static void grass(Graphics g, BufferedImage buffer) {
         // g.setColor(new Color(128, 192, 20));
         // g.setColor(Color.decode("#80C014"));
         // g.fillRect(0, 350, 600, 240);
         // g.setColor(new Color(128, 192, 20 ));
-        bresenhamLine(g, 0, 600-30, 600, 600-30);
-        buffer = floodFill(buffer, 0, 599-30, Color.WHITE, Color.decode("#80C014"));
+        bresenhamLine(g, 0, 600 - 30, 600, 600 - 30);
+        buffer = floodFill(buffer, 0, 599 - 30, Color.WHITE, Color.decode("#80C014"));
 
     }
 
@@ -71,8 +71,8 @@ public class Expe extends JPanel {
         int x2 = x1 + width;
         int y2 = y1;
         bresenhamLine(g, x1, y1, x2, y2);
-        // left 
-        x2 = x1 ; 
+        // left
+        x2 = x1;
         y2 = y1 + height;
         bresenhamLine(g, x1, y1, x2, y2);
         // down
@@ -86,7 +86,38 @@ public class Expe extends JPanel {
         y1 = y2;
         y2 = y2 - height;
         bresenhamLine(g, x1, y1, x2, y2);
-    } 
+    }
+
+    private void drawRectToBresen2(Graphics g, int x, int y, int width, int height, int curve) {
+        int curveHalf = curve / 2;
+        int curveHalf2 = curveHalf / 2;
+        // top
+        int x1 = x;
+        int y1 = y;
+        int x2 = x1 + width;
+        int y2 = y1;
+        bresenhamLine(g, x1 + curve, y1, x2 - curve, y2);
+        // left
+        x2 = x1;
+        y2 = y1 + height;
+        bresenhamLine(g, x, y1 + curve, x, y2 - curve);
+        bezier_Curve(g, new int[] { x, x1, x1 + curve }, new int[] { y1 + curve, y1, y1 });
+        // bezier_Curve(g, new int[] { x1, x1, x1 + curve }, new int[] { y1 + curve, y1, y1 });
+
+        // down
+        x1 = x2;
+        y1 = y2;
+        x2 = x1 + width;
+        y2 = y1;
+        bresenhamLine(g, x1 + curve, y1, x2 - curve, y2);
+        bezier_Curve(g, new int[] { x1 , x1,x1 +curve },
+                new int[] { y2-curve,y2,y2});
+        // right
+        x1 = x2;
+        y1 = y2;
+        y2 = y2 - height;
+        bresenhamLine(g, x1, y1 - curve, x2, y2 + curve);
+    }
 
     private void table(Graphics g, BufferedImage buffer) {
         Color replaceColor;
@@ -96,55 +127,53 @@ public class Expe extends JPanel {
         // g.fillRoundRect(1, 460 - 30, 300, 20, 10, 15);
         // bresenhamLine(g, 1, 460 - 30, 300, 460 - 30);
         // bresenhamLine(g, 1, 480 - 30, 300, 480 - 30);
-        drawRectToBresen(g, 1, 460 - 30, 300, 20);
-        buffer = floodFill(buffer, 2, 461 - 30 , Color.decode("#80C014"),  Color.decode("#AF6329"));
-
+        // drawRectToBresen(g, 1, 460 - 30, 300, 20);
+        drawRectToBresen2(g, 1, 460 - 30, 300, 20, 7);
+        // buffer = floodFill(buffer, 2, 461 - 30 , Color.decode("#80C014"),
+        // Color.decode("#AF6329"));
 
         // left leg
         // g.fillRect(15, 480 - 30, 20, 120);
         // bresenhamLine(g, 15, 460-30, 15, 600 - 30);
         // bresenhamLine(g, 35, 460-30, 35, 600 - 30);
-        drawRectToBresen(g, 15, 480-30, 20, 120);
-        buffer = floodFill(buffer, 16, 481 - 30 , Color.decode("#80C014"),  Color.decode("#AF6329"));
-
+        drawRectToBresen(g, 15, 480 - 30, 20, 120);
+        buffer = floodFill(buffer, 16, 481 - 30, Color.decode("#80C014"), Color.decode("#AF6329"));
 
         // middle part
         g.setColor(Color.decode("#A25424"));
         replaceColor = Color.decode("#A25424");
         // g.fillRect(35, 510 - 30, 160, 20);
-        drawRectToBresen(g, 35, 510 - 30, 155,  20);
-        buffer = floodFill(buffer, 36, 511 - 30 , Color.decode("#80C014"), replaceColor);
+        drawRectToBresen(g, 35, 510 - 30, 155, 20);
+        buffer = floodFill(buffer, 36, 511 - 30, Color.decode("#80C014"), replaceColor);
 
         // red box
         g.setColor(Color.decode("#EC2C39"));
         replaceColor = Color.decode("#EC2C39");
         // g.fillRect(190, 480 - 30, 85, 120);
         drawRectToBresen(g, 190, 481 - 30, 85, 120);
-        buffer = floodFill(buffer, 191, 482 - 30 , Color.decode("#80C014"), replaceColor);
-        
-        
+        buffer = floodFill(buffer, 191, 482 - 30, Color.decode("#80C014"), replaceColor);
+
         // half box
         g.setColor(Color.decode("#CB1F2B"));
         replaceColor = Color.decode("#CB1F2B");
         // g.fillRect(190, (480 + 120 / 2) - 30, 85, 10);
         drawRectToBresen(g, 190, (480 + 120 / 2) - 30, 85, 10);
-        
-        buffer = floodFill(buffer, 191, (481 + 120 / 2) - 30 + 1 , Color.decode("#EC2C39"), replaceColor);
+
+        buffer = floodFill(buffer, 191, (481 + 120 / 2) - 30 + 1, Color.decode("#EC2C39"), replaceColor);
 
         // puller1
         g.setColor(Color.decode("#F6B74E"));
         replaceColor = Color.decode("#F6B74E");
         // g.fillRect(215, 495 - 30, 37, 10);
         drawRectToBresen(g, 215, 495 - 30, 37, 10);
-        buffer = floodFill(buffer, 216, 496 - 30 , Color.decode("#EC2C39"), replaceColor);
-
+        buffer = floodFill(buffer, 216, 496 - 30, Color.decode("#EC2C39"), replaceColor);
 
         // puller2
         g.setColor(Color.decode("#F6B74E"));
         replaceColor = Color.decode("#F6B74E");
         // g.fillRect(215, 567 - 30, 37, 10);
         drawRectToBresen(g, 215, 567 - 30, 37, 10);
-        buffer = floodFill(buffer, 216, 568- 30 , Color.decode("#EC2C39"), replaceColor);
+        buffer = floodFill(buffer, 216, 568 - 30, Color.decode("#EC2C39"), replaceColor);
     }
 
     private void computer(Graphics g, BufferedImage buffer) {
@@ -152,10 +181,10 @@ public class Expe extends JPanel {
         // base
 
         g.setColor(Color.decode("#353939"));
-        replaceColor = Color.decode("#F6B74E");
+        replaceColor = Color.decode("#353939");
         // g.fillRect(38, 450 - 30, 132, 10);
         drawRectToBresen(g, 38, 450 - 30, 132, 10);
-        buffer = floodFill(buffer, 216, 568- 30 , Color.decode("#EC2C39"), replaceColor);
+        buffer = floodFill(buffer, 39, 451 - 30, replaceColor);
 
         // Monitor
         // g.fillRoundRect(48, 360 - 30, 110, 85, 15, 15);
@@ -168,12 +197,12 @@ public class Expe extends JPanel {
         // white top tap
         g.setColor(Color.WHITE);
         // g.fillRect(55, 375 - 30, 97, 3);
-        drawRectToBresen(g ,55, 375 - 30, 97, 3);
+        drawRectToBresen(g, 55, 375 - 30, 97, 3);
 
         // bg
         g.setColor(Color.decode("#3F4E4D"));
         // g.fillRect(55, 378 - 30, 97, 60);
-        drawRectToBresen(g ,55, 378 - 30, 97, 60);
+        drawRectToBresen(g, 55, 378 - 30, 97, 60);
         // long green
         g.setColor(Color.decode("#6B9C27"));
         // g.fillRect(62, 378 - 30, 2, 60);
@@ -184,12 +213,12 @@ public class Expe extends JPanel {
         // g.fillRect(68, 389 - 30, 4, 2);
         drawRectToBresen(g, 68, 389 - 30, 4, 2);
         // g.fillRect(68, 399 - 30, 9, 2);
-        drawRectToBresen(g ,68, 399 - 30, 9, 2);
+        drawRectToBresen(g, 68, 399 - 30, 9, 2);
 
         // Blue in screen
         g.setColor(Color.decode("#34A3E8"));
         // g.fillRect(75, 389 - 30, 4, 2);
-        drawRectToBresen(g ,75, 389 - 30, 4, 2);
+        drawRectToBresen(g, 75, 389 - 30, 4, 2);
         // g.fillRect(103, 399 - 30, 15, 2);
         drawRectToBresen(g, 103, 399 - 30, 15, 2);
         // g.fillRect(85, 420 - 30, 15, 2);
@@ -212,13 +241,13 @@ public class Expe extends JPanel {
         // g.fillOval(218, 428-30, 12, 12);
 
         g.setColor(Color.red);
-        g.drawArc(210, 430-30, 20, 15, -80, 180);
-        //outside cup handle
-        g.drawArc(210, 430-30, 25, 16, -90, 180);
+        g.drawArc(210, 430 - 30, 20, 15, -80, 180);
+        // outside cup handle
+        g.drawArc(210, 430 - 30, 25, 16, -90, 180);
 
         // try outside cup handle fk this too hard
         // g.fillArc(220, 430-30, 20, 16, -90, 180);
-        
+
         g.setColor(Color.black);
         g.fillRect(180, 424 - 30, 46, 2);
 
@@ -227,20 +256,18 @@ public class Expe extends JPanel {
         // right of cup
         g.fillArc(200, 398 - 30, 25, 55, 270, 90);
         // under of cup
-        g.fillRect(193, 454-30, 20, -30);
+        g.fillRect(193, 454 - 30, 20, -30);
 
-
-        g.fillRect(190, 424-30, 25, 30);
+        g.fillRect(190, 424 - 30, 25, 30);
         // eye
         g.setColor(Color.red);
         g.fillRect(210, 430 - 30, 2, 2);
         g.fillRect(190, 430 - 30, 2, 2);
 
         // lip
-        g.drawArc(197, 440-30, 10, 10, 180, 180);
+        g.drawArc(197, 440 - 30, 10, 10, 180, 180);
     }
-    
-    
+
     private void mattress(Graphics g) {
         g.setColor(Color.decode("#6F4E25"));
         // g.drawArc(220, 530, 200, 5, 0, 100);
@@ -299,6 +326,43 @@ public class Expe extends JPanel {
         }
     }
 
+    public void bezier_Curve(Graphics g,int[] controlsPointX, int[] controlsPointY) {
+        double t = 0;
+        int xt;
+        int yt;
+        if(controlsPointX.length == 4){
+            for (; t <= 1; t+= 0.001) {
+             xt = (int) (Math.pow(1 - t, 3) * controlsPointX[0] +
+                    3 * t * Math.pow(1 - t, 2) * controlsPointX[1] +
+                    3 * t * t * Math.pow(1 - t, 1) * controlsPointX[2] +
+                    t * t * t * controlsPointX[3]);
+
+            yt = (int) (Math.pow(1 - t, 3) * controlsPointY[0] +
+                    3 * t * Math.pow(1 - t, 2) * controlsPointY[1] +
+                    3 * t * t * Math.pow(1 - t, 1) * controlsPointY[2] +
+                    t * t * t * controlsPointY[3]);
+  
+                    plot(g, xt, yt);
+            }
+        }
+        else{
+            // System.out.println(" 8");
+             for (; t <= 1; t+= 0.001) {
+             xt = (int) (Math.pow(1 - t, 2) * controlsPointX[0] +
+                    2 * t * Math.pow(1 - t, 1) * controlsPointX[1] +
+                    t *  t * controlsPointX[2]);
+
+            yt = (int) (Math.pow(1 - t, 2) * controlsPointY[0] +
+                    2 * t * Math.pow(1 - t, 1) * controlsPointY[1] +
+                    t  * t * controlsPointY[2]);
+  
+                    plot(g, xt, yt);
+        }
+        
+
+    }
+    }
+
     public static void plot(Graphics g, int x, int y, int size) {
         g.fillRect(x, y, size, size);
     }
@@ -307,10 +371,10 @@ public class Expe extends JPanel {
         Queue<int[]> q = new LinkedList<>();
         // Queue<int[]> q = new LinkedList<>();
 
-        q.add(new int[]{x,y});
+        q.add(new int[] { x, y });
         int targetRGB = target_color.getRGB();
         int replaceRGB = replacement_color.getRGB();
-        
+
         int[] currentPos;
         while (!q.isEmpty()) {
             currentPos = q.poll();
@@ -321,33 +385,74 @@ public class Expe extends JPanel {
             if (m.getRGB(x1, y1) == targetRGB) {
                 m.setRGB(x1, y1, replaceRGB);
                 // south
-                if (isInBound(x1, y1+1) && m.getRGB(x1, y1+1) == targetRGB) {
-                    q.add(new int[]{x1, y1+1});
+                if (isInBound(x1, y1 + 1) && m.getRGB(x1, y1 + 1) == targetRGB) {
+                    q.add(new int[] { x1, y1 + 1 });
                     // System.out.println("firsy");
                 }
                 // north
-                if (isInBound(x1, y1-1) && m.getRGB(x1, y1-1) == targetRGB) {
-                    q.add(new int[]{x1, y1-1});
+                if (isInBound(x1, y1 - 1) && m.getRGB(x1, y1 - 1) == targetRGB) {
+                    q.add(new int[] { x1, y1 - 1 });
                     // System.out.println("f2irsy");
                 }
                 // east
-                if (isInBound(x1+1, y1) && m.getRGB(x1+1, y1) == targetRGB) {
-                    q.add(new int[]{x1+1, y1});
+                if (isInBound(x1 + 1, y1) && m.getRGB(x1 + 1, y1) == targetRGB) {
+                    q.add(new int[] { x1 + 1, y1 });
                     // System.out.println("f3irsy");
                 }
                 // west
-                if (isInBound(x1-1, y1) && m.getRGB(x1-1, y1) == targetRGB) {
-                    q.add(new int[]{x1-1, y1});
+                if (isInBound(x1 - 1, y1) && m.getRGB(x1 - 1, y1) == targetRGB) {
+                    q.add(new int[] { x1 - 1, y1 });
                     // System.out.println("fir4sy");
                 }
             }
         }
 
+        return m;
+    }
+
+    public static BufferedImage floodFill(BufferedImage m, int x, int y, Color border_Color) {
+        Queue<int[]> q = new LinkedList<>();
+        // Queue<int[]> q = new LinkedList<>();
+
+        q.add(new int[] { x, y });
+        int border_ColorRGB = border_Color.getRGB();
+
+        int[] currentPos;
+        while (!q.isEmpty()) {
+            currentPos = q.poll();
+
+            int x1 = currentPos[0];
+            int y1 = currentPos[1];
+
+            if (m.getRGB(x1, y1) != border_ColorRGB) {
+                m.setRGB(x1, y1, border_ColorRGB);
+                // south
+                if (isInBound(x1, y1 + 1) && m.getRGB(x1, y1 + 1) != border_ColorRGB) {
+                    q.add(new int[] { x1, y1 + 1 });
+                    // System.out.println("firsy");
+                }
+                // north
+                if (isInBound(x1, y1 - 1) && m.getRGB(x1, y1 - 1) != border_ColorRGB) {
+                    q.add(new int[] { x1, y1 - 1 });
+                    // System.out.println("f2irsy");
+                }
+                // east
+                if (isInBound(x1 + 1, y1) && m.getRGB(x1 + 1, y1) != border_ColorRGB) {
+                    q.add(new int[] { x1 + 1, y1 });
+                    // System.out.println("f3irsy");
+                }
+                // west
+                if (isInBound(x1 - 1, y1) && m.getRGB(x1 - 1, y1) != border_ColorRGB) {
+                    q.add(new int[] { x1 - 1, y1 });
+                    // System.out.println("fir4sy");
+                }
+            }
+        }
 
         return m;
     }
 
     static boolean isInBound(int x, int y) {
-        return x >=0  && y > 0 && x < 601 && y < 601;
+        return x >= 0 && y > 0 && x < 601 && y < 601;
     }
 }
