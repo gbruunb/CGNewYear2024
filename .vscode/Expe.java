@@ -29,73 +29,33 @@ public class Expe extends JPanel {
 
         g2d.setColor(Color.WHITE);
         g2d.fillRect(0, 0, 600, 600);
-        // // sky
-        // sky(g2d, buffer);
-        // // star
-        // star(g2d);
-        // // graass
-        // grass(g2d, buffer);
-        // // table
-        // table(g2d, buffer);
-        // // computer
-        // computer(g2d, buffer);
-        // // cup
-        // cup(g2d);
+        // sky
+        sky(g2d, buffer);
+        // star
+        star(g2d);
+        // graass
+        grass(g2d, buffer);
+        // table
+        table(g2d, buffer);
+        // computer
+        computer(g2d, buffer);
+        // cup
         cup(g2d);
-        // // mattress
-        // mattress(g2d);
-        // firework(g2d);
+        // mattress
+        mattress(g2d);
+        firework(g2d);
 
-        // boy(g2d, buffer);
-        // girl(g2d, buffer);
+        boy(g2d, buffer);
+        girl(g2d, buffer);
 
-        // cat(g2d, buffer, 30);
+        cat(g2d, buffer, 30);
 
-        // g.setColor(Color.WHITE);
+        g.setColor(Color.WHITE);
 
-        // bezier_Curve(g2d,new int[]{10,5,30}, new int[]{20,30,30});
-
-        test(g2d);
 
 
         g.drawImage(buffer, 0, 0, null);
 
-    }
-
-    private void test(Graphics g2d) {
-      bezier_CurveTest(g2d, 446.0638, 9.9947, 446.2331, 9.9007, 446.9245, 10.8454,447.2128, 11);
-      bezier_CurveTest(g2d,447.2128 ,447.637, 11.819, 11.2394, 448.108, 12.5525 ,448.7447, 13.8245);
-
-        
-    }
-    public static void bezier_CurveTest(Graphics g,double x1d, double y1d, double x2d, double y2d, double x3d, double y3d, double x4d, double y4d) {
-        double t = 0;
-        int xt;
-        int yt;
-
-        int x1 = (int) Math.round(x1d);
-        int y1 = (int) Math.round(y1d);
-        int x2 = (int) Math.round(x2d);
-        int y2 = (int) Math.round(y2d);
-        int x3 = (int) Math.round(x3d);
-        int y3 = (int) Math.round(y3d);
-        int x4 = (int) Math.round(x4d);
-        int y4 = (int) Math.round(y4d);
-
-            for (; t <= 1; t += 0.001) {
-                xt = (int) (Math.pow(1 - t, 3) * x1 +
-                        3 * t * Math.pow(1 - t, 2) * x2 +
-                        3 * t * t * Math.pow(1 - t, 1) * x3 +
-                        t * t * t * x4);
-
-                yt = (int) (Math.pow(1 - t, 3) * y1 +
-                        3 * t * Math.pow(1 - t, 2) * y2 +
-                        3 * t * t * Math.pow(1 - t, 1) * y3 +
-                        t * t * t * y4);
-
-                plot(g, xt, yt);
-            
-        }
     }
 
     private void boy(Graphics2D g2d, BufferedImage buffer) {
@@ -931,43 +891,9 @@ public class Expe extends JPanel {
         buffer = floodFill(buffer, 105, 421 - 30, Color.decode("#864B9B"));
     }
 
-    private void cup(Graphics g2d) {
-        // bresenhamLine(g, 179, 425 - 30, 239, 425 - 30);
+    private void cup(Graphics g) {
+        bresenhamLine(g, 179, 425 - 30, 239, 425 - 30);
         // bezier_Curve(g, new int[]{188, 195,,}, new int[]{425, 426,,});
-        g2d.setColor(Color.black);
-        bezier_Curve(g2d, new int[]{179, 180, 181, 185}, new int[]{425, 424, 424, 424});
-bezier_Curve(g2d, new int[]{185, 189, 191, 195}, new int[]{424, 424, 424, 424});
-bezier_Curve(g2d, new int[]{195, 200, 200, 207}, new int[]{424, 424, 424, 424});
-bezier_Curve(g2d, new int[]{207, 214, 213, 217}, new int[]{424, 424, 424, 424});
-bezier_Curve(g2d, new int[]{217, 222, 224, 230}, new int[]{424, 424, 423, 423});
-bezier_Curve(g2d, new int[]{230, 230, 232, 235}, new int[]{423, 423, 424, 424});
-bezier_Curve(g2d, new int[]{235, 238, 240, 240}, new int[]{424, 424, 425, 426});
-bezier_Curve(g2d, new int[]{240, 240, 239, 239}, new int[]{426, 427, 428, 428});
-bezier_Curve(g2d, new int[]{239, 240, 240, 244}, new int[]{428, 429, 429, 428});
-bezier_Curve(g2d, new int[]{244, 247, 247, 249}, new int[]{428, 427, 427, 426});
-bezier_Curve(g2d, new int[]{249, 250, 251, 253}, new int[]{426, 426, 426, 427});
-bezier_Curve(g2d, new int[]{253, 255, 256, 256}, new int[]{427, 427, 428, 429});
-bezier_Curve(g2d, new int[]{256, 258, 258, 258}, new int[]{429, 430, 431, 432});
-bezier_Curve(g2d, new int[]{258, 259, 259, 259}, new int[]{432, 434, 436, 437});
-bezier_Curve(g2d, new int[]{259, 259, 259, 257}, new int[]{437, 438, 441, 443});
-bezier_Curve(g2d, new int[]{257, 256, 255, 252}, new int[]{443, 444, 445, 447});
-bezier_Curve(g2d, new int[]{252, 250, 248, 246}, new int[]{447, 448, 449, 450});
-bezier_Curve(g2d, new int[]{246, 242, 242, 238}, new int[]{450, 452, 451, 452});
-bezier_Curve(g2d, new int[]{238, 236, 236, 232}, new int[]{452, 453, 454, 455});
-bezier_Curve(g2d, new int[]{232, 229, 230, 229}, new int[]{455, 456, 456, 457});
-bezier_Curve(g2d, new int[]{229, 226, 226, 223}, new int[]{457, 458, 460, 461});
-bezier_Curve(g2d, new int[]{223, 222, 221, 218}, new int[]{461, 462, 462, 462});
-bezier_Curve(g2d, new int[]{218, 217, 215, 211}, new int[]{462, 462, 463, 463});
-bezier_Curve(g2d, new int[]{211, 208, 208, 202}, new int[]{463, 463, 463, 463});
-bezier_Curve(g2d, new int[]{202, 195, 194, 193}, new int[]{463, 462, 463, 461});
-bezier_Curve(g2d, new int[]{193, 192, 191, 189}, new int[]{461, 461, 460, 458});
-bezier_Curve(g2d, new int[]{189, 188, 188, 187}, new int[]{458, 457, 456, 455});
-bezier_Curve(g2d, new int[]{187, 185, 184, 183}, new int[]{455, 453, 451, 450});
-bezier_Curve(g2d, new int[]{183, 182, 182, 181}, new int[]{450, 448, 447, 445});
-bezier_Curve(g2d, new int[]{181, 179, 179, 179}, new int[]{445, 442, 440, 438});
-bezier_Curve(g2d, new int[]{179, 178, 178, 178}, new int[]{438, 437, 436, 432});
-bezier_Curve(g2d, new int[]{178, 178, 179, 179}, new int[]{432, 426, 426, 425});
-
     }
 
     private void mattress(Graphics g) {
