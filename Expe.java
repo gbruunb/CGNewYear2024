@@ -53,7 +53,7 @@ public class Expe extends JPanel {
         lineOfLamp1(g2d, buffer,7,-29);
         lineOfLamp2(g2d, buffer,12,-50);
         lineOfLamp3(g2d, buffer,28,-69);
-        ballOnChristmas(g2d, buffer, 0,0);
+        ballOnChristmas(g2d, buffer, 0,0, Color.decode("#9BD0DD"));
 
 
 
@@ -69,13 +69,25 @@ public class Expe extends JPanel {
 
     }
 
-    private void ballOnChristmas(Graphics g, BufferedImage buffer, int x, int y){
+    private void ballOnChristmas(Graphics g, BufferedImage buffer, int x, int y, Color color){
+        int startX = 0;
+        int startY = -30;
         g.setColor(Color.decode("#000000"));
-        int[] xPoints = {44+x, 45+x, 45+x, 47+x, 48+x, 49+x, 49+x, 51+x, 52+x, 53+x, 52+x, 52+x, 51+x, 49+x, 47+x, 47+x, 45+x, 43+x, 42+x, 42+x, 41+x, 42+x, 43+x};
-        int[] yPoints = {268, 268, 267, 267, 267, 267, 268, 269, 269, 271, 272, 274, 275, 277, 277, 277, 277, 275, 274, 272, 271, 269, 269};
-        for (int i = 0; i < xPoints.length - 3; i+=3) {
-            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
-        }
+        int[] xPoints = {44+startX+x, 46+startX+x, 49+startX+x, 51+startX+x, 52+startX+x, 52+startX+x, 51+startX+x, 50+startX+x, 48+startX+x, 46+startX+x, 44+startX+x, 43+startX+x, 42+startX+x, 43+startX+x, 44+startX+x};
+        int[] yPoints = {268+startY+y, 267+startY+y, 267+startY+y, 269+startY+y, 271+startY+y, 273+startY+y, 275+startY+y, 276+startY+y, 277+startY+y, 277+startY+y, 276+startY+y, 274+startY+y, 272+startY+y, 270+startY+y, 268+startY+y};
+        g.drawPolygon(xPoints, yPoints, xPoints.length);
+        bresenhamLine(g,44+startX+x,268+startY+y, 44+startX+x, 265+startY+y);
+        bresenhamLine(g,44+startX+x,265+startY+y, 50+startX+x, 265+startY+y);
+        bresenhamLine(g,50+startX+x,265+startY+y, 50+startX+x, 268+startY+y);
+        bresenhamLine(g,47+startX+x,265+startY+y, 47+startX+x, 261+startY+y);
+
+        buffer = floodFill(buffer,46+startX+x,269+startY+y,Color.WHITE, color);
+        buffer = floodFill(buffer,46+startX+x,266+startY+y,Color.WHITE, Color.decode("#EFEA43"));
+
+        g.setColor(Color.BLUE);
+        plot(g,46+startX+x,266+startY+y);
+
+
     }
 
 
