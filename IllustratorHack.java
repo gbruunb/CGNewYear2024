@@ -13,7 +13,7 @@ public class IllustratorHack {
             while (input.hasNextLine()) {
                 String[] splt = input.nextLine().split(" ");
                 for (int i = 0; i < splt.length / 2; i += 2) {
-                    if (!splt[i].equals("c") || !splt[i].equals("m")) {
+                    if (!splt[i].equals("c") || !splt[i].equals("m")|| !splt[i].equals("l")) {
                         xPointArrl.add((int)Math.round(Double.parseDouble(splt[i])));
                         yPointArrl.add((int)Math.round(Double.parseDouble(splt[i+1])));
                     }
