@@ -197,6 +197,22 @@ public class Expe extends JPanel {
         bresenhamLine(g, 11 + x, 328 + y,15 + x,327 + y);
         bresenhamLine(g, 39 + x, 328 + y,35 + x,327 + y);
 
+        bresenhamLine(g,23+x,328+y,19+x, 330+y);
+        bresenhamLine(g,21+x,326+y,16+x, 330+y);
+
+
+        bresenhamLine(g,19+x,333+y,19+x, 330+y);
+        bresenhamLine(g,16+x,333+y,16+x, 330+y);
+
+        bresenhamLine(g,17+x,335+y,17+x, 350+y);
+        bresenhamLine(g,20+x,336+y,20+x, 352+y);
+
+        g.setColor(Color.BLUE);
+
+//        plot(g,19+x,326+y);
+//        plot(g,16+x,330+y);
+//        plot(g,20+x,331+y);
+
 
 
     }
