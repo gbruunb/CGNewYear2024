@@ -14,7 +14,7 @@ public class Expe extends JPanel {
 
         JFrame f = new JFrame();
         f.add(m);
-        f.setTitle("First Swing");
+        f.setTitle("Assignment1_521_870");
         f.setSize(600, 600);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
@@ -40,55 +40,170 @@ public class Expe extends JPanel {
         // computer
         computer(g2d, buffer);
         // cup
-        cup(g2d);
+        cup(g2d,buffer, 0, -35);
         // mattress
 //        mattress(g2d);
-        firework(g2d);
+        firework(g2d, buffer);
 
-        boy(g2d, buffer);
-        girl(g2d, buffer);
+        girl(g2d, buffer,0,0);
+        boy(g2d, buffer, 0, 0);
 
         cat(g2d, buffer, 30);
+        ballOnChristmas(g2d, buffer, 0,0, Color.decode("#9BD0DD"));
+        ballOnChristmas(g2d, buffer, 0,-30, Color.decode("#8984BF"));
+        ballOnChristmas(g2d, buffer, 16,-26, Color.decode("#D7482E"));
         christmasTree(g2d, buffer, 0, 0);
+        lineOfLamp1(g2d, buffer,7,-29);
+        lineOfLamp2(g2d, buffer,12,-50);
+        lineOfLamp3(g2d, buffer,28,-69);
 
-        g.setColor(Color.WHITE);
 
-        gift(g2d, buffer, 0, 0);
+        girl(g2d, buffer,0,0);
+        boy(g2d, buffer, 0, 0);
+
+
+
+        gift(g2d, buffer, 0, 0-30);
+//        gift(g2d, buffer, -12, -16-30);
+//        gift(g2d, buffer, 18, -12-30);
+//        gift(g2d, buffer, 50, -12-30);
+//        gift(g2d, buffer, 77, -21-30);
+
+
 
         g.drawImage(buffer, 0, 0, null);
 
     }
 
+    private void ballOnChristmas(Graphics g, BufferedImage buffer, int x, int y, Color color){
+        int startX = 0;
+        int startY = -30;
+        g.setColor(Color.decode("#000000"));
+        int[] xPoints = {44+startX+x, 46+startX+x, 49+startX+x, 51+startX+x, 52+startX+x, 52+startX+x, 51+startX+x, 50+startX+x, 48+startX+x, 46+startX+x, 44+startX+x, 43+startX+x, 42+startX+x, 43+startX+x, 44+startX+x};
+        int[] yPoints = {268+startY+y, 267+startY+y, 267+startY+y, 269+startY+y, 271+startY+y, 273+startY+y, 275+startY+y, 276+startY+y, 277+startY+y, 277+startY+y, 276+startY+y, 274+startY+y, 272+startY+y, 270+startY+y, 268+startY+y};
+        g.drawPolygon(xPoints, yPoints, xPoints.length);
+        bresenhamLine(g,44+startX+x,268+startY+y, 44+startX+x, 265+startY+y);
+        bresenhamLine(g,44+startX+x,265+startY+y, 50+startX+x, 265+startY+y);
+        bresenhamLine(g,50+startX+x,265+startY+y, 50+startX+x, 268+startY+y);
+        bresenhamLine(g,47+startX+x,265+startY+y, 47+startX+x, 261+startY+y);
+
+        buffer = floodFill(buffer,46+startX+x,269+startY+y,Color.WHITE, color);
+        buffer = floodFill(buffer,46+startX+x,266+startY+y,Color.WHITE, Color.decode("#EFEA43"));
+
+
+
+    }
+
+
+
+    private void smallLamp(Graphics g, BufferedImage buffer, int x, int y){
+        g.setColor(Color.decode("#98972B"));
+        int[] xPoints = {21+x, 23+x, 24+x, 24+x, 23+x, 21+x, 20+x, 20+x, 21+x};
+        int[] yPoints = {261+y, 261+y, 262+y, 264+y, 265+y, 265+y, 264+y, 262+y, 261+y};
+        g.drawPolygon(xPoints,yPoints,xPoints.length);
+        for (int i = 21; i <= 23; i++) {
+            for (int j = 262; j <= 264; j++) {
+                buffer = floodFill(buffer, i+x, j+y, Color.BLACK, Color.decode("#EFEA43"));
+            }
+        }
+        Color curColorY1 = getColor(buffer,21,262+y);
+        Color curColorY2 = getColor(buffer,21+x,263+y);
+        Color curColorY3 = getColor(buffer,21+x,263+y);
+//        System.out.println(Color.decode("#EFEA43"));
+//        System.out.println(curColorY1);
+        buffer = floodFill(buffer, 21+x, 262+y, Color.WHITE, Color.decode("#EFEA43"));
+        buffer = floodFill(buffer, 23+x, 262+y, Color.WHITE, Color.decode("#EFEA43"));
+        buffer = floodFill(buffer, 23+x, 264+y, Color.WHITE, Color.decode("#EFEA43"));
+        buffer = floodFill(buffer, 21+x, 264+y, Color.WHITE, Color.decode("#EFEA43"));
+
+        buffer = floodFill(buffer, 21+x, 262+y, Color.decode("#19B24A"), Color.decode("#EFEA43"));
+        buffer = floodFill(buffer, 23+x, 262+y, Color.decode("#19B24A"), Color.decode("#EFEA43"));
+        buffer = floodFill(buffer, 23+x, 264+y, Color.decode("#19B24A"), Color.decode("#EFEA43"));
+        buffer = floodFill(buffer, 21+x, 264+y, Color.decode("#19B24A"), Color.decode("#EFEA43"));
+
+    }
+
+    private Color getColor(BufferedImage buffer, int x, int y){
+        int pixel = buffer.getRGB(x, y);
+        int r = (pixel >> 16) & 0xFF;
+        int g = (pixel >> 8) & 0xFF;
+        int b = pixel & 0xFF;
+        return new Color(r, g, b);
+    }
+
+    private void lineOfLamp1(Graphics g, BufferedImage buffer, int x, int y){
+        int firstX = 23;
+        int firstY = 262;
+        int[] diffX = {23-firstX,  25-firstX,  28-firstX,  31-firstX,  34-firstX,  37-firstX,  41-firstX,  44-firstX,  48-firstX,  51-firstX,  55-firstX,  59-firstX,  63-firstX,  67-firstX,  71-firstX,  75-firstX,  79-firstX, 83-firstX, 87-firstX, 91-firstX};
+        int[] diffY = {262-firstY, 266-firstY, 269-firstY, 272-firstY, 275-firstY, 278-firstY, 280-firstY, 283-firstY, 285-firstY, 288-firstY, 290-firstY, 292-firstY, 294-firstY, 295-firstY, 297-firstY, 298-firstY, 299-firstY, 300-firstY, 300-firstY, 301-firstY};
+        for (int i = 0; i < diffX.length; i++) {
+            smallLamp(g,buffer,diffX[i] + x,diffY[i] + y);
+        }
+        System.out.println(diffY.length);
+
+    }
+
+    private void lineOfLamp2(Graphics g, BufferedImage buffer, int x, int y){
+        int firstX = 34;
+        int firstY = 211;
+        int[] diffX = {34-firstX,  36-firstX,  39-firstX,  42-firstX,  45-firstX,  48-firstX,  51-firstX,  55-firstX,  58-firstX,  62-firstX,  65-firstX,  69-firstX,  73-firstX,  77-firstX,  81-firstX,  85-firstX,  89-firstX,  93-firstX};
+        int[] diffY = {211-firstY, 215-firstY, 218-firstY, 221-firstY, 224-firstY, 227-firstY, 230-firstY, 232-firstY, 235-firstY, 237-firstY, 240-firstY, 242-firstY, 244-firstY, 246-firstY, 247-firstY, 248-firstY, 249-firstY, 249-firstY};
+
+        for (int i = 0; i < diffX.length; i++) {
+            smallLamp(g,buffer,diffX[i] + x,diffY[i] + y);
+        }
+        System.out.println(diffY.length);
+
+    }
+
+    private void lineOfLamp3(Graphics g, BufferedImage buffer, int x, int y){
+        int firstX = 50;
+        int firstY = 190;
+        int[] diffX = {50-firstX,  53-firstX,  57-firstX,  61-firstX,  65-firstX,  69-firstX,  73-firstX};
+        int[] diffY = {190-firstY, 193-firstY, 195-firstY, 197-firstY, 199-firstY, 201-firstY, 203-firstY};
+
+        for (int i = 0; i < diffX.length; i++) {
+            smallLamp(g,buffer,diffX[i] + x,diffY[i] + y);
+        }
+        System.out.println(diffY.length);
+
+    }
+
+
     private void gift(Graphics g, BufferedImage buffer, int x, int y){
-        g.setColor(Color.WHITE);
-        int[] xPoints = {1, 2, 2, 5, 8, 10, 10, 10, 10, 10, 9, 6, 6, 3, 2, 2, 1};
-        int[] yPoints = {310, 310, 311, 312, 312, 311, 310, 310, 309, 308, 308, 306, 306, 306, 307, 307, 308};
+        g.setColor(Color.black);
+        int[] xPoints = {22, 20, 20, 18, 15, 13, 12, 12, 15, 18, 18, 21, 21, 23, 24, 25, 26, 27, 27, 27, 28, 29, 31, 34, 36, 37, 38, 38, 37, 35, 34, 29, 28, 26, 27, 25, 23, 22, 22};
+        int[] yPoints = {326, 327, 327, 327, 328, 326, 325, 322, 321, 321, 321, 323, 325, 325, 325, 325, 325, 325, 326, 326, 325, 323, 322, 321, 322, 323, 324, 326, 327, 327, 328, 328, 326, 327, 328, 329, 328, 328, 326};
         for (int i = 0; i < xPoints.length - 3; i+=3) {
             bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
         }
-        bresenhamLine(g,1,306,1,310);
+        plot(g,22 + x,327 + y);
+        plot(g,22 + x,328 + y);
 
-        xPoints = new int[]{10, 11, 14, 15, 15, 15, 14, 12, 11, 10, 9, 9, 9};
-        yPoints = new int[]{310, 309, 309, 310, 311, 312, 312, 312, 312, 312, 312, 311, 311};
-        for (int i = 0; i < xPoints.length - 3; i+=3) {
-            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
-        }
+        xPoints = new int[]{11 + x, 24 + x, 39 + x, 39 + x, 24 + x, 11 + x};
+        yPoints = new int[]{328 + y, 332 + y, 328 + y, 332 + y, 336 + y, 332 + y};
 
-//        xPoints = new int[]{19, 21, 24, 25, 25, 25, 24, 23, 21, 20, 20, 17, 15, 15, 15, 15, 15, 15, 17};
-//        yPoints = new int[]{307, 306, 306, 309, 309, 310, 311, 312, 312, 312, 312, 312, 312, 312, 312, 310, 310, 310, 308};
-        xPoints = new int[]{19, 21, 24, 25, 25, 25, 24, 23, 21, 20, 20, 17, 15, 15, 15, 15, 15, 15, 17};
-        yPoints = new int[]{307, 306, 306, 309, 309, 310, 311, 312, 312, 312, 312, 312, 312, 312, 312, 310, 310, 310, 308};
+        g.drawPolygon(xPoints, yPoints, xPoints.length);
+        bresenhamLine(g, 24 + x, 336 + y, 24 + x,332 + y);
 
-        for (int i = 0; i < xPoints.length - 3; i+=3) {
-            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
-        }
+        xPoints = new int[]{12 + x, 12 + x, 24 + x, 24 + x};
+        yPoints = new int[]{333 + y, 347 + y, 353 + y, 336 + y};
+
+        g.drawPolygon(xPoints, yPoints, xPoints.length);
+
+        xPoints = new int[]{24 + x, 24 + x, 38 + x, 38 + x};
+        yPoints = new int[]{336 + y, 353 + y, 346 + y, 332 + y};
+
+        g.drawPolygon(xPoints, yPoints, xPoints.length);
+        bresenhamLine(g, 11 + x, 328 + y,15 + x,327 + y);
+        bresenhamLine(g, 39 + x, 328 + y,35 + x,327 + y);
 
 
 
     }
 
     private void christmasTree(Graphics g, BufferedImage buffer, int x, int y) {
-        g.setColor(Color.white);
+        g.setColor(Color.black);
         double[] xPoints = {12, 12.3455, 13.2721, 16.3005, 18.5576, 24.6485, 25.1167, 28.6134, 28.931, 31.686, 32.0698, 35.9322, 36.9498, 41.3041, 41.5605, 46.1792, 47.1407, 51.8008, 52.6668, 55.1776, 55.0872, 57.4208, 58.2147, 62.0222, 62.7171, 67.0826, 67.879, 71.8208, 71.9313, 76.3136, 77.3967, 82.0345, 82.3698, 86.0246, 86.6151, 89.4301, 89.2468, 93.1014, 94.9177, 99.9534, 101.6439, 102.3559, 101.3569};
         double[] yPoints = {280, 282.6668, 283.6118, 285.2269, 282.549, 283.347, 286.0635, 285.9456, 284.3062, 283.517, 287.7048, 288.2955, 284.8327, 285.188, 289.6872, 290.2794, 286.8385, 287.1017, 288.537, 287.5257, 286.1701, 285.7353, 288.9123, 289.0994, 285.1078, 284.9017, 288.1586, 287.8639, 285.4115, 284.5398, 287.3642, 286.7154, 284.8509, 285.1852, 288.162, 287.8327, 284.6062, 283.2734, 287.3722, 286.7641, 284.8257, 281.1758, 279.5796};
 
@@ -119,249 +234,604 @@ public class Expe extends JPanel {
         bresenhamLine(g, 27+x, 226+y, 58+x, 181+x);
         bresenhamLine(g, 88+x, 228+y, 57+x, 181+x);
 
-        int[] xPointsInt = new int[]{58, 50, 51, 46, 53, 57, 61, 68, 63, 64};
-        int[] yPointsInt = new int[]{181, 185, 177, 172, 170, 163, 170, 172, 177, 185};
+        //star
+        int[] xPointsInt = new int[]{58+x, 50+x, 51+x, 46+x, 53+x, 57+x, 61+x, 68+x, 63+x, 64+x};
+        int[] yPointsInt = new int[]{181+y, 185+y, 177+y, 172+y, 170+y, 163+y, 170+y, 172+y, 177+y, 185+y};
+        g.setColor(Color.decode("#EFEA43"));
+        g.fillPolygon(xPointsInt, yPointsInt, xPointsInt.length);
 
-        g.drawPolygon(xPointsInt, yPointsInt, xPointsInt.length);
+        g.setColor(Color.WHITE);
+        xPoints = new double[]{54, 54, 54, 56, 57, 57, 54};
+        yPoints = new double[]{174, 174, 172, 170, 169, 169, 174};
+        for (int i = 0; i < xPoints.length - 3; i+=3) {
+            bezier_Curve(g, new int[] { (int)Math.round(xPoints[i])+x, (int)Math.round(xPoints[i+1])+x,  (int)Math.round(xPoints[i+2])+x, (int)Math.round(xPoints[i+3])+x}, new int[] { (int)Math.round(yPoints[i])+y, (int)Math.round(yPoints[i+1])+y, (int)Math.round(yPoints[i+2])+y, (int)Math.round(yPoints[i+3])+y});
+        }
+
+        xPoints = new double[]{54, 54, 53, 54, 55};
+        yPoints = new double[]{177, 177, 179, 181, 181};
+        for (int i = 0; i < xPoints.length - 3; i+=3) {
+            bezier_Curve(g, new int[] { (int)Math.round(xPoints[i])+x, (int)Math.round(xPoints[i+1])+x,  (int)Math.round(xPoints[i+2])+x, (int)Math.round(xPoints[i+3])+x}, new int[] { (int)Math.round(yPoints[i])+y, (int)Math.round(yPoints[i+1])+y, (int)Math.round(yPoints[i+2])+y, (int)Math.round(yPoints[i+3])+y});
+        }
+
+        buffer = floodFill(buffer,56,190, Color.WHITE, Color.decode("#19B24A"));
+        buffer = floodFill(buffer,70,240, Color.WHITE, Color.decode("#19B24A"));
+        buffer = floodFill(buffer,70,270, Color.WHITE, Color.decode("#19B24A"));
+        buffer = floodFill(buffer,70,280, Color.decode("#80C014"), Color.decode("#19B24A"));
+        g.setColor(Color.BLUE);
+        plot(g,70,270);
+
+
     }
 
 
-    private void boy(Graphics2D g2d, BufferedImage buffer) {
-        Color c = Color.decode("#FFFFF");
+    private void boy(Graphics2D g2d, BufferedImage buffer, int x, int y) {
+        // Color c = Color.decode("#FFFFFF");
+        Color c = Color.decode("#000000");
         g2d.setColor(c);
 
-        bezier_Curve(g2d, new int[]{423,423,424}, new int[]{221,217,214});
-        bezier_Curve(g2d, new int[]{423,424,426}, new int[]{221,222,211});
-        bezier_Curve(g2d, new int[]{426,422,425}, new int[]{211,224,228});
-        bezier_Curve(g2d, new int[]{426,426,427}, new int[]{228,228,228});
-        bezier_Curve(g2d, new int[]{428,429,433}, new int[]{228,230,230});
-        bezier_Curve(g2d, new int[]{433,434,438}, new int[]{230,231,227});
-        bezier_Curve(g2d, new int[]{437,440,440}, new int[]{228,225,223});
-        bezier_Curve(g2d, new int[]{440,441,438}, new int[]{223,220,213});
-        bezier_Curve(g2d, new int[]{438,434,424}, new int[]{213,210,214});
+        // head
+        int[] xPoints = {
+                424, 424, 425, 426, 428, 429, 431, 433, 434, 436, 437, 438, 439, 440, 440, 441, 441,
+                441, 440, 440, 440,
+                440, 440, 439, 439, 438, 438, 438, 438, 437, 437, 437, 436, 435, 434, 433, 433, 432,
+                433, 432, 432, 430,
+                430, 430, 429, 429, 428, 428, 428, 428, 428, 427, 427, 426, 427, 427, 427, 426, 426,
+                425, 425, 424, 424,
+                424, 424, 423, 423, 423, 423, 424, 424, 424, 425, 425, 424, 424, 423, 423, 423, 423,
+                423, 423, 423, 423,
+                423 };
 
-        // คอเสื้อ
+        int[] yPoints = {
+                214, 214, 213, 211, 211, 211, 210, 210, 211, 212, 212, 213, 214, 216, 217, 220, 221,
+                222, 222, 223, 223,
+                224, 224, 226, 226, 227, 228, 228, 227, 227, 228, 229, 229, 230, 230, 231, 231, 231,
+                230, 230, 230, 230,
+                230, 230, 230, 230, 230, 229, 229, 228, 229, 229, 228, 228, 228, 227, 227, 227, 227,
+                227, 227, 226, 226,
+                226, 225, 224, 224, 223, 223, 222, 222, 221, 221, 221, 221, 220, 221, 221, 221, 219,
+                218, 216, 216, 215,
+                215 };
 
-        bezier_Curve(g2d, new int[]{429,428,427}, new int[]{230,232,236});
-        bezier_Curve(g2d, new int[]{427,432,438}, new int[]{236,236,236});
-        bezier_Curve(g2d, new int[]{438,437,436}, new int[]{236,232,228});
+        for (int i = 0; i < xPoints.length - 3; i += 3) {
+            bezier_Curve(g2d,
+                    new int[] { (int) Math.round(xPoints[i]) + x,
+                            (int) Math.round(xPoints[i + 1]) + x,
+                            (int) Math.round(xPoints[i + 2]) + x,
+                            (int) Math.round(xPoints[i + 3]) + x },
+                    new int[] { (int) Math.round(yPoints[i]) + y,
+                            (int) Math.round(yPoints[i + 1]) + y,
+                            (int) Math.round(yPoints[i + 2]) + y,
+                            (int) Math.round(yPoints[i + 3]) + y });
+        }
 
-        // เสื้อ
-        // ซ้าย
-        bezier_Curve(g2d, new int[]{426,421,416}, new int[]{233,235,239});
-        bezier_Curve(g2d, new int[]{416,413,412}, new int[]{239,243,248});
-        bezier_Curve(g2d, new int[]{416,413,412}, new int[]{239,243,248});
-        bezier_Curve(g2d, new int[]{412,411,409}, new int[]{248,250,251});
-        bezier_Curve(g2d, new int[]{409,412,419}, new int[]{251,256,257});
+        // คอ
+        xPoints = new int[] {
+                427, 427, 427, 428, 428, 429, 429, 428, 428, 429, 430, 433, 433, 435, 436, 436, 436,
+                435, 435, 435, 435,
+                436, 437, 437, 437, 438, 438, 438, 438, 437, 436, 434, 433, 432, 431, 428, 427 };
+        yPoints = new int[] {
+                233, 233, 232, 232, 232, 231, 230, 230, 232, 233, 233, 234, 234, 234, 234, 233, 233,
+                231, 231, 231, 231,
+                232, 232, 232, 233, 234, 233, 234, 234, 235, 235, 236, 236, 236, 236, 235, 234 };
+        for (int i = 0; i < xPoints.length - 3; i += 3) {
+            bezier_Curve(g2d,
+                    new int[] { (int) Math.round(xPoints[i]) + x,
+                            (int) Math.round(xPoints[i + 1]) + x,
+                            (int) Math.round(xPoints[i + 2]) + x,
+                            (int) Math.round(xPoints[i + 3]) + x },
+                    new int[] { (int) Math.round(yPoints[i]) + y,
+                            (int) Math.round(yPoints[i + 1]) + y,
+                            (int) Math.round(yPoints[i + 2]) + y,
+                            (int) Math.round(yPoints[i + 3]) + y });
+        }
 
-        bezier_Curve(g2d, new int[]{419, 419, 420}, new int[]{246, 249, 251});
-        bezier_Curve(g2d, new int[]{420, 419, 419}, new int[]{251, 258, 267});
-        bezier_Curve(g2d, new int[]{419, 418, 416}, new int[]{267, 273, 287});
-        bezier_Curve(g2d, new int[]{416, 419, 427}, new int[]{287, 289, 289});
-        bezier_Curve(g2d, new int[]{416, 419, 427}, new int[]{287, 289, 289});
-        bezier_Curve(g2d, new int[]{427, 435, 446}, new int[]{289, 289, 288});
-        // ขวา
-        bezier_Curve(g2d, new int[]{446, 446, 445}, new int[]{288, 281, 276});
-        bezier_Curve(g2d, new int[]{445, 444, 445}, new int[]{276, 270, 264});
-        bezier_Curve(g2d, new int[]{445, 446, 446}, new int[]{264, 258, 250});
+        xPoints = new int[] {
+                426, 426, 425, 423, 423, 420, 419, 417, 417, 416, 415, 415, 415, 413, 413, 412, 412,
+                412, 412, 411, 410,
+                409, 409, 409, 410, 412, 412, 412, 413, 414, 415, 418, 419, 420, 420, 419, 419, 419,
+                419, 419, 419, 418,
+                418, 417, 417, 417, 417, 417, 417, 417, 416, 417, 418, 420, 422, 425, 425, 429, 430,
+                436, 438, 442, 443,
+                444, 445, 446, 446, 446, 446, 446, 446, 446, 446, 445, 445, 445, 445, 445, 445, 445,
+                445, 445, 445, 445,
+                445, 445, 446, 445, 445, 446, 446, 447, 448, 450, 451, 454, 454, 454, 454, 454, 453,
+                453, 453, 452, 452,
+                451, 451, 450, 450, 450, 449, 449, 448, 447, 447, 445, 445, 443, 443, 441, 441, 439,
+                439, 438, 438, 438,
+                437, 436, 436, 435, 434, 432, 431, 431, 430, 428, 427, 427, 426 };
+        yPoints = new int[] {
+                233, 233, 234, 235, 234, 236, 236, 237, 238, 238, 239, 240, 240, 243, 243, 246, 246,
+                247, 248, 249, 250,
+                251, 251, 252, 252, 255, 255, 256, 256, 257, 257, 257, 257, 257, 258, 260, 262, 267,
+                266, 268, 269, 274,
+                275, 277, 277, 281, 281, 284, 284, 287, 287, 288, 289, 290, 290, 290, 290, 289, 289,
+                289, 288, 288, 288,
+                288, 289, 288, 287, 286, 286, 283, 285, 281, 280, 277, 278, 275, 275, 274, 273, 271,
+                270, 267, 266, 262,
+                262, 261, 260, 258, 258, 257, 258, 258, 258, 257, 257, 255, 255, 255, 255, 254, 253,
+                251, 251, 249, 249,
+                247, 247, 244, 243, 242, 242, 240, 239, 239, 238, 237, 237, 236, 236, 235, 235, 234,
+                234, 234, 234, 235,
+                235, 236, 236, 236, 236, 236, 236, 236, 236, 235, 234, 234, 233 };
+        for (int i = 0; i < xPoints.length - 3; i += 3) {
+            bezier_Curve(g2d,
+                    new int[] { (int) Math.round(xPoints[i]) + x,
+                            (int) Math.round(xPoints[i + 1]) + x,
+                            (int) Math.round(xPoints[i + 2]) + x,
+                            (int) Math.round(xPoints[i + 3]) + x },
+                    new int[] { (int) Math.round(yPoints[i]) + y,
+                            (int) Math.round(yPoints[i + 1]) + y,
+                            (int) Math.round(yPoints[i + 2]) + y,
+                            (int) Math.round(yPoints[i + 3]) + y });
+        }
+        xPoints = new int[] {
+                426, 426, 425, 423, 423, 420, 419, 417, 417, 416, 415, 415, 415, 413, 413, 412, 412,
+                412, 412, 411, 410,
+                409, 409, 409, 410, 412, 412, 412, 413, 414, 415, 418, 419, 420, 420, 419, 419, 419,
+                419, 419, 419, 418,
+                418, 417, 417, 417, 417, 417, 417, 417, 416, 417, 418, 420, 422, 425, 425, 429, 430,
+                436, 438, 442, 443,
+                444, 445, 446, 446, 446, 446, 446, 446, 446, 446, 445, 445, 445, 445, 445, 445, 445,
+                445, 445, 445, 445,
+                445, 445, 446, 445, 445, 446, 446, 447, 448, 450, 451, 454, 454, 454, 454, 454, 453,
+                453, 453, 452, 452,
+                451, 451, 450, 450, 450, 449, 449, 448, 447, 447, 445, 445, 443, 443, 441, 441, 439,
+                439, 438, 438, 438,
+                437, 436, 436, 435, 434, 432, 431, 431, 430, 428, 427, 427, 426 };
+        yPoints = new int[] {
+                233, 233, 234, 235, 234, 236, 236, 237, 238, 238, 239, 240, 240, 243, 243, 246, 246,
+                247, 248, 249, 250,
+                251, 251, 252, 252, 255, 255, 256, 256, 257, 257, 257, 257, 257, 258, 260, 262, 267,
+                266, 268, 269, 274,
+                275, 277, 277, 281, 281, 284, 284, 287, 287, 288, 289, 290, 290, 290, 290, 289, 289,
+                289, 288, 288, 288,
+                288, 289, 288, 287, 286, 286, 283, 285, 281, 280, 277, 278, 275, 275, 274, 273, 271,
+                270, 267, 266, 262,
+                262, 261, 260, 258, 258, 257, 258, 258, 258, 257, 257, 255, 255, 255, 255, 254, 253,
+                251, 251, 249, 249,
+                247, 247, 244, 243, 242, 242, 240, 239, 239, 238, 237, 237, 236, 236, 235, 235, 234,
+                234, 234, 234, 235,
+                235, 236, 236, 236, 236, 236, 236, 236, 236, 235, 234, 234, 233 };
+        for (int i = 0; i < xPoints.length - 3; i += 3) {
+            bezier_Curve(g2d,
+                    new int[] { (int) Math.round(xPoints[i]) + x,
+                            (int) Math.round(xPoints[i + 1]) + x,
+                            (int) Math.round(xPoints[i + 2]) + x,
+                            (int) Math.round(xPoints[i + 3]) + x },
+                    new int[] { (int) Math.round(yPoints[i]) + y,
+                            (int) Math.round(yPoints[i + 1]) + y,
+                            (int) Math.round(yPoints[i + 2]) + y,
+                            (int) Math.round(yPoints[i + 3]) + y });
+        }
 
-        bezier_Curve(g2d, new int[]{438, 441, 446}, new int[]{234, 236, 238});
-        bezier_Curve(g2d, new int[]{446, 449, 454}, new int[]{238, 241, 255});
-        bezier_Curve(g2d, new int[]{454, 450, 445}, new int[]{255, 257, 258});
+        xPoints = new int[] {
+                420, 420, 420, 420, 420, 420, 420, 419, 420 };
+        yPoints = new int[] {
+                246, 246, 247, 251, 251, 255, 257, 257, 246 };
+        for (int i = 0; i < xPoints.length - 3; i += 3) {
+            bezier_Curve(g2d,
+                    new int[] { (int) Math.round(xPoints[i]) + x,
+                            (int) Math.round(xPoints[i + 1]) + x,
+                            (int) Math.round(xPoints[i + 2]) + x,
+                            (int) Math.round(xPoints[i + 3]) + x },
+                    new int[] { (int) Math.round(yPoints[i]) + y,
+                            (int) Math.round(yPoints[i + 1]) + y,
+                            (int) Math.round(yPoints[i + 2]) + y,
+                            (int) Math.round(yPoints[i + 3]) + y });
+        }
 
-        // แขน
-        //   ซ้าย
-        bezier_Curve(g2d, new int[]{410, 413, 411}, new int[]{253, 260, 263});
-        bezier_Curve(g2d, new int[]{411, 410, 410}, new int[]{263, 267, 272});
-        bezier_Curve(g2d, new int[]{410, 410, 409}, new int[]{272, 275, 280});
+        // เสื้อขึ้นขวา
+        xPoints = new int[] {
+                446, 446, 446, 446, 446, 446, 446, 445, 446 };
+        yPoints = new int[] {
+                250, 250, 251, 253, 253, 257, 258, 258, 250 };
 
+        for (int i = 0; i < xPoints.length - 3; i += 3) {
+            bezier_Curve(g2d,
+                    new int[] { (int) Math.round(xPoints[i]) + x,
+                            (int) Math.round(xPoints[i + 1]) + x,
+                            (int) Math.round(xPoints[i + 2]) + x,
+                            (int) Math.round(xPoints[i + 3]) + x },
+                    new int[] { (int) Math.round(yPoints[i]) + y,
+                            (int) Math.round(yPoints[i + 1]) + y,
+                            (int) Math.round(yPoints[i + 2]) + y,
+                            (int) Math.round(yPoints[i + 3]) + y });
+        }
 
-        bezier_Curve(g2d, new int[]{409, 409, 414}, new int[]{291, 292, 291});
+        // แขน ซ้าย
+        xPoints = new int[] {
+                450, 451, 450, 450, 450, 451, 451, 452, 452, 452, 452, 452, 452, 452, 452, 452, 452,
+                452, 452, 452, 452,
+                452, 452, 452, 452, 453, 453, 453, 453, 453, 453, 452, 452, 452, 452, 451, 450, 450,
+                449, 449, 449, 449,
+                449, 449, 449, 449, 449, 449, 449, 449, 449, 449, 448, 448, 448, 448, 448, 448, 448,
+                447, 447, 447, 447,
+                447, 447, 447, 447, 448, 448, 448, 448, 448, 448, 447, 447, 447, 447, 446, 446, 446,
+                445, 445, 445, 445,
+                445, 445, 445, 445, 445, 445, 446, 446, 446, 446, 446, 446, 446, 448, 448, 450, 450 };
+        yPoints = new int[] {
+                258, 258, 258, 260, 261, 264, 264, 265, 265, 270, 270, 272, 272, 274, 275, 279, 279,
+                281, 281, 284, 284,
+                285, 286, 287, 287, 288, 288, 290, 290, 291, 292, 293, 293, 295, 296, 296, 297, 297,
+                297, 297, 297, 296,
+                296, 295, 295, 294, 294, 293, 293, 292, 291, 291, 291, 291, 292, 293, 293, 294, 294,
+                294, 293, 293, 292,
+                290, 290, 289, 289, 287, 287, 286, 286, 283, 283, 281, 281, 278, 278, 276, 275, 273,
+                273, 272, 271, 270,
+                269, 267, 267, 266, 265, 262, 262, 261, 260, 259, 258, 258, 258, 258, 258, 258, 258 };
 
-        bezier_Curve(g2d, new int[]{419, 418, 416}, new int[]{262, 264, 269});
-        bezier_Curve(g2d, new int[]{416, 415, 413}, new int[]{269, 274, 280});
-        bezier_Curve(g2d, new int[]{413, 413, 414}, new int[]{280, 282, 285});
+        for (int i = 0; i < xPoints.length - 3; i += 3) {
+            bezier_Curve(g2d,
+                    new int[] { (int) Math.round(xPoints[i]) + x,
+                            (int) Math.round(xPoints[i + 1]) + x,
+                            (int) Math.round(xPoints[i + 2]) + x,
+                            (int) Math.round(xPoints[i + 3]) + x },
+                    new int[] { (int) Math.round(yPoints[i]) + y,
+                            (int) Math.round(yPoints[i + 1]) + y,
+                            (int) Math.round(yPoints[i + 2]) + y,
+                            (int) Math.round(yPoints[i + 3]) + y });
+        }
 
-        //  ขวา
-        bezier_Curve(g2d, new int[]{450, 450, 451}, new int[]{258, 261, 264});
-        bezier_Curve(g2d, new int[]{451, 452, 452}, new int[]{264, 270, 286});
-        bezier_Curve(g2d, new int[]{452, 453, 452}, new int[]{286, 289, 293});
-        bezier_Curve(g2d, new int[]{452, 450, 445}, new int[]{293, 294, 287});
+        // แขน ขวา
+        xPoints = new int[] {
+                414, 413, 413, 413, 413, 412, 412, 411, 411, 411, 411, 411, 411, 410, 410, 410, 410,
+                410, 410, 409, 409,
+                409, 409, 409, 409, 409, 409, 409, 409, 410, 410, 411, 412, 413, 414, 414, 413, 414,
+                414, 414, 414, 413,
+                413, 413, 413, 413, 412, 412, 413, 414, 414, 415, 416, 417, 417, 418, 418, 419, 419,
+                419, 419, 419, 420,
+                419, 419, 417, 417, 416, 416, 414, 414 };
+        yPoints = new int[] {
+                257, 257, 257, 259, 259, 260, 260, 264, 264, 265, 265, 267, 268, 270, 271, 273, 273,
+                275, 275, 278, 278,
+                280, 280, 281, 283, 286, 286, 290, 291, 292, 292, 292, 292, 291, 290, 288, 288, 287,
+                287, 286, 286, 284,
+                284, 283, 283, 281, 280, 279, 278, 274, 275, 271, 271, 268, 267, 265, 265, 262, 262,
+                259, 259, 258, 257,
+                257, 257, 257, 257, 257, 257, 257, 257 };
+
+        for (int i = 0; i < xPoints.length - 3; i += 3) {
+            bezier_Curve(g2d,
+                    new int[] { (int) Math.round(xPoints[i]) + x,
+                            (int) Math.round(xPoints[i + 1]) + x,
+                            (int) Math.round(xPoints[i + 2]) + x,
+                            (int) Math.round(xPoints[i + 3]) + x },
+                    new int[] { (int) Math.round(yPoints[i]) + y,
+                            (int) Math.round(yPoints[i + 1]) + y,
+                            (int) Math.round(yPoints[i + 2]) + y,
+                            (int) Math.round(yPoints[i + 3]) + y });
+        }
 
         // กางเกง
-        //  ซ้าย
-        bezier_Curve(g2d, new int[]{417, 417, 416}, new int[]{289, 291, 298});
-        bezier_Curve(g2d, new int[]{416, 416, 417}, new int[]{298, 302, 317});
-        bezier_Curve(g2d, new int[]{417, 422, 428}, new int[]{317, 316, 315});
-        bezier_Curve(g2d, new int[]{428, 428, 428}, new int[]{315, 309, 306});
-        bezier_Curve(g2d, new int[]{428, 425, 419}, new int[]{306, 304, 304});
-        bezier_Curve(g2d, new int[]{432, 430, 428}, new int[]{293, 300, 305});
+        xPoints = new int[] {
+                417, 417, 417, 417, 417, 417, 417, 416, 416, 416, 415, 415, 415, 416, 416, 416, 417,
+                416, 416, 417, 418,
+                420, 421, 423, 424, 427, 427, 428, 428, 428, 428, 429, 429, 428, 428, 427, 427, 428,
+                429, 429, 430, 430,
+                430, 430, 431, 431, 431, 431, 431, 431, 431, 431, 431, 431, 431, 430, 431, 431, 431,
+                430, 430, 431, 431,
+                432, 433, 435, 435, 437, 438, 442, 442, 443, 443, 443, 443, 442, 442, 442, 442, 443,
+                443, 443, 443, 443,
+                444, 444, 444, 445, 445, 446, 446, 446, 446, 446, 446, 446, 445, 443, 444, 439, 439,
+                436, 436, 434, 434,
+                431, 430, 427, 427, 425, 424, 423, 422, 420, 419, 418, 417 };
 
+        yPoints = new int[] {
+                289, 289, 290, 292, 292, 295, 295, 299, 299, 302, 302, 304, 305, 309, 309, 314, 315,
+                317, 317, 318, 317,
+                316, 316, 316, 315, 315, 315, 314, 314, 311, 311, 308, 308, 306, 306, 305, 305, 303,
+                303, 301, 300, 298,
+                298, 298, 299, 300, 300, 303, 303, 305, 305, 308, 309, 310, 310, 312, 313, 315, 316,
+                318, 319, 320, 320,
+                320, 320, 320, 320, 320, 320, 320, 320, 319, 318, 318, 317, 316, 315, 313, 313, 310,
+                310, 306, 306, 304,
+                304, 301, 301, 298, 298, 294, 292, 291, 290, 289, 288, 288, 288, 288, 288, 289, 289,
+                289, 289, 289, 289,
+                289, 289, 289, 289, 289, 289, 289, 289, 289, 289, 289, 289 };
+
+        for (int i = 0; i < xPoints.length - 3; i += 3) {
+            bezier_Curve(g2d,
+                    new int[] { (int) Math.round(xPoints[i]) + x,
+                            (int) Math.round(xPoints[i + 1]) + x,
+                            (int) Math.round(xPoints[i + 2]) + x,
+                            (int) Math.round(xPoints[i + 3]) + x },
+                    new int[] { (int) Math.round(yPoints[i]) + y,
+                            (int) Math.round(yPoints[i + 1]) + y,
+                            (int) Math.round(yPoints[i + 2]) + y,
+                            (int) Math.round(yPoints[i + 3]) + y });
+        }
+
+        // ขา
+        // ซ้าย
+        xPoints = new int[] { 418, 417, 418, 418, 418, 419, 418, 419, 419, 420, 420, 421, 421, 422, 422, 423,
+                423, 423,
+                423, 424, 424, 426, 426, 427, 426, 426, 426, 426, 426, 426, 426, 426, 426, 427, 427,
+                427, 427, 427, 426,
+                426, 425, 423, 424, 419, 418 };
+        yPoints = new int[] { 318, 319, 319, 321, 321, 323, 323, 325, 325, 327, 328, 330, 330, 333, 333, 335,
+                336, 336,
+                335, 334, 334, 332, 332, 332, 331, 330, 329, 327, 327, 324, 324, 323, 323, 320, 320,
+                319, 318, 316, 316,
+                315, 315, 316, 315, 317, 317 };
+        for (int i = 0; i < xPoints.length - 3; i += 3) {
+            bezier_Curve(g2d,
+                    new int[] { (int) Math.round(xPoints[i]) + x,
+                            (int) Math.round(xPoints[i + 1]) + x,
+                            (int) Math.round(xPoints[i + 2]) + x,
+                            (int) Math.round(xPoints[i + 3]) + x },
+                    new int[] { (int) Math.round(yPoints[i]) + y,
+                            (int) Math.round(yPoints[i + 1]) + y,
+                            (int) Math.round(yPoints[i + 2]) + y,
+                            (int) Math.round(yPoints[i + 3]) + y });
+        }
         // ขวา
-        bezier_Curve(g2d, new int[]{446, 445, 441}, new int[]{289, 297, 311});
-        bezier_Curve(g2d, new int[]{444, 442, 444}, new int[]{305, 297, 319});
-        bezier_Curve(g2d, new int[]{444, 442, 444}, new int[]{305, 297, 319});
-        bezier_Curve(g2d, new int[]{444, 438, 431}, new int[]{319, 321, 320});
-        bezier_Curve(g2d, new int[]{444, 438, 431}, new int[]{319, 321, 320});
-        bezier_Curve(g2d, new int[]{431, 431, 430}, new int[]{320, 315, 312});
-        bezier_Curve(g2d, new int[]{430, 431, 430}, new int[]{312, 304, 299});
+        xPoints = new int[] { 432, 432, 431, 431, 431, 431, 431, 431, 431, 431, 431, 431, 431, 431, 431, 431,
+                431, 430,
+                429, 429, 430, 432, 433, 433, 435, 436, 435, 435, 435, 436, 436, 437, 436, 437, 438,
+                438, 438, 439, 439,
+                440, 440, 440, 440, 440, 439, 438, 437, 433, 432 };
+        yPoints = new int[] { 321, 321, 321, 323, 323, 326, 327, 328, 328, 332, 332, 334, 335, 338, 338, 341,
+                341, 342,
+                342, 342, 343, 343, 344, 344, 344, 342, 342, 340, 339, 337, 337, 335, 335, 332, 332,
+                330, 330, 326, 325,
+                325, 324, 321, 321, 321, 321, 321, 321, 321, 320 };
+        for (int i = 0; i < xPoints.length - 3; i += 3) {
+            bezier_Curve(g2d,
+                    new int[] { (int) Math.round(xPoints[i]) + x,
+                            (int) Math.round(xPoints[i + 1]) + x,
+                            (int) Math.round(xPoints[i + 2]) + x,
+                            (int) Math.round(xPoints[i + 3]) + x },
+                    new int[] { (int) Math.round(yPoints[i]) + y,
+                            (int) Math.round(yPoints[i + 1]) + y,
+                            (int) Math.round(yPoints[i + 2]) + y,
+                            (int) Math.round(yPoints[i + 3]) + y });
+        }
 
-        // leg
-        //  left
-        bezier_Curve(g2d, new int[]{418, 419, 418}, new int[]{318, 326, 329});
-        bezier_Curve(g2d, new int[]{418, 419, 419}, new int[]{329, 332, 335});
-        bezier_Curve(g2d, new int[]{422-3, 422-3, 421-3}, new int[]{335, 339, 342});
-        bezier_Curve(g2d, new int[]{422-3, 422-3, 421-3}, new int[]{335, 339, 342});
-        bezier_Curve(g2d, new int[]{421-3, 418-3, 417-3}, new int[]{342, 345, 349});
-        bezier_Curve(g2d, new int[]{417-3, 420-3, 426-3}, new int[]{349, 352, 350});
-        bezier_Curve(g2d, new int[]{426-3, 427-3, 430-3}, new int[]{350, 344, 341});
-        bezier_Curve(g2d, new int[]{430-3, 431-3, 430-3}, new int[]{341, 339, 338});
-        bezier_Curve(g2d, new int[]{430-3, 429-3, 427-3}, new int[]{338, 335, 332});
-        bezier_Curve(g2d, new int[]{427, 424, 423-3}, new int[]{332, 334, 335});
-        bezier_Curve(g2d, new int[]{426, 427, 426}, new int[]{315, 318, 323});
-        bezier_Curve(g2d, new int[]{426, 427, 426}, new int[]{315, 318, 323});
-        bezier_Curve(g2d, new int[]{426, 426, 426}, new int[]{323, 327, 332});
+        // รองเท้า
+        // left
+        xPoints = new int[] { 423, 423, 422, 422, 422, 421, 421, 421, 421, 418, 418, 417, 417, 417, 417, 418,
+                419, 420,
+                421, 423, 424, 426, 426, 426, 426, 426, 426, 427, 428, 429, 429, 430, 430, 431, 431,
+                430, 430, 429, 428,
+                427, 427, 426, 424 };
+        yPoints = new int[] { 336, 337, 338, 338, 339, 341, 341, 342, 343, 346, 346, 346, 347, 350, 350, 352,
+                352, 353,
+                352, 352, 352, 351, 350, 349, 348, 345, 344, 343, 343, 342, 342, 341, 341, 339, 339,
+                338, 337, 335, 335,
+                332, 332, 332, 334 };
+        for (int i = 0; i < xPoints.length - 3; i += 3) {
+            bezier_Curve(g2d,
+                    new int[] { (int) Math.round(xPoints[i]) + x,
+                            (int) Math.round(xPoints[i + 1]) + x,
+                            (int) Math.round(xPoints[i + 2]) + x,
+                            (int) Math.round(xPoints[i + 3]) + x },
+                    new int[] { (int) Math.round(yPoints[i]) + y,
+                            (int) Math.round(yPoints[i + 1]) + y,
+                            (int) Math.round(yPoints[i + 2]) + y,
+                            (int) Math.round(yPoints[i + 3]) + y });
+        }
 
         // right
-        bezier_Curve(g2d, new int[]{432, 431, 431}, new int[]{320, 323, 330});
-        bezier_Curve(g2d, new int[]{431, 431, 431}, new int[]{330, 335, 340});
-        bezier_Curve(g2d, new int[]{431, 430, 428}, new int[]{340, 342, 344});
-        bezier_Curve(g2d, new int[]{428, 428, 428}, new int[]{344, 347, 351});
-        bezier_Curve(g2d, new int[]{428, 431, 436}, new int[]{351, 352, 349});
-        bezier_Curve(g2d, new int[]{436, 439, 438}, new int[]{349, 347, 345});
-        bezier_Curve(g2d, new int[]{438, 437, 435}, new int[]{345, 343, 342});
-        bezier_Curve(g2d, new int[]{434, 435, 435}, new int[]{344, 343, 341});
-        bezier_Curve(g2d, new int[]{430, 432, 435}, new int[]{342, 344, 343});
-        bezier_Curve(g2d, new int[]{435, 436, 439}, new int[]{341, 337, 329});
-        bezier_Curve(g2d, new int[]{439, 440, 440}, new int[]{329, 323, 321});
+        xPoints = new int[] { 429, 429, 429, 428, 428, 428, 428, 428, 428, 428, 429, 432, 432, 433, 434, 435,
+                435, 436,
+                437, 438, 439, 439, 439, 438, 438, 437, 437, 436, 436, 435, 434, 431, 430 };
+        yPoints = new int[] { 343, 343, 344, 345, 345, 347, 348, 351, 351, 351, 351, 352, 352, 351, 351, 350,
+                350, 349,
+                349, 348, 348, 347, 347, 344, 344, 343, 342, 342, 343, 344, 344, 344, 343 };
+        for (int i = 0; i < xPoints.length - 3; i += 3) {
+            bezier_Curve(g2d,
+                    new int[] { (int) Math.round(xPoints[i]) + x,
+                            (int) Math.round(xPoints[i + 1]) + x,
+                            (int) Math.round(xPoints[i + 2]) + x,
+                            (int) Math.round(xPoints[i + 3]) + x },
+                    new int[] { (int) Math.round(yPoints[i]) + y,
+                            (int) Math.round(yPoints[i + 1]) + y,
+                            (int) Math.round(yPoints[i + 2]) + y,
+                            (int) Math.round(yPoints[i + 3]) + y });
+        }
+        // g2d.fillRect(435, 217, 1, 1);
+        Color borderColor = Color.decode("#000000");
+        // hair
+        buffer = floodFill2(buffer, 435, 217, borderColor, Color.decode("#472915"));
+        // neck
+        Color neckColor = Color.decode("#FDEEEF");
+        buffer = floodFill2(buffer, 430, 231, borderColor, neckColor);
+        // shirt neck
+        Color shirtNeck = Color.decode("#1A5D78");
+        buffer = floodFill2(buffer, 433, 234, borderColor, shirtNeck);
+        // shirt
+        Color shirt= Color.decode("#B1E2F9");
+        buffer = floodFill2(buffer, 423+x, 250, borderColor, shirt);
+        // arm
+        //      l
+        buffer = floodFill2(buffer, 415+x, 262, borderColor, neckColor);
+        //      r
+        buffer = floodFill2(buffer, 447+x, 268, borderColor, neckColor);
+        // pant
+        buffer = floodFill2(buffer, 421+x, 297, borderColor, shirtNeck);
+        // leg
+        //      l
+        buffer = floodFill2(buffer, 422+x, 321, borderColor, neckColor);
+        //      r
+        buffer = floodFill2(buffer, 435+x, 327, borderColor, neckColor);
+        // shoe
+        Color shoe = Color.decode("#0C1235");
+        //      l
+        buffer = floodFill2(buffer, 426, 335, borderColor, shoe);
+        //      r
+        buffer = floodFill2(buffer, 431, 345, borderColor, shoe);
+
+
+
     }
-    private void girl(Graphics2D g2d, BufferedImage buffer) {
+
+    private void girl(Graphics2D g2d, BufferedImage buffer, int x, int y) {
         // hair
         // Color c = Color.decode("#563C2B");
-        Color c = Color.decode("#FFFFF");
+        // Color c = Color.decode("#FFFFF");
+        Color c = Color.decode("#000000");
         g2d.setColor(c);
-        bezier_Curve(g2d, new int[]{375,370,369}, new int[]{220,223,228});
+        bezier_Curve(g2d, new int[] { 375, 370, 369 }, new int[] { 220, 223, 228 });
 
-        bezier_Curve(g2d, new int[]{369,369,369}, new int[]{228,233,235});
+        bezier_Curve(g2d, new int[] { 369, 369, 369 }, new int[] { 228, 233, 235 });
 
-        bezier_Curve(g2d, new int[]{369,369,368}, new int[]{235,238,242});
+        bezier_Curve(g2d, new int[] { 369, 369, 368 }, new int[] { 235, 238, 242 });
 
-        bezier_Curve(g2d, new int[]{368,369,372}, new int[]{242,244,246});
+        bezier_Curve(g2d, new int[] { 368, 369, 372 }, new int[] { 242, 244, 246 });
 
-        bezier_Curve(g2d, new int[]{372,373,376}, new int[]{246,249,249});
+        bezier_Curve(g2d, new int[] { 372, 373, 376 }, new int[] { 246, 249, 249 });
         // g2d.setColor(Color.decode("#F15E62"));
 
-        bezier_Curve(g2d, new int[]{376,379,381}, new int[]{249,250,247});
+        bezier_Curve(g2d, new int[] { 376, 379, 381 }, new int[] { 249, 250, 247 });
 
         // g2d.setColor(c);
-        bezier_Curve(g2d, new int[]{381,381,383}, new int[]{247,244,244});
+        bezier_Curve(g2d, new int[] { 381, 381, 383 }, new int[] { 247, 244, 244 });
 
-        bezier_Curve(g2d, new int[]{383,384,385}, new int[]{244,241,238});
+        bezier_Curve(g2d, new int[] { 383, 384, 385 }, new int[] { 244, 241, 238 });
 
-        bezier_Curve(g2d, new int[]{386,384,383}, new int[]{238,231,224});
+        bezier_Curve(g2d, new int[] { 386, 384, 383 }, new int[] { 238, 231, 224 });
 
-        bezier_Curve(g2d, new int[]{383,380,375}, new int[]{224,220,220});
+        bezier_Curve(g2d, new int[] { 383, 380, 375 }, new int[] { 224, 220, 220 });
         // buffer = floodFill(buffer, 375, 230,c);
 
         // shirt
         c = Color.decode("#F15E62");
         // g2d.setColor(c);
-        //      left part
-        bezier_Curve(g2d, new int[]{368,366,365}, new int[]{244,244,245});
-        bezier_Curve(g2d, new int[]{365,361,356}, new int[]{245,252,257});
-        bezier_Curve(g2d, new int[]{356,357,359}, new int[]{257,259,260});
-        bezier_Curve(g2d, new int[]{359,360,362}, new int[]{260,262,262});
-        bezier_Curve(g2d, new int[]{362,362,365}, new int[]{262,264,264});
+        // left part
+        bezier_Curve(g2d, new int[] { 368, 366, 365 }, new int[] { 244, 244, 245 });
+        bezier_Curve(g2d, new int[] { 365, 361, 356 }, new int[] { 245, 252, 257 });
+        bezier_Curve(g2d, new int[] { 356, 357, 359 }, new int[] { 257, 259, 260 });
+        bezier_Curve(g2d, new int[] { 359, 360, 362 }, new int[] { 260, 262, 262 });
+        bezier_Curve(g2d, new int[] { 362, 362, 365 }, new int[] { 262, 264, 264 });
 
-        bezier_Curve(g2d, new int[]{367,366,366}, new int[]{249,264,263});
-        bezier_Curve(g2d, new int[]{365,366,364}, new int[]{263,270,274});
-        bezier_Curve(g2d, new int[]{365,366,364}, new int[]{263,270,274});
-        bezier_Curve(g2d, new int[]{364,369,376}, new int[]{274,275,275});
-        bezier_Curve(g2d, new int[]{376,384,388}, new int[]{275,275,274});
-        //      middle
-        bezier_Curve(g2d, new int[]{370,373,389}, new int[]{246,257,271});
+        bezier_Curve(g2d, new int[] { 367, 366, 366 }, new int[] { 249, 264, 263 });
+        bezier_Curve(g2d, new int[] { 365, 366, 364 }, new int[] { 263, 270, 274 });
+        bezier_Curve(g2d, new int[] { 365, 366, 364 }, new int[] { 263, 270, 274 });
+        bezier_Curve(g2d, new int[] { 364, 369, 376 }, new int[] { 274, 275, 275 });
+        bezier_Curve(g2d, new int[] { 376, 384, 388 }, new int[] { 275, 275, 274 });
+        // middle
+        bezier_Curve(g2d, new int[] { 370, 373, 389 }, new int[] { 246, 257, 271 });
 
-        //      right part
-        bezier_Curve(g2d, new int[]{382, 388, 389 }, new int[]{244,246, 248});
-        bezier_Curve(g2d, new int[]{384, 388, 389 }, new int[]{244,246, 248});
-        bezier_Curve(g2d, new int[]{389, 390, 397 }, new int[]{248,254, 261});
-        bezier_Curve(g2d, new int[]{397, 394, 391 }, new int[]{261,264, 265});
-        bezier_Curve(g2d, new int[]{391, 389, 389 }, new int[]{265,262, 260});
-        bezier_Curve(g2d, new int[]{391, 390, 388 }, new int[]{265,267, 267});
-        bezier_Curve(g2d, new int[]{386, 387, 388 }, new int[]{256,266, 276});
+        // right part
+        bezier_Curve(g2d, new int[] { 382, 388, 389 }, new int[] { 244, 246, 248 });
+        bezier_Curve(g2d, new int[] { 384, 388, 389 }, new int[] { 244, 246, 248 });
+        bezier_Curve(g2d, new int[] { 389, 390, 397 }, new int[] { 248, 254, 261 });
+        bezier_Curve(g2d, new int[] { 397, 394, 391 }, new int[] { 261, 264, 265 });
+        bezier_Curve(g2d, new int[] { 391, 389, 389 }, new int[] { 265, 262, 260 });
+        bezier_Curve(g2d, new int[] { 391, 390, 388 }, new int[] { 265, 267, 267 });
+        bezier_Curve(g2d, new int[] { 386, 387, 388 }, new int[] { 256, 266, 276 });
         // buffer = floodFill(buffer, 372, 260, c);
         // plot(g2d, 372, 260,1);
 
         // skirt
-        bezier_Curve(g2d, new int[]{365, 363, 362 }, new int[]{275,279, 284});
-        bezier_Curve(g2d, new int[]{362, 362, 360 }, new int[]{284,290, 294});
-        bezier_Curve(g2d, new int[]{360, 364, 369 }, new int[]{294,296, 298});
-        bezier_Curve(g2d, new int[]{369, 372, 375 }, new int[]{298,296, 297});
-        bezier_Curve(g2d, new int[]{369, 372, 375 }, new int[]{298,296, 297});
-        bezier_Curve(g2d, new int[]{375, 380, 385 }, new int[]{297,298, 297});
-        bezier_Curve(g2d, new int[]{385, 390, 392 }, new int[]{297,297, 296});
-        bezier_Curve(g2d, new int[]{392, 393, 395 }, new int[]{296,294, 294});
+        bezier_Curve(g2d, new int[] { 365, 363, 362 }, new int[] { 275, 279, 284 });
+        bezier_Curve(g2d, new int[] { 362, 362, 360 }, new int[] { 284, 290, 294 });
+        bezier_Curve(g2d, new int[] { 360, 364, 369 }, new int[] { 294, 296, 298 });
+        bezier_Curve(g2d, new int[] { 369, 372, 375 }, new int[] { 298, 296, 297 });
+        bezier_Curve(g2d, new int[] { 369, 372, 375 }, new int[] { 298, 296, 297 });
+        bezier_Curve(g2d, new int[] { 375, 380, 385 }, new int[] { 297, 298, 297 });
+        bezier_Curve(g2d, new int[] { 385, 390, 392 }, new int[] { 297, 297, 296 });
+        bezier_Curve(g2d, new int[] { 392, 393, 395 }, new int[] { 296, 294, 294 });
 
-        bezier_Curve(g2d, new int[]{372, 370, 369 }, new int[]{276,280, 288});
-        bezier_Curve(g2d, new int[]{380, 383, 386 }, new int[]{275,280, 287});
+        bezier_Curve(g2d, new int[] { 372, 370, 369 }, new int[] { 276, 280, 288 });
+        bezier_Curve(g2d, new int[] { 380, 383, 386 }, new int[] { 275, 280, 287 });
 
-
-        //  right side
-        bezier_Curve(g2d, new int[]{388, 389, 391 }, new int[]{273,280, 283});
-        bezier_Curve(g2d, new int[]{391, 393, 395 }, new int[]{283,288, 294});
+        // right side
+        bezier_Curve(g2d, new int[] { 388, 389, 391 }, new int[] { 273, 280, 283 });
+        bezier_Curve(g2d, new int[] { 391, 393, 395 }, new int[] { 283, 288, 294 });
 
         // leg
-        //         left leg
-        bezier_Curve(g2d, new int[]{365, 366, 366 }, new int[]{297,302, 309});
-        bezier_Curve(g2d, new int[]{366, 365, 365 }, new int[]{309,314, 317});
-        bezier_Curve(g2d, new int[]{365, 365, 365 }, new int[]{317,326, 338});
-        bezier_Curve(g2d, new int[]{365, 367, 365 }, new int[]{338,341, 343});
-        bezier_Curve(g2d, new int[]{365, 365, 363 }, new int[]{343,346, 347});
-        bezier_Curve(g2d, new int[]{363, 368, 371 }, new int[]{347,350, 348});
-        bezier_Curve(g2d, new int[]{371, 373, 373 }, new int[]{348,345, 344});
-        bezier_Curve(g2d, new int[]{373, 373, 372 }, new int[]{344,342, 337});
-        bezier_Curve(g2d, new int[]{373, 373, 372 }, new int[]{344,342, 337});
-        bezier_Curve(g2d, new int[]{371, 369, 367 }, new int[]{338,338, 338});
-        bezier_Curve(g2d, new int[]{372, 371, 371 }, new int[]{337,334, 330});
-        bezier_Curve(g2d, new int[]{371, 369, 366 }, new int[]{330,328, 330});
-        bezier_Curve(g2d, new int[]{371, 372, 374 }, new int[]{330,322, 316});
-        bezier_Curve(g2d, new int[]{374, 374, 373 }, new int[]{316,313, 311});
-        bezier_Curve(g2d, new int[]{373, 373, 374 }, new int[]{311,306, 298});
-
-
-        //      right leg
-        bezier_Curve(g2d, new int[]{380, 379, 380 }, new int[]{298,303, 308});
-        bezier_Curve(g2d, new int[]{380, 380, 380 }, new int[]{308,312, 318});
-        bezier_Curve(g2d, new int[]{380, 378, 378 }, new int[]{318,324, 331});
-        bezier_Curve(g2d, new int[]{378, 378, 377 }, new int[]{331,338, 347});
-        bezier_Curve(g2d, new int[]{377, 376, 382 }, new int[]{347,349, 350});
-        bezier_Curve(g2d, new int[]{382, 379, 378 }, new int[]{341,341, 340});
-        bezier_Curve(g2d, new int[]{382, 382, 382 }, new int[]{350,344, 340});
-        bezier_Curve(g2d, new int[]{382, 382, 384 }, new int[]{340,336, 333});
-        bezier_Curve(g2d, new int[]{384, 385, 386 }, new int[]{333,326, 314});
-        bezier_Curve(g2d, new int[]{386, 389, 388 }, new int[]{314,305, 297});
+        // left leg
+        bezier_Curve(g2d, new int[] { 365, 366, 366 }, new int[] { 297, 302, 309 });
+        bezier_Curve(g2d, new int[] { 366, 365, 365 }, new int[] { 309, 314, 317 });
+        bezier_Curve(g2d, new int[] { 365, 365, 365 }, new int[] { 317, 326, 338 });
+        bezier_Curve(g2d, new int[] { 365, 367, 365 }, new int[] { 338, 341, 343 });
+        bezier_Curve(g2d, new int[] { 365, 365, 363 }, new int[] { 343, 346, 347 });
+        bezier_Curve(g2d, new int[] { 363, 368, 371 }, new int[] { 347, 350, 348 });
+        bezier_Curve(g2d, new int[] { 371, 373, 373 }, new int[] { 348, 345, 344 });
+        bezier_Curve(g2d, new int[] { 373, 373, 372 }, new int[] { 344, 342, 337 });
+        bezier_Curve(g2d, new int[] { 373, 373, 372 }, new int[] { 344, 342, 337 });
+        bezier_Curve(g2d, new int[] { 371, 369, 367 }, new int[] { 338, 338, 338 });
+        bezier_Curve(g2d, new int[] { 372, 371, 371 }, new int[] { 337, 334, 330 });
+        bezier_Curve(g2d, new int[] { 371, 369, 366 }, new int[] { 330, 328, 330 });
+        bezier_Curve(g2d, new int[] { 371, 372, 374 }, new int[] { 330, 322, 316 });
+        bezier_Curve(g2d, new int[] { 374, 374, 373 }, new int[] { 316, 313, 311 });
+        bezier_Curve(g2d, new int[] { 373, 373, 374 }, new int[] { 311, 306, 298 });
+        bresenhamLine(g2d, 373, 297, 374, 303);
+        // right leg
+        bezier_Curve(g2d, new int[] { 380, 379, 380 }, new int[] { 298, 303, 308 });
+        bezier_Curve(g2d, new int[] { 380, 380, 380 }, new int[] { 308, 312, 318 });
+        bezier_Curve(g2d, new int[] { 380, 378, 378 }, new int[] { 318, 324, 331 });
+        bezier_Curve(g2d, new int[] { 378, 378, 377 }, new int[] { 331, 338, 347 });
+        bezier_Curve(g2d, new int[] { 377, 376, 382 }, new int[] { 347, 349, 350 });
+        bezier_Curve(g2d, new int[] { 382, 379, 378 }, new int[] { 341, 341, 340 });
+        bezier_Curve(g2d, new int[] { 382, 382, 382 }, new int[] { 350, 344, 340 });
+        bezier_Curve(g2d, new int[] { 382, 382, 384 }, new int[] { 340, 336, 333 });
+        bezier_Curve(g2d, new int[] { 384, 385, 386 }, new int[] { 333, 326, 314 });
+        bezier_Curve(g2d, new int[] { 386, 389, 388 }, new int[] { 314, 305, 297 });
+        bezier_Curve(g2d, new int[] { 374+4, 377+4, 380+4 }, new int[] { 332, 333, 332 });
+        bezier_Curve(g2d, new int[]{367+x, 367+x, 367+x, 368+x}, new int[]{339+y, 339+y, 339+y, 339+y});
+        bezier_Curve(g2d, new int[]{368+x, 368+x, 369+x, 369+x}, new int[]{339+y, 338+y, 338+y, 338+y});
+        bezier_Curve(g2d, new int[]{369+x, 370+x, 370+x, 371+x}, new int[]{338+y, 338+y, 338+y, 338+y});
+        bezier_Curve(g2d, new int[]{371+x, 372+x, 372+x, 372+x}, new int[]{338+y, 338+y, 338+y, 338+y});
+        bezier_Curve(g2d, new int[]{372+x, 372+x, 371+x, 371+x}, new int[]{338+y, 338+y, 338+y, 338+y});
+        bezier_Curve(g2d, new int[]{371+x, 370+x, 370+x, 368+x}, new int[]{338+y, 338+y, 338+y, 338+y});
+        bezier_Curve(g2d, new int[]{368+x, 368+x, 368+x, 367+x}, new int[]{338+y, 338+y, 338+y, 338+y});
+        bezier_Curve(g2d, new int[]{367+x, 367+x, 367+x, 367+x}, new int[]{338+y, 339+y, 339+y, 339+y});
 
 
         // arm
-        //      left arm
+        // left arm
         // bezier_Curve(g2d, new int[]{363-5, 361-5, 363-5 }, new int[]{262,266, 272});
         // bezier_Curve(g2d, new int[]{363-5, 367-5, 368-5 }, new int[]{272,271, 270});
         // bezier_Curve(g2d, new int[]{368-5, 368-5, 367-5 }, new int[]{265,266, 268});
-        bezier_Curve(g2d, new int[]{360, 358, 360 }, new int[]{262,266, 271});
-        bezier_Curve(g2d, new int[]{360, 364, 365 }, new int[]{271,272, 270});
-        bezier_Curve(g2d, new int[]{365, 364, 365 }, new int[]{268,267, 266});
+        bezier_Curve(g2d, new int[] { 360, 358, 360 }, new int[] { 262, 266, 271 });
+        bezier_Curve(g2d, new int[] { 360, 364, 365 }, new int[] { 271, 272, 270 });
+        bezier_Curve(g2d, new int[] { 365, 364, 365 }, new int[] { 268, 267, 266 });
 
-        //      right arm
-        bezier_Curve(g2d, new int[]{391, 393, 395 }, new int[]{265,268, 270});
-        bezier_Curve(g2d, new int[]{395, 399, 407 }, new int[]{270,276, 283});
-        bezier_Curve(g2d, new int[]{407, 407, 407 }, new int[]{283,286, 288});
-        bezier_Curve(g2d, new int[]{407, 407, 407 }, new int[]{283,286, 288});
-        bezier_Curve(g2d, new int[]{407, 411, 414 }, new int[]{288,291, 290});
-        bezier_Curve(g2d, new int[]{414, 414, 414 }, new int[]{290,287, 280});
-        bezier_Curve(g2d, new int[]{414, 412, 409 }, new int[]{280,284, 282});
-        bezier_Curve(g2d, new int[]{414, 412, 409 }, new int[]{280,284, 282});
-        bezier_Curve(g2d, new int[]{409, 404, 400 }, new int[]{282,274, 268});
-        bezier_Curve(g2d, new int[]{400, 397, 396 }, new int[]{268,265, 263});
+        // right arm
+        bezier_Curve(g2d, new int[] { 391, 393, 395 }, new int[] { 265, 268, 270 });
+        bezier_Curve(g2d, new int[] { 395, 399, 407 }, new int[] { 270, 276, 283 });
+        bezier_Curve(g2d, new int[] { 407, 407, 407 }, new int[] { 283, 286, 288 });
+        bezier_Curve(g2d, new int[] { 407, 407, 407 }, new int[] { 283, 286, 288 });
+        bezier_Curve(g2d, new int[] { 407, 411, 414 }, new int[] { 288, 291, 290 });
+        bezier_Curve(g2d, new int[] { 414, 414, 414 }, new int[] { 290, 287, 280 });
+        bezier_Curve(g2d, new int[] { 414, 412, 409 }, new int[] { 280, 284, 282 });
+        bezier_Curve(g2d, new int[] { 414, 412, 409 }, new int[] { 280, 284, 282 });
+        bezier_Curve(g2d, new int[] { 409, 404, 400 }, new int[] { 282, 274, 268 });
+        bezier_Curve(g2d, new int[] { 400, 397, 396 }, new int[] { 268, 265, 263 });
+
+        // hair
+        Color borderColor = Color.decode("#000000");
+        Color hairColor = Color.decode("#563C2B");
+        g2d.setColor(hairColor);
+        buffer = floodFill2(buffer, 378, 233,borderColor ,hairColor);
+        // shirt
+        Color shirtColor = Color.decode("#F15E62");
+        g2d.fillRect(370, 258, 2, 2);
+        buffer = floodFill2(buffer, 370, 258, borderColor, shirtColor);
+        buffer = floodFill2(buffer, 382, 258, borderColor, shirtColor);
+        // hand
+        Color handColor = Color.decode("#FDEEEF");
+        // // Color handColor = Color.decode("#D88D8D");
+        buffer = floodFill2(buffer, 361, 267, borderColor, handColor);
+        buffer = floodFill2(buffer, 399, 271, borderColor, handColor);
+        // skirt
+        Color skirtColor = Color.decode("#F5842A");
+        buffer = floodFill2(buffer, 378, 284, borderColor, skirtColor);
+        // // leg
+        buffer = floodFill2(buffer, 368, 315, borderColor, handColor);
+        buffer = floodFill2(buffer, 383, 331, borderColor, handColor);
+        // sock
+        Color sockColor = Color.decode("#666AB0");
+        buffer = floodFill2(buffer, 368, 334, borderColor, sockColor);
+        buffer = floodFill2(buffer, 380, 336, borderColor, sockColor);
+        // // shoe
+        Color shoeColor = Color.decode("#F4823F");
+        buffer = floodFill2(buffer, 370, 345, borderColor, shoeColor);
+        // g2d.setColor(Color.red);
+        // // g2d.fillRect(380, 345, 1, 1);
+        buffer = floodFill2(buffer, 379, 345, borderColor, shoeColor);
 
     }
 
@@ -377,12 +847,13 @@ public class Expe extends JPanel {
 
     }
 
-    private void firework(Graphics2D g2d) {
-        fireworkPoint(g2d, 0, 0);
+    private void firework(Graphics2D g2d,BufferedImage buffer) {
+        fireworkPoint1(g2d,buffer,  0, 0, Color.decode("#EA4645"));
     }
 
-    private void fireworkPoint(Graphics2D g2d, int x, int y) {
-        g2d.setColor(Color.decode("#EA4645"));
+    private void fireworkPoint1(Graphics2D g2d, BufferedImage buffer, int x, int y, Color color) {
+        g2d.setColor(color);
+
         // 1
         bezier_Curve(g2d, new int[] { 446 + x, 446 + x, 449 + x, 450 + x },
                 new int[] { 10 + y, 10 + y, 13 + y, 17 + y });
@@ -499,6 +970,16 @@ public class Expe extends JPanel {
 
         bezier_Curve(g2d, new int[] { 452 + x, 450 + x, 445 + x }, new int[] { 51 + y, 48 + y, 48 + y });
         bezier_Curve(g2d, new int[] { 452 + x, 448 + x, 445 + x }, new int[] { 51 + y, 50 + y, 48 + y });
+
+        // g2d.drawRect(442, 31, 1, 1);
+        // g2d.drawRect(442, 31, 1, 1);
+        // g2d.drawRect(442, 31, 1, 1);
+        // g2d.drawRect(442, 31, 1, 1);
+        buffer = floodFill(buffer, 442+x, 30+y, color);
+        buffer = floodFill(buffer, 427+x, 38+y, color);
+        buffer = floodFill(buffer, 431+x, 46+y, color);
+        g2d.setColor(Color.magenta);
+        g2d.drawRect(431, 46, 1, 1);
 
     }
 
@@ -732,34 +1213,11 @@ public class Expe extends JPanel {
         }
     }
 
-    private static Color interpolateColor(Color startColor, Color endColor, float ratio) {
-        int red = (int) (startColor.getRed() + ratio * (endColor.getRed() - startColor.getRed()));
-        int green = (int) (startColor.getGreen() + ratio * (endColor.getGreen() - startColor.getGreen()));
-        int blue = (int) (startColor.getBlue() + ratio * (endColor.getBlue() - startColor.getBlue()));
-        int alpha = interpolateNumber(startColor.getAlpha(), endColor.getAlpha(), ratio);
-
-        return new Color(red, green, blue, alpha);
-
-    }
-
-    private static int interpolateNumber(int start, int end, float ratio) {
-        int x = (int) (start + ratio * (end - start));
-        return x;
-    }
 
     private static void grass(Graphics g, BufferedImage buffer) {
-        // g.setColor(new Color(128, 192, 20));
-        // g.setColor(Color.decode("#80C014"));
-        // g.fillRect(0, 350, 600, 240);
-        // g.setColor(new Color(128, 192, 20 ));
-        // g.setColor(Color.decode("#041839"));
-        // bresenhamLine(g, 0, 600 - 30, 600, 600 - 30);
-        // g.setColor(new Color(9, 30, 60));
+
         g.setColor(Color.decode("#80C014"));
         bezier_Curve(g, new int[] { 0, 500, 620, }, new int[] { 280, 280, 320 });
-        // bezier_Curve(g, new int[]{0,}, new int[]{,600-});
-        // buffer = floodFill(buffer, 0, 599 - 30, Color.decode("#041839"),
-        // Color.decode("#80C014"));
         buffer = floodFill(buffer, 0, 599 - 30, Color.decode("#80C014"));
 
     }
@@ -788,51 +1246,6 @@ public class Expe extends JPanel {
         bresenhamLine(g, x1, y1, x2, y2);
     }
 
-    private void drawRoundedRectToBresen(Graphics g, int x, int y, int width, int height, int curve) {
-        // int curveHalf = curve / 2;
-        // int curveHalf2 = curveHalf / 2;
-
-        // top
-        int x1 = x;
-        int y1 = y;
-        int x2 = x + width;
-        int y2 = y;
-        bresenhamLine(g, x1 + curve, y1, x2 - curve, y2);
-
-        // top to left
-        bezier_Curve(g, new int[] { x1 + curve, x1, x1 }, new int[] { y1, y1, y1 + curve });
-
-        // left
-        x1 = x;
-        y1 = y;
-        x2 = x;
-        y2 = y + height;
-        bresenhamLine(g, x1, y1 + curve, x2, y2 - curve);
-
-        // left to down
-        bezier_Curve(g, new int[] { x2, x2, x2 + curve }, new int[] { y2 - curve, y2 + 2, y2 });
-
-        // down
-        x1 = x;
-        y1 = y + height;
-        x2 = x + width;
-        y2 = y + height;
-        bresenhamLine(g, x1 + curve, y1, x2 - curve, y2);
-
-        // down to right
-        bezier_Curve(g, new int[] { x2 - curve, x2 + 2, x2 }, new int[] { y2, y2 + 2, y2 - curve });
-
-        // right
-        x1 = x + width;
-        y1 = y;
-        x2 = x + width;
-        y2 = y + height;
-        bresenhamLine(g, x1, y1 + curve, x2, y2 - curve);
-
-        // right to top
-        bezier_Curve(g, new int[] { x1, x1 + 2, x1 - curve }, new int[] { y1 + curve, y1 + 1, y1 });
-
-    }
 
     private void table(Graphics g, BufferedImage buffer) {
         Color replaceColor;
@@ -960,9 +1373,105 @@ public class Expe extends JPanel {
         buffer = floodFill(buffer, 105, 421 - 30, Color.decode("#864B9B"));
     }
 
-    private void cup(Graphics g) {
-        bresenhamLine(g, 179, 425 - 30, 239, 425 - 30);
+    private void cup(Graphics g2d,BufferedImage buffer, int x, int y) {
         // bezier_Curve(g, new int[]{188, 195,,}, new int[]{425, 426,,});
+        // g2d.setColor(Color.gray);
+        g2d.setColor(Color.WHITE);
+        // เงา
+        int[] xPoints = new int[]{188, 188, 187, 185, 184, 185, 186, 190, 193, 198, 201, 207, 210, 223, 221, 224, 226, 231, 233, 235, 235, 237, 236, 228, 220, 211, 203, 194, 188, 188, 188};
+        int[] yPoints = new int[]{454, 455, 455, 457, 458, 459, 460, 461, 461, 462, 462, 461, 461, 461, 461, 461, 461, 460, 460, 459, 458, 456, 453, 453, 453, 453, 453, 454, 453, 456, 454};
+        for (int i = 0; i < xPoints.length - 3; i += 3) {
+            bezier_Curve(g2d,
+                    new int[] { (int) Math.round(xPoints[i]) + x, (int) Math.round(xPoints[i + 1]) + x,
+                            (int) Math.round(xPoints[i + 2]) + x, (int) Math.round(xPoints[i + 3]) + x },
+                    new int[] { (int) Math.round(yPoints[i]) + y, (int) Math.round(yPoints[i + 1]) + y,
+                            (int) Math.round(yPoints[i + 2]) + y, (int) Math.round(yPoints[i + 3]) + y });
+        }
+
+        buffer = floodFill(buffer, 200+x, 458+y, Color.WHITE);
+
+
+
+
+
+
+        g2d.setColor(Color.black);
+        xPoints = new int[] { 179, 179, 181, 187, 186, 203, 204, 218, 223, 230, 232, 237, 238, 239, 239,
+                239, 239,
+                237, 237, 236, 235, 233, 232, 230, 229, 228, 226, 222, 220, 211, 210, 196, 196, 191,
+                190, 187, 180, 178,
+                178, 178, 178 };
+        yPoints = new int[] { 425, 424, 425, 425, 425, 425, 425, 425, 425, 425, 424, 425, 425, 426, 427,
+                431, 432,
+                437, 438, 442, 444, 448, 450, 454, 455, 457, 459, 460, 461, 462, 461, 461, 461, 459,
+                457, 453, 443, 432,
+                431, 426, 426 };
+        for (int i = 0; i < xPoints.length - 3; i += 3) {
+            bezier_Curve(g2d,
+                    new int[] { (int) Math.round(xPoints[i]) + x,
+                            (int) Math.round(xPoints[i + 1]) + x,
+                            (int) Math.round(xPoints[i + 2]) + x,
+                            (int) Math.round(xPoints[i + 3]) + x },
+                    new int[] { (int) Math.round(yPoints[i]) + y,
+                            (int) Math.round(yPoints[i + 1]) + y,
+                            (int) Math.round(yPoints[i + 2]) + y,
+                            (int) Math.round(yPoints[i + 3]) + y });
+        }
+
+        // จับนอก
+        xPoints = new int[] { 239, 239, 239, 242, 243, 246, 248, 251, 254, 257, 258, 259, 259, 259, 258, 257,
+                256, 254,
+                252, 249, 248, 246, 245, 237, 237, 234, 234, 231, 230, 229, 230, 232, 232, 234, 234,
+                235, 236, 237, 237,
+                238, 239, 239, 238 };
+        yPoints = new int[] { 427, 427, 428, 429, 428, 427, 426, 426, 427, 430, 431, 434, 435, 440, 441, 443,
+                444, 446,
+                447, 448, 449, 450, 450, 453, 453, 454, 453, 454, 455, 454, 453, 450, 450, 446, 446,
+                444, 442, 439, 439,
+                432, 432, 429, 427 };
+        for (int i = 0; i < xPoints.length - 3; i += 3) {
+            bezier_Curve(g2d,
+                    new int[] { (int) Math.round(xPoints[i]) + x,
+                            (int) Math.round(xPoints[i + 1]) + x,
+                            (int) Math.round(xPoints[i + 2]) + x,
+                            (int) Math.round(xPoints[i + 3]) + x },
+                    new int[] { (int) Math.round(yPoints[i]) + y,
+                            (int) Math.round(yPoints[i + 1]) + y,
+                            (int) Math.round(yPoints[i + 2]) + y,
+                            (int) Math.round(yPoints[i + 3]) + y });
+        }
+
+        // จับใน
+        xPoints = new int[] { 238, 238, 239, 240, 241, 243, 244, 244, 246, 249, 250, 252, 254, 256, 255, 254,
+                252, 251,
+                250, 248, 247, 243, 243, 238, 237, 236, 236, 236, 236, 237, 237, 237, 237, 238, 237 };
+        yPoints = new int[] { 438, 437, 438, 437, 437, 434, 433, 433, 431, 431, 431, 432, 432, 436, 438, 441,
+                442, 444,
+                444, 445, 445, 446, 447, 448, 448, 447, 447, 446, 445, 443, 442, 441, 440, 438, 438 };
+        for (int i = 0; i < xPoints.length - 3; i += 3) {
+            bezier_Curve(g2d,
+                    new int[] { (int) Math.round(xPoints[i]) + x,
+                            (int) Math.round(xPoints[i + 1]) + x,
+                            (int) Math.round(xPoints[i + 2]) + x,
+                            (int) Math.round(xPoints[i + 3]) + x },
+                    new int[] { (int) Math.round(yPoints[i]) + y,
+                            (int) Math.round(yPoints[i + 1]) + y,
+                            (int) Math.round(yPoints[i + 2]) + y,
+                            (int) Math.round(yPoints[i + 3]) + y });
+        }
+
+        // ควัน
+
+        // g2d.setColor(Color.gray);
+        buffer = floodFill(buffer,250+x, 428+y, Color.black);
+        // g2d.fillRect(230, 428-30, 2, 2);
+        buffer = floodFill(buffer,232+x, 428+y, Color.black);
+
+        // ควัน
+        Color smokeColor = Color.decode("#D12734");
+        g2d.setColor(Color.RED);
+        g2d.fillRect(215, 380, 1, 1);
+        // buffer = floodFill2(buffer, 215, 380, Color.BLACK,  smokeColor );
     }
 
     private void mattress(Graphics g) {
@@ -1100,6 +1609,55 @@ public class Expe extends JPanel {
         return m;
     }
 
+    public static BufferedImage floodFill2(BufferedImage m, int x, int y, Color border_Color, Color replacement_Color) {
+        // System.out.println("work");
+        Queue<int[]> q = new LinkedList<>();
+        // Queue<int[]> q = new LinkedList<>();
+
+        q.add(new int[] { x, y });
+        int border_ColorRGB = border_Color.getRGB();
+        int replace_ColorRGB = replacement_Color.getRGB();
+        // System.out.println(x+"  "+y);
+        // border_ColorRGB += 50;
+        int[] currentPos;
+        while (!q.isEmpty()) {
+            currentPos = q.poll();
+
+
+            int x1 = currentPos[0];
+            int y1 = currentPos[1];
+
+            if (m.getRGB(x1, y1) != border_ColorRGB && m.getRGB(x1, y1) != replace_ColorRGB) {
+                m.setRGB(x1, y1, replace_ColorRGB);
+                // System.out.println("x1 is:"+x1);
+                // System.out.println("y1 is:"+y1);
+                // south
+                if (isInBound(x1, y1 + 1) && m.getRGB(x1, y1 + 1) != border_ColorRGB && m.getRGB(x1, y1 + 1) != replace_ColorRGB) {
+                    q.add(new int[] { x1, y1 + 1 });
+                    // System.out.println("firsy");
+                }
+                // north
+                if (isInBound(x1, y1 - 1) && m.getRGB(x1, y1 - 1) != border_ColorRGB&& m.getRGB(x1, y1 - 1) != replace_ColorRGB) {
+                    q.add(new int[] { x1, y1 - 1 });
+                    // System.out.println("f2irsy");
+                }
+                // east
+                if (isInBound(x1 + 1, y1) && m.getRGB(x1 + 1, y1) != border_ColorRGB&& m.getRGB(x1+1, y1) != replace_ColorRGB) {
+                    q.add(new int[] { x1 + 1, y1 });
+                    // System.out.println("f3irsy");
+                }
+                // west
+                if (isInBound(x1 - 1, y1) && m.getRGB(x1 - 1, y1) != border_ColorRGB&& m.getRGB(x1-1, y1) != replace_ColorRGB) {
+                    q.add(new int[] { x1 - 1, y1 });
+                    // System.out.println("fir4sy");
+                }
+            }
+        }
+
+        return m;
+    }
+
+
     public static BufferedImage floodFill(BufferedImage m, int x, int y, Color border_Color) {
         Queue<int[]> q = new LinkedList<>();
         // Queue<int[]> q = new LinkedList<>();
@@ -1145,4 +1703,66 @@ public class Expe extends JPanel {
     static boolean isInBound(int x, int y) {
         return x >= 0 && y > 0 && x < 601 && y < 601;
     }
+
+    private void drawRoundedRectToBresen(Graphics g, int x, int y, int width, int height, int curve) {
+        // int curveHalf = curve / 2;
+        // int curveHalf2 = curveHalf / 2;
+
+        // top
+        int x1 = x;
+        int y1 = y;
+        int x2 = x + width;
+        int y2 = y;
+        bresenhamLine(g, x1 + curve, y1, x2 - curve, y2);
+
+        // top to left
+        bezier_Curve(g, new int[] { x1 + curve, x1, x1 }, new int[] { y1, y1, y1 + curve });
+
+        // left
+        x1 = x;
+        y1 = y;
+        x2 = x;
+        y2 = y + height;
+        bresenhamLine(g, x1, y1 + curve, x2, y2 - curve);
+
+        // left to down
+        bezier_Curve(g, new int[] { x2, x2, x2 + curve }, new int[] { y2 - curve, y2 + 2, y2 });
+
+        // down
+        x1 = x;
+        y1 = y + height;
+        x2 = x + width;
+        y2 = y + height;
+        bresenhamLine(g, x1 + curve, y1, x2 - curve, y2);
+
+        // down to right
+        bezier_Curve(g, new int[] { x2 - curve, x2 + 2, x2 }, new int[] { y2, y2 + 2, y2 - curve });
+
+        // right
+        x1 = x + width;
+        y1 = y;
+        x2 = x + width;
+        y2 = y + height;
+        bresenhamLine(g, x1, y1 + curve, x2, y2 - curve);
+
+        // right to top
+        bezier_Curve(g, new int[] { x1, x1 + 2, x1 - curve }, new int[] { y1 + curve, y1 + 1, y1 });
+
+    }
+
+    private static Color interpolateColor(Color startColor, Color endColor, float ratio) {
+        int red = (int) (startColor.getRed() + ratio * (endColor.getRed() - startColor.getRed()));
+        int green = (int) (startColor.getGreen() + ratio * (endColor.getGreen() - startColor.getGreen()));
+        int blue = (int) (startColor.getBlue() + ratio * (endColor.getBlue() - startColor.getBlue()));
+        int alpha = interpolateNumber(startColor.getAlpha(), endColor.getAlpha(), ratio);
+
+        return new Color(red, green, blue, alpha);
+
+    }
+
+    private static int interpolateNumber(int start, int end, float ratio) {
+        int x = (int) (start + ratio * (end - start));
+        return x;
+    }
+
 }

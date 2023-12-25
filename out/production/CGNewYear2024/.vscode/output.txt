@@ -1,8 +1,0 @@
-bezier_Curve(g2d, new int[]{367+x, 367+x, 367+x, 368+x}, new int[]{339+y, 339+y, 339+y, 339+y});
-bezier_Curve(g2d, new int[]{368+x, 368+x, 369+x, 369+x}, new int[]{339+y, 338+y, 338+y, 338+y});
-bezier_Curve(g2d, new int[]{369+x, 370+x, 370+x, 371+x}, new int[]{338+y, 338+y, 338+y, 338+y});
-bezier_Curve(g2d, new int[]{371+x, 372+x, 372+x, 372+x}, new int[]{338+y, 338+y, 338+y, 338+y});
-bezier_Curve(g2d, new int[]{372+x, 372+x, 371+x, 371+x}, new int[]{338+y, 338+y, 338+y, 338+y});
-bezier_Curve(g2d, new int[]{371+x, 370+x, 370+x, 368+x}, new int[]{338+y, 338+y, 338+y, 338+y});
-bezier_Curve(g2d, new int[]{368+x, 368+x, 368+x, 367+x}, new int[]{338+y, 338+y, 338+y, 338+y});
-bezier_Curve(g2d, new int[]{367+x, 367+x, 367+x, 367+x}, new int[]{338+y, 339+y, 339+y, 339+y});
