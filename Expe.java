@@ -14,7 +14,7 @@ public class Expe extends JPanel {
 
         JFrame f = new JFrame();
         f.add(m);
-        f.setTitle("Assignment1_521_870");
+        f.setTitle("First Swing");
         f.setSize(600, 600);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
@@ -30,7 +30,7 @@ public class Expe extends JPanel {
         g2d.setColor(Color.WHITE);
         g2d.fillRect(0, 0, 600, 600);
         // sky
-//        sky(g2d, buffer);
+        sky(g2d, buffer);
         // star
         star(g2d);
         // graass
@@ -58,16 +58,9 @@ public class Expe extends JPanel {
         lineOfLamp3(g2d, buffer,28,-69);
 
 
+        g.setColor(Color.WHITE);
 
-
-
-        gift(g2d, buffer, 0, 0-30);
-//        gift(g2d, buffer, -12, -16-30);
-//        gift(g2d, buffer, 18, -12-30);
-//        gift(g2d, buffer, 50, -12-30);
-//        gift(g2d, buffer, 77, -21-30);
-
-
+        gift(g2d, buffer, 0, 0);
 
         g.drawImage(buffer, 0, 0, null);
 
@@ -201,7 +194,7 @@ public class Expe extends JPanel {
     }
 
     private void christmasTree(Graphics g, BufferedImage buffer, int x, int y) {
-        g.setColor(Color.black);
+        g.setColor(Color.white);
         double[] xPoints = {12, 12.3455, 13.2721, 16.3005, 18.5576, 24.6485, 25.1167, 28.6134, 28.931, 31.686, 32.0698, 35.9322, 36.9498, 41.3041, 41.5605, 46.1792, 47.1407, 51.8008, 52.6668, 55.1776, 55.0872, 57.4208, 58.2147, 62.0222, 62.7171, 67.0826, 67.879, 71.8208, 71.9313, 76.3136, 77.3967, 82.0345, 82.3698, 86.0246, 86.6151, 89.4301, 89.2468, 93.1014, 94.9177, 99.9534, 101.6439, 102.3559, 101.3569};
         double[] yPoints = {280, 282.6668, 283.6118, 285.2269, 282.549, 283.347, 286.0635, 285.9456, 284.3062, 283.517, 287.7048, 288.2955, 284.8327, 285.188, 289.6872, 290.2794, 286.8385, 287.1017, 288.537, 287.5257, 286.1701, 285.7353, 288.9123, 289.0994, 285.1078, 284.9017, 288.1586, 287.8639, 285.4115, 284.5398, 287.3642, 286.7154, 284.8509, 285.1852, 288.162, 287.8327, 284.6062, 283.2734, 287.3722, 286.7641, 284.8257, 281.1758, 279.5796};
 
@@ -232,33 +225,10 @@ public class Expe extends JPanel {
         bresenhamLine(g, 27+x, 226+y, 58+x, 181+x);
         bresenhamLine(g, 88+x, 228+y, 57+x, 181+x);
 
-        //star
-        int[] xPointsInt = new int[]{58+x, 50+x, 51+x, 46+x, 53+x, 57+x, 61+x, 68+x, 63+x, 64+x};
-        int[] yPointsInt = new int[]{181+y, 185+y, 177+y, 172+y, 170+y, 163+y, 170+y, 172+y, 177+y, 185+y};
-        g.setColor(Color.decode("#EFEA43"));
-        g.fillPolygon(xPointsInt, yPointsInt, xPointsInt.length);
+        int[] xPointsInt = new int[]{58, 50, 51, 46, 53, 57, 61, 68, 63, 64};
+        int[] yPointsInt = new int[]{181, 185, 177, 172, 170, 163, 170, 172, 177, 185};
 
-        g.setColor(Color.WHITE);
-        xPoints = new double[]{54, 54, 54, 56, 57, 57, 54};
-        yPoints = new double[]{174, 174, 172, 170, 169, 169, 174};
-        for (int i = 0; i < xPoints.length - 3; i+=3) {
-            bezier_Curve(g, new int[] { (int)Math.round(xPoints[i])+x, (int)Math.round(xPoints[i+1])+x,  (int)Math.round(xPoints[i+2])+x, (int)Math.round(xPoints[i+3])+x}, new int[] { (int)Math.round(yPoints[i])+y, (int)Math.round(yPoints[i+1])+y, (int)Math.round(yPoints[i+2])+y, (int)Math.round(yPoints[i+3])+y});
-        }
-
-        xPoints = new double[]{54, 54, 53, 54, 55};
-        yPoints = new double[]{177, 177, 179, 181, 181};
-        for (int i = 0; i < xPoints.length - 3; i+=3) {
-            bezier_Curve(g, new int[] { (int)Math.round(xPoints[i])+x, (int)Math.round(xPoints[i+1])+x,  (int)Math.round(xPoints[i+2])+x, (int)Math.round(xPoints[i+3])+x}, new int[] { (int)Math.round(yPoints[i])+y, (int)Math.round(yPoints[i+1])+y, (int)Math.round(yPoints[i+2])+y, (int)Math.round(yPoints[i+3])+y});
-        }
-
-        buffer = floodFill(buffer,56,190, Color.WHITE, Color.decode("#19B24A"));
-        buffer = floodFill(buffer,70,240, Color.WHITE, Color.decode("#19B24A"));
-        buffer = floodFill(buffer,70,270, Color.WHITE, Color.decode("#19B24A"));
-        buffer = floodFill(buffer,70,280, Color.decode("#80C014"), Color.decode("#19B24A"));
-        g.setColor(Color.BLUE);
-        plot(g,70,270);
-
-
+        g.drawPolygon(xPointsInt, yPointsInt, xPointsInt.length);
     }
 
 
@@ -1233,12 +1203,58 @@ public class Expe extends JPanel {
             }
         }
 
-        return m;
-    }
+                return m;
+        }
+        public static BufferedImage floodFill2(BufferedImage m, int x, int y, Color border_Color, Color replacement_Color) {
+                // System.out.println("work");
+                Queue<int[]> q = new LinkedList<>();
+                // Queue<int[]> q = new LinkedList<>();
 
-    public static BufferedImage floodFill(BufferedImage m, int x, int y, Color border_Color) {
-        Queue<int[]> q = new LinkedList<>();
-        // Queue<int[]> q = new LinkedList<>();
+                q.add(new int[] { x, y });
+                int border_ColorRGB = border_Color.getRGB();
+                int replace_ColorRGB = replacement_Color.getRGB();
+                // System.out.println(x+"  "+y);
+                // border_ColorRGB += 50;
+                int[] currentPos;
+                while (!q.isEmpty()) {
+                        currentPos = q.poll();
+
+
+                        int x1 = currentPos[0];
+                        int y1 = currentPos[1];
+
+                        if (m.getRGB(x1, y1) != border_ColorRGB && m.getRGB(x1, y1) != replace_ColorRGB) {
+                                m.setRGB(x1, y1, replace_ColorRGB);
+                                // System.out.println("x1 is:"+x1);
+                                // System.out.println("y1 is:"+y1);
+                                // south
+                                if (isInBound(x1, y1 + 1) && m.getRGB(x1, y1 + 1) != border_ColorRGB && m.getRGB(x1, y1 + 1) != replace_ColorRGB) {
+                                        q.add(new int[] { x1, y1 + 1 });
+                                        // System.out.println("firsy");
+                                }
+                                // north
+                                if (isInBound(x1, y1 - 1) && m.getRGB(x1, y1 - 1) != border_ColorRGB&& m.getRGB(x1, y1 - 1) != replace_ColorRGB) {
+                                        q.add(new int[] { x1, y1 - 1 });
+                                        // System.out.println("f2irsy");
+                                }
+                                // east
+                                if (isInBound(x1 + 1, y1) && m.getRGB(x1 + 1, y1) != border_ColorRGB&& m.getRGB(x1+1, y1) != replace_ColorRGB) {
+                                        q.add(new int[] { x1 + 1, y1 });
+                                        // System.out.println("f3irsy");
+                                }
+                                // west
+                                if (isInBound(x1 - 1, y1) && m.getRGB(x1 - 1, y1) != border_ColorRGB&& m.getRGB(x1-1, y1) != replace_ColorRGB) {
+                                        q.add(new int[] { x1 - 1, y1 });
+                                        // System.out.println("fir4sy");
+                                }
+                        }
+                }
+
+                return m;
+        }
+        public static BufferedImage floodFill(BufferedImage m, int x, int y, Color border_Color) {
+                Queue<int[]> q = new LinkedList<>();
+                // Queue<int[]> q = new LinkedList<>();
 
         q.add(new int[] { x, y });
         int border_ColorRGB = border_Color.getRGB();
