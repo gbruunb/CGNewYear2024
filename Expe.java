@@ -14,7 +14,7 @@ public class Expe extends JPanel {
 
         JFrame f = new JFrame();
         f.add(m);
-        f.setTitle("Assignment1_521_870");
+        f.setTitle("First Swing");
         f.setSize(600, 600);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
@@ -30,7 +30,7 @@ public class Expe extends JPanel {
         g2d.setColor(Color.WHITE);
         g2d.fillRect(0, 0, 600, 600);
         // sky
-//        sky(g2d, buffer);
+        sky(g2d, buffer);
         // star
         star(g2d);
         // graass
@@ -49,159 +49,46 @@ public class Expe extends JPanel {
         girl(g2d, buffer);
 
         cat(g2d, buffer, 30);
-        ballOnChristmas(g2d, buffer, 0,0, Color.decode("#9BD0DD"));
-        ballOnChristmas(g2d, buffer, 0,-30, Color.decode("#8984BF"));
-        ballOnChristmas(g2d, buffer, 16,-26, Color.decode("#D7482E"));
         christmasTree(g2d, buffer, 0, 0);
-        lineOfLamp1(g2d, buffer,7,-29);
-        lineOfLamp2(g2d, buffer,12,-50);
-        lineOfLamp3(g2d, buffer,28,-69);
 
+        g.setColor(Color.WHITE);
 
-
-
-
-        gift(g2d, buffer, 0, 0-30);
-//        gift(g2d, buffer, -12, -16-30);
-//        gift(g2d, buffer, 18, -12-30);
-//        gift(g2d, buffer, 50, -12-30);
-//        gift(g2d, buffer, 77, -21-30);
-
-
+        gift(g2d, buffer, 0, 0);
 
         g.drawImage(buffer, 0, 0, null);
 
     }
 
-    private void ballOnChristmas(Graphics g, BufferedImage buffer, int x, int y, Color color){
-        int startX = 0;
-        int startY = -30;
-        g.setColor(Color.decode("#000000"));
-        int[] xPoints = {44+startX+x, 46+startX+x, 49+startX+x, 51+startX+x, 52+startX+x, 52+startX+x, 51+startX+x, 50+startX+x, 48+startX+x, 46+startX+x, 44+startX+x, 43+startX+x, 42+startX+x, 43+startX+x, 44+startX+x};
-        int[] yPoints = {268+startY+y, 267+startY+y, 267+startY+y, 269+startY+y, 271+startY+y, 273+startY+y, 275+startY+y, 276+startY+y, 277+startY+y, 277+startY+y, 276+startY+y, 274+startY+y, 272+startY+y, 270+startY+y, 268+startY+y};
-        g.drawPolygon(xPoints, yPoints, xPoints.length);
-        bresenhamLine(g,44+startX+x,268+startY+y, 44+startX+x, 265+startY+y);
-        bresenhamLine(g,44+startX+x,265+startY+y, 50+startX+x, 265+startY+y);
-        bresenhamLine(g,50+startX+x,265+startY+y, 50+startX+x, 268+startY+y);
-        bresenhamLine(g,47+startX+x,265+startY+y, 47+startX+x, 261+startY+y);
-
-        buffer = floodFill(buffer,46+startX+x,269+startY+y,Color.WHITE, color);
-        buffer = floodFill(buffer,46+startX+x,266+startY+y,Color.WHITE, Color.decode("#EFEA43"));
-
-
-
-    }
-
-
-
-    private void smallLamp(Graphics g, BufferedImage buffer, int x, int y){
-        g.setColor(Color.decode("#98972B"));
-        int[] xPoints = {21+x, 23+x, 24+x, 24+x, 23+x, 21+x, 20+x, 20+x, 21+x};
-        int[] yPoints = {261+y, 261+y, 262+y, 264+y, 265+y, 265+y, 264+y, 262+y, 261+y};
-        g.drawPolygon(xPoints,yPoints,xPoints.length);
-        for (int i = 21; i <= 23; i++) {
-            for (int j = 262; j <= 264; j++) {
-                buffer = floodFill(buffer, i+x, j+y, Color.BLACK, Color.decode("#EFEA43"));
-            }
-        }
-        Color curColorY1 = getColor(buffer,21,262+y);
-        Color curColorY2 = getColor(buffer,21+x,263+y);
-        Color curColorY3 = getColor(buffer,21+x,263+y);
-//        System.out.println(Color.decode("#EFEA43"));
-//        System.out.println(curColorY1);
-        buffer = floodFill(buffer, 21+x, 262+y, Color.WHITE, Color.decode("#EFEA43"));
-        buffer = floodFill(buffer, 23+x, 262+y, Color.WHITE, Color.decode("#EFEA43"));
-        buffer = floodFill(buffer, 23+x, 264+y, Color.WHITE, Color.decode("#EFEA43"));
-        buffer = floodFill(buffer, 21+x, 264+y, Color.WHITE, Color.decode("#EFEA43"));
-
-        buffer = floodFill(buffer, 21+x, 262+y, Color.decode("#19B24A"), Color.decode("#EFEA43"));
-        buffer = floodFill(buffer, 23+x, 262+y, Color.decode("#19B24A"), Color.decode("#EFEA43"));
-        buffer = floodFill(buffer, 23+x, 264+y, Color.decode("#19B24A"), Color.decode("#EFEA43"));
-        buffer = floodFill(buffer, 21+x, 264+y, Color.decode("#19B24A"), Color.decode("#EFEA43"));
-
-    }
-
-    private Color getColor(BufferedImage buffer, int x, int y){
-        int pixel = buffer.getRGB(x, y);
-        int r = (pixel >> 16) & 0xFF;
-        int g = (pixel >> 8) & 0xFF;
-        int b = pixel & 0xFF;
-        return new Color(r, g, b);
-    }
-
-    private void lineOfLamp1(Graphics g, BufferedImage buffer, int x, int y){
-        int firstX = 23;
-        int firstY = 262;
-        int[] diffX = {23-firstX,  25-firstX,  28-firstX,  31-firstX,  34-firstX,  37-firstX,  41-firstX,  44-firstX,  48-firstX,  51-firstX,  55-firstX,  59-firstX,  63-firstX,  67-firstX,  71-firstX,  75-firstX,  79-firstX, 83-firstX, 87-firstX, 91-firstX};
-        int[] diffY = {262-firstY, 266-firstY, 269-firstY, 272-firstY, 275-firstY, 278-firstY, 280-firstY, 283-firstY, 285-firstY, 288-firstY, 290-firstY, 292-firstY, 294-firstY, 295-firstY, 297-firstY, 298-firstY, 299-firstY, 300-firstY, 300-firstY, 301-firstY};
-        for (int i = 0; i < diffX.length; i++) {
-            smallLamp(g,buffer,diffX[i] + x,diffY[i] + y);
-        }
-        System.out.println(diffY.length);
-
-    }
-
-    private void lineOfLamp2(Graphics g, BufferedImage buffer, int x, int y){
-        int firstX = 34;
-        int firstY = 211;
-        int[] diffX = {34-firstX,  36-firstX,  39-firstX,  42-firstX,  45-firstX,  48-firstX,  51-firstX,  55-firstX,  58-firstX,  62-firstX,  65-firstX,  69-firstX,  73-firstX,  77-firstX,  81-firstX,  85-firstX,  89-firstX,  93-firstX};
-        int[] diffY = {211-firstY, 215-firstY, 218-firstY, 221-firstY, 224-firstY, 227-firstY, 230-firstY, 232-firstY, 235-firstY, 237-firstY, 240-firstY, 242-firstY, 244-firstY, 246-firstY, 247-firstY, 248-firstY, 249-firstY, 249-firstY};
-
-        for (int i = 0; i < diffX.length; i++) {
-            smallLamp(g,buffer,diffX[i] + x,diffY[i] + y);
-        }
-        System.out.println(diffY.length);
-
-    }
-
-    private void lineOfLamp3(Graphics g, BufferedImage buffer, int x, int y){
-        int firstX = 50;
-        int firstY = 190;
-        int[] diffX = {50-firstX,  53-firstX,  57-firstX,  61-firstX,  65-firstX,  69-firstX,  73-firstX};
-        int[] diffY = {190-firstY, 193-firstY, 195-firstY, 197-firstY, 199-firstY, 201-firstY, 203-firstY};
-
-        for (int i = 0; i < diffX.length; i++) {
-            smallLamp(g,buffer,diffX[i] + x,diffY[i] + y);
-        }
-        System.out.println(diffY.length);
-
-    }
-
-
     private void gift(Graphics g, BufferedImage buffer, int x, int y){
-        g.setColor(Color.black);
-        int[] xPoints = {22, 20, 20, 18, 15, 13, 12, 12, 15, 18, 18, 21, 21, 23, 24, 25, 26, 27, 27, 27, 28, 29, 31, 34, 36, 37, 38, 38, 37, 35, 34, 29, 28, 26, 27, 25, 23, 22, 22};
-        int[] yPoints = {326, 327, 327, 327, 328, 326, 325, 322, 321, 321, 321, 323, 325, 325, 325, 325, 325, 325, 326, 326, 325, 323, 322, 321, 322, 323, 324, 326, 327, 327, 328, 328, 326, 327, 328, 329, 328, 328, 326};
+        g.setColor(Color.WHITE);
+        int[] xPoints = {1, 2, 2, 5, 8, 10, 10, 10, 10, 10, 9, 6, 6, 3, 2, 2, 1};
+        int[] yPoints = {310, 310, 311, 312, 312, 311, 310, 310, 309, 308, 308, 306, 306, 306, 307, 307, 308};
         for (int i = 0; i < xPoints.length - 3; i+=3) {
             bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
         }
-        plot(g,22 + x,327 + y);
-        plot(g,22 + x,328 + y);
+        bresenhamLine(g,1,306,1,310);
 
-        xPoints = new int[]{11 + x, 24 + x, 39 + x, 39 + x, 24 + x, 11 + x};
-        yPoints = new int[]{328 + y, 332 + y, 328 + y, 332 + y, 336 + y, 332 + y};
+        xPoints = new int[]{10, 11, 14, 15, 15, 15, 14, 12, 11, 10, 9, 9, 9};
+        yPoints = new int[]{310, 309, 309, 310, 311, 312, 312, 312, 312, 312, 312, 311, 311};
+        for (int i = 0; i < xPoints.length - 3; i+=3) {
+            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
+        }
 
-        g.drawPolygon(xPoints, yPoints, xPoints.length);
-        bresenhamLine(g, 24 + x, 336 + y, 24 + x,332 + y);
+//        xPoints = new int[]{19, 21, 24, 25, 25, 25, 24, 23, 21, 20, 20, 17, 15, 15, 15, 15, 15, 15, 17};
+//        yPoints = new int[]{307, 306, 306, 309, 309, 310, 311, 312, 312, 312, 312, 312, 312, 312, 312, 310, 310, 310, 308};
+        xPoints = new int[]{19, 21, 24, 25, 25, 25, 24, 23, 21, 20, 20, 17, 15, 15, 15, 15, 15, 15, 17};
+        yPoints = new int[]{307, 306, 306, 309, 309, 310, 311, 312, 312, 312, 312, 312, 312, 312, 312, 310, 310, 310, 308};
 
-        xPoints = new int[]{12 + x, 12 + x, 24 + x, 24 + x};
-        yPoints = new int[]{333 + y, 347 + y, 353 + y, 336 + y};
-
-        g.drawPolygon(xPoints, yPoints, xPoints.length);
-
-        xPoints = new int[]{24 + x, 24 + x, 38 + x, 38 + x};
-        yPoints = new int[]{336 + y, 353 + y, 346 + y, 332 + y};
-
-        g.drawPolygon(xPoints, yPoints, xPoints.length);
-        bresenhamLine(g, 11 + x, 328 + y,15 + x,327 + y);
-        bresenhamLine(g, 39 + x, 328 + y,35 + x,327 + y);
+        for (int i = 0; i < xPoints.length - 3; i+=3) {
+            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
+        }
 
 
 
     }
 
     private void christmasTree(Graphics g, BufferedImage buffer, int x, int y) {
-        g.setColor(Color.black);
+        g.setColor(Color.white);
         double[] xPoints = {12, 12.3455, 13.2721, 16.3005, 18.5576, 24.6485, 25.1167, 28.6134, 28.931, 31.686, 32.0698, 35.9322, 36.9498, 41.3041, 41.5605, 46.1792, 47.1407, 51.8008, 52.6668, 55.1776, 55.0872, 57.4208, 58.2147, 62.0222, 62.7171, 67.0826, 67.879, 71.8208, 71.9313, 76.3136, 77.3967, 82.0345, 82.3698, 86.0246, 86.6151, 89.4301, 89.2468, 93.1014, 94.9177, 99.9534, 101.6439, 102.3559, 101.3569};
         double[] yPoints = {280, 282.6668, 283.6118, 285.2269, 282.549, 283.347, 286.0635, 285.9456, 284.3062, 283.517, 287.7048, 288.2955, 284.8327, 285.188, 289.6872, 290.2794, 286.8385, 287.1017, 288.537, 287.5257, 286.1701, 285.7353, 288.9123, 289.0994, 285.1078, 284.9017, 288.1586, 287.8639, 285.4115, 284.5398, 287.3642, 286.7154, 284.8509, 285.1852, 288.162, 287.8327, 284.6062, 283.2734, 287.3722, 286.7641, 284.8257, 281.1758, 279.5796};
 
@@ -232,33 +119,10 @@ public class Expe extends JPanel {
         bresenhamLine(g, 27+x, 226+y, 58+x, 181+x);
         bresenhamLine(g, 88+x, 228+y, 57+x, 181+x);
 
-        //star
-        int[] xPointsInt = new int[]{58+x, 50+x, 51+x, 46+x, 53+x, 57+x, 61+x, 68+x, 63+x, 64+x};
-        int[] yPointsInt = new int[]{181+y, 185+y, 177+y, 172+y, 170+y, 163+y, 170+y, 172+y, 177+y, 185+y};
-        g.setColor(Color.decode("#EFEA43"));
-        g.fillPolygon(xPointsInt, yPointsInt, xPointsInt.length);
+        int[] xPointsInt = new int[]{58, 50, 51, 46, 53, 57, 61, 68, 63, 64};
+        int[] yPointsInt = new int[]{181, 185, 177, 172, 170, 163, 170, 172, 177, 185};
 
-        g.setColor(Color.WHITE);
-        xPoints = new double[]{54, 54, 54, 56, 57, 57, 54};
-        yPoints = new double[]{174, 174, 172, 170, 169, 169, 174};
-        for (int i = 0; i < xPoints.length - 3; i+=3) {
-            bezier_Curve(g, new int[] { (int)Math.round(xPoints[i])+x, (int)Math.round(xPoints[i+1])+x,  (int)Math.round(xPoints[i+2])+x, (int)Math.round(xPoints[i+3])+x}, new int[] { (int)Math.round(yPoints[i])+y, (int)Math.round(yPoints[i+1])+y, (int)Math.round(yPoints[i+2])+y, (int)Math.round(yPoints[i+3])+y});
-        }
-
-        xPoints = new double[]{54, 54, 53, 54, 55};
-        yPoints = new double[]{177, 177, 179, 181, 181};
-        for (int i = 0; i < xPoints.length - 3; i+=3) {
-            bezier_Curve(g, new int[] { (int)Math.round(xPoints[i])+x, (int)Math.round(xPoints[i+1])+x,  (int)Math.round(xPoints[i+2])+x, (int)Math.round(xPoints[i+3])+x}, new int[] { (int)Math.round(yPoints[i])+y, (int)Math.round(yPoints[i+1])+y, (int)Math.round(yPoints[i+2])+y, (int)Math.round(yPoints[i+3])+y});
-        }
-
-        buffer = floodFill(buffer,56,190, Color.WHITE, Color.decode("#19B24A"));
-        buffer = floodFill(buffer,70,240, Color.WHITE, Color.decode("#19B24A"));
-        buffer = floodFill(buffer,70,270, Color.WHITE, Color.decode("#19B24A"));
-        buffer = floodFill(buffer,70,280, Color.decode("#80C014"), Color.decode("#19B24A"));
-        g.setColor(Color.BLUE);
-        plot(g,70,270);
-
-
+        g.drawPolygon(xPointsInt, yPointsInt, xPointsInt.length);
     }
 
 
