@@ -87,8 +87,10 @@ public class Expe extends JPanel {
         bresenhamLine(g,50+startX+x,265+startY+y, 50+startX+x, 268+startY+y);
         bresenhamLine(g,47+startX+x,265+startY+y, 47+startX+x, 261+startY+y);
 
-        buffer = floodFill(buffer,46+startX+x,269+startY+y,Color.WHITE, color);
-        buffer = floodFill(buffer,46+startX+x,266+startY+y,Color.WHITE, Color.decode("#EFEA43"));
+        Color borderColor = Color.BLACK;
+
+        buffer = floodFill2(buffer,46+startX+x,269+startY+y,borderColor, color);
+        buffer = floodFill2(buffer,46+startX+x,266+startY+y,borderColor, Color.decode("#EFEA43"));
 
 
 
@@ -106,20 +108,17 @@ public class Expe extends JPanel {
                 buffer = floodFill(buffer, i+x, j+y, Color.BLACK, Color.decode("#EFEA43"));
             }
         }
-        Color curColorY1 = getColor(buffer,21,262+y);
-        Color curColorY2 = getColor(buffer,21+x,263+y);
-        Color curColorY3 = getColor(buffer,21+x,263+y);
-//        System.out.println(Color.decode("#EFEA43"));
-//        System.out.println(curColorY1);
-        buffer = floodFill(buffer, 21+x, 262+y, Color.WHITE, Color.decode("#EFEA43"));
-        buffer = floodFill(buffer, 23+x, 262+y, Color.WHITE, Color.decode("#EFEA43"));
-        buffer = floodFill(buffer, 23+x, 264+y, Color.WHITE, Color.decode("#EFEA43"));
-        buffer = floodFill(buffer, 21+x, 264+y, Color.WHITE, Color.decode("#EFEA43"));
 
-        buffer = floodFill(buffer, 21+x, 262+y, Color.decode("#19B24A"), Color.decode("#EFEA43"));
-        buffer = floodFill(buffer, 23+x, 262+y, Color.decode("#19B24A"), Color.decode("#EFEA43"));
-        buffer = floodFill(buffer, 23+x, 264+y, Color.decode("#19B24A"), Color.decode("#EFEA43"));
-        buffer = floodFill(buffer, 21+x, 264+y, Color.decode("#19B24A"), Color.decode("#EFEA43"));
+        Color border = Color.decode("#98972B");
+        buffer = floodFill2(buffer, 21+x, 262+y, border, Color.decode("#EFEA43"));
+        buffer = floodFill2(buffer, 23+x, 262+y, border, Color.decode("#EFEA43"));
+        buffer = floodFill2(buffer, 23+x, 264+y, border, Color.decode("#EFEA43"));
+        buffer = floodFill2(buffer, 21+x, 264+y, border, Color.decode("#EFEA43"));
+
+        buffer = floodFill2(buffer, 21+x, 262+y, Color.decode("#19B24A"), Color.decode("#EFEA43"));
+        buffer = floodFill2(buffer, 23+x, 262+y, Color.decode("#19B24A"), Color.decode("#EFEA43"));
+        buffer = floodFill2(buffer, 23+x, 264+y, Color.decode("#19B24A"), Color.decode("#EFEA43"));
+        buffer = floodFill2(buffer, 21+x, 264+y, Color.decode("#19B24A"), Color.decode("#EFEA43"));
 
     }
 
@@ -253,12 +252,14 @@ public class Expe extends JPanel {
             bezier_Curve(g, new int[] { (int)Math.round(xPoints[i])+x, (int)Math.round(xPoints[i+1])+x,  (int)Math.round(xPoints[i+2])+x, (int)Math.round(xPoints[i+3])+x}, new int[] { (int)Math.round(yPoints[i])+y, (int)Math.round(yPoints[i+1])+y, (int)Math.round(yPoints[i+2])+y, (int)Math.round(yPoints[i+3])+y});
         }
 
-        buffer = floodFill(buffer,56,190, Color.WHITE, Color.decode("#19B24A"));
-        buffer = floodFill(buffer,70,240, Color.WHITE, Color.decode("#19B24A"));
-        buffer = floodFill(buffer,70,270, Color.WHITE, Color.decode("#19B24A"));
-        buffer = floodFill(buffer,70,280, Color.decode("#80C014"), Color.decode("#19B24A"));
-        g.setColor(Color.BLUE);
-        plot(g,70,270);
+        Color borderColor = Color.BLACK;
+        Color treeColor = Color.decode("#19B24A");
+        buffer = floodFill2(buffer, 56, 190,borderColor ,treeColor);
+        buffer = floodFill2(buffer,70,240, borderColor ,treeColor);
+        buffer = floodFill2(buffer,70,270, borderColor ,treeColor);
+        buffer = floodFill2(buffer,70,280, borderColor ,treeColor);
+//        g.setColor(Color.BLUE);
+//        plot(g,70,270);
 
 
     }
