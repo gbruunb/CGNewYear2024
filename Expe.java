@@ -30,7 +30,7 @@ public class Expe extends JPanel {
         g2d.setColor(Color.WHITE);
         g2d.fillRect(0, 0, 600, 600);
         // sky
-        sky(g2d, buffer);
+//        sky(g2d, buffer);
         // star
         star(g2d);
         // graass
@@ -49,14 +49,7 @@ public class Expe extends JPanel {
         girl(g2d, buffer);
 
         cat(g2d, buffer, 30);
-        ballOnChristmas(g2d, buffer, 0,0, Color.decode("#9BD0DD"));
-        ballOnChristmas(g2d, buffer, 0,-30, Color.decode("#8984BF"));
-        ballOnChristmas(g2d, buffer, 16,-26, Color.decode("#D7482E"));
         christmasTree(g2d, buffer, 0, 0);
-        lineOfLamp1(g2d, buffer,7,-29);
-        lineOfLamp2(g2d, buffer,12,-50);
-        lineOfLamp3(g2d, buffer,28,-69);
-
 
         g.setColor(Color.WHITE);
 
@@ -66,128 +59,29 @@ public class Expe extends JPanel {
 
     }
 
-    private void ballOnChristmas(Graphics g, BufferedImage buffer, int x, int y, Color color){
-        int startX = 0;
-        int startY = -30;
-        g.setColor(Color.decode("#000000"));
-        int[] xPoints = {44+startX+x, 46+startX+x, 49+startX+x, 51+startX+x, 52+startX+x, 52+startX+x, 51+startX+x, 50+startX+x, 48+startX+x, 46+startX+x, 44+startX+x, 43+startX+x, 42+startX+x, 43+startX+x, 44+startX+x};
-        int[] yPoints = {268+startY+y, 267+startY+y, 267+startY+y, 269+startY+y, 271+startY+y, 273+startY+y, 275+startY+y, 276+startY+y, 277+startY+y, 277+startY+y, 276+startY+y, 274+startY+y, 272+startY+y, 270+startY+y, 268+startY+y};
-        g.drawPolygon(xPoints, yPoints, xPoints.length);
-        bresenhamLine(g,44+startX+x,268+startY+y, 44+startX+x, 265+startY+y);
-        bresenhamLine(g,44+startX+x,265+startY+y, 50+startX+x, 265+startY+y);
-        bresenhamLine(g,50+startX+x,265+startY+y, 50+startX+x, 268+startY+y);
-        bresenhamLine(g,47+startX+x,265+startY+y, 47+startX+x, 261+startY+y);
-
-        buffer = floodFill(buffer,46+startX+x,269+startY+y,Color.WHITE, color);
-        buffer = floodFill(buffer,46+startX+x,266+startY+y,Color.WHITE, Color.decode("#EFEA43"));
-
-
-
-    }
-
-
-
-    private void smallLamp(Graphics g, BufferedImage buffer, int x, int y){
-        g.setColor(Color.decode("#98972B"));
-        int[] xPoints = {21+x, 23+x, 24+x, 24+x, 23+x, 21+x, 20+x, 20+x, 21+x};
-        int[] yPoints = {261+y, 261+y, 262+y, 264+y, 265+y, 265+y, 264+y, 262+y, 261+y};
-        g.drawPolygon(xPoints,yPoints,xPoints.length);
-        for (int i = 21; i <= 23; i++) {
-            for (int j = 262; j <= 264; j++) {
-                buffer = floodFill(buffer, i+x, j+y, Color.BLACK, Color.decode("#EFEA43"));
-            }
-        }
-        Color curColorY1 = getColor(buffer,21,262+y);
-        Color curColorY2 = getColor(buffer,21+x,263+y);
-        Color curColorY3 = getColor(buffer,21+x,263+y);
-//        System.out.println(Color.decode("#EFEA43"));
-//        System.out.println(curColorY1);
-        buffer = floodFill(buffer, 21+x, 262+y, Color.WHITE, Color.decode("#EFEA43"));
-        buffer = floodFill(buffer, 23+x, 262+y, Color.WHITE, Color.decode("#EFEA43"));
-        buffer = floodFill(buffer, 23+x, 264+y, Color.WHITE, Color.decode("#EFEA43"));
-        buffer = floodFill(buffer, 21+x, 264+y, Color.WHITE, Color.decode("#EFEA43"));
-
-        buffer = floodFill(buffer, 21+x, 262+y, Color.decode("#19B24A"), Color.decode("#EFEA43"));
-        buffer = floodFill(buffer, 23+x, 262+y, Color.decode("#19B24A"), Color.decode("#EFEA43"));
-        buffer = floodFill(buffer, 23+x, 264+y, Color.decode("#19B24A"), Color.decode("#EFEA43"));
-        buffer = floodFill(buffer, 21+x, 264+y, Color.decode("#19B24A"), Color.decode("#EFEA43"));
-
-    }
-
-    private Color getColor(BufferedImage buffer, int x, int y){
-        int pixel = buffer.getRGB(x, y);
-        int r = (pixel >> 16) & 0xFF;
-        int g = (pixel >> 8) & 0xFF;
-        int b = pixel & 0xFF;
-        return new Color(r, g, b);
-    }
-
-    private void lineOfLamp1(Graphics g, BufferedImage buffer, int x, int y){
-        int firstX = 23;
-        int firstY = 262;
-        int[] diffX = {23-firstX,  25-firstX,  28-firstX,  31-firstX,  34-firstX,  37-firstX,  41-firstX,  44-firstX,  48-firstX,  51-firstX,  55-firstX,  59-firstX,  63-firstX,  67-firstX,  71-firstX,  75-firstX,  79-firstX, 83-firstX, 87-firstX, 91-firstX};
-        int[] diffY = {262-firstY, 266-firstY, 269-firstY, 272-firstY, 275-firstY, 278-firstY, 280-firstY, 283-firstY, 285-firstY, 288-firstY, 290-firstY, 292-firstY, 294-firstY, 295-firstY, 297-firstY, 298-firstY, 299-firstY, 300-firstY, 300-firstY, 301-firstY};
-        for (int i = 0; i < diffX.length; i++) {
-            smallLamp(g,buffer,diffX[i] + x,diffY[i] + y);
-        }
-        System.out.println(diffY.length);
-
-    }
-
-    private void lineOfLamp2(Graphics g, BufferedImage buffer, int x, int y){
-        int firstX = 34;
-        int firstY = 211;
-        int[] diffX = {34-firstX,  36-firstX,  39-firstX,  42-firstX,  45-firstX,  48-firstX,  51-firstX,  55-firstX,  58-firstX,  62-firstX,  65-firstX,  69-firstX,  73-firstX,  77-firstX,  81-firstX,  85-firstX,  89-firstX,  93-firstX};
-        int[] diffY = {211-firstY, 215-firstY, 218-firstY, 221-firstY, 224-firstY, 227-firstY, 230-firstY, 232-firstY, 235-firstY, 237-firstY, 240-firstY, 242-firstY, 244-firstY, 246-firstY, 247-firstY, 248-firstY, 249-firstY, 249-firstY};
-
-        for (int i = 0; i < diffX.length; i++) {
-            smallLamp(g,buffer,diffX[i] + x,diffY[i] + y);
-        }
-        System.out.println(diffY.length);
-
-    }
-
-    private void lineOfLamp3(Graphics g, BufferedImage buffer, int x, int y){
-        int firstX = 50;
-        int firstY = 190;
-        int[] diffX = {50-firstX,  53-firstX,  57-firstX,  61-firstX,  65-firstX,  69-firstX,  73-firstX};
-        int[] diffY = {190-firstY, 193-firstY, 195-firstY, 197-firstY, 199-firstY, 201-firstY, 203-firstY};
-
-        for (int i = 0; i < diffX.length; i++) {
-            smallLamp(g,buffer,diffX[i] + x,diffY[i] + y);
-        }
-        System.out.println(diffY.length);
-
-    }
-
-
     private void gift(Graphics g, BufferedImage buffer, int x, int y){
-        g.setColor(Color.black);
-        int[] xPoints = {22, 20, 20, 18, 15, 13, 12, 12, 15, 18, 18, 21, 21, 23, 24, 25, 26, 27, 27, 27, 28, 29, 31, 34, 36, 37, 38, 38, 37, 35, 34, 29, 28, 26, 27, 25, 23, 22, 22};
-        int[] yPoints = {326, 327, 327, 327, 328, 326, 325, 322, 321, 321, 321, 323, 325, 325, 325, 325, 325, 325, 326, 326, 325, 323, 322, 321, 322, 323, 324, 326, 327, 327, 328, 328, 326, 327, 328, 329, 328, 328, 326};
+        g.setColor(Color.WHITE);
+        int[] xPoints = {1, 2, 2, 5, 8, 10, 10, 10, 10, 10, 9, 6, 6, 3, 2, 2, 1};
+        int[] yPoints = {310, 310, 311, 312, 312, 311, 310, 310, 309, 308, 308, 306, 306, 306, 307, 307, 308};
         for (int i = 0; i < xPoints.length - 3; i+=3) {
             bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
         }
-        plot(g,22 + x,327 + y);
-        plot(g,22 + x,328 + y);
+        bresenhamLine(g,1,306,1,310);
 
-        xPoints = new int[]{11 + x, 24 + x, 39 + x, 39 + x, 24 + x, 11 + x};
-        yPoints = new int[]{328 + y, 332 + y, 328 + y, 332 + y, 336 + y, 332 + y};
+        xPoints = new int[]{10, 11, 14, 15, 15, 15, 14, 12, 11, 10, 9, 9, 9};
+        yPoints = new int[]{310, 309, 309, 310, 311, 312, 312, 312, 312, 312, 312, 311, 311};
+        for (int i = 0; i < xPoints.length - 3; i+=3) {
+            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
+        }
 
-        g.drawPolygon(xPoints, yPoints, xPoints.length);
-        bresenhamLine(g, 24 + x, 336 + y, 24 + x,332 + y);
+//        xPoints = new int[]{19, 21, 24, 25, 25, 25, 24, 23, 21, 20, 20, 17, 15, 15, 15, 15, 15, 15, 17};
+//        yPoints = new int[]{307, 306, 306, 309, 309, 310, 311, 312, 312, 312, 312, 312, 312, 312, 312, 310, 310, 310, 308};
+        xPoints = new int[]{19, 21, 24, 25, 25, 25, 24, 23, 21, 20, 20, 17, 15, 15, 15, 15, 15, 15, 17};
+        yPoints = new int[]{307, 306, 306, 309, 309, 310, 311, 312, 312, 312, 312, 312, 312, 312, 312, 310, 310, 310, 308};
 
-        xPoints = new int[]{12 + x, 12 + x, 24 + x, 24 + x};
-        yPoints = new int[]{333 + y, 347 + y, 353 + y, 336 + y};
-
-        g.drawPolygon(xPoints, yPoints, xPoints.length);
-
-        xPoints = new int[]{24 + x, 24 + x, 38 + x, 38 + x};
-        yPoints = new int[]{336 + y, 353 + y, 346 + y, 332 + y};
-
-        g.drawPolygon(xPoints, yPoints, xPoints.length);
-        bresenhamLine(g, 11 + x, 328 + y,15 + x,327 + y);
-        bresenhamLine(g, 39 + x, 328 + y,35 + x,327 + y);
+        for (int i = 0; i < xPoints.length - 3; i+=3) {
+            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
+        }
 
 
 
@@ -1203,58 +1097,12 @@ public class Expe extends JPanel {
             }
         }
 
-                return m;
-        }
-        public static BufferedImage floodFill2(BufferedImage m, int x, int y, Color border_Color, Color replacement_Color) {
-                // System.out.println("work");
-                Queue<int[]> q = new LinkedList<>();
-                // Queue<int[]> q = new LinkedList<>();
+        return m;
+    }
 
-                q.add(new int[] { x, y });
-                int border_ColorRGB = border_Color.getRGB();
-                int replace_ColorRGB = replacement_Color.getRGB();
-                // System.out.println(x+"  "+y);
-                // border_ColorRGB += 50;
-                int[] currentPos;
-                while (!q.isEmpty()) {
-                        currentPos = q.poll();
-
-
-                        int x1 = currentPos[0];
-                        int y1 = currentPos[1];
-
-                        if (m.getRGB(x1, y1) != border_ColorRGB && m.getRGB(x1, y1) != replace_ColorRGB) {
-                                m.setRGB(x1, y1, replace_ColorRGB);
-                                // System.out.println("x1 is:"+x1);
-                                // System.out.println("y1 is:"+y1);
-                                // south
-                                if (isInBound(x1, y1 + 1) && m.getRGB(x1, y1 + 1) != border_ColorRGB && m.getRGB(x1, y1 + 1) != replace_ColorRGB) {
-                                        q.add(new int[] { x1, y1 + 1 });
-                                        // System.out.println("firsy");
-                                }
-                                // north
-                                if (isInBound(x1, y1 - 1) && m.getRGB(x1, y1 - 1) != border_ColorRGB&& m.getRGB(x1, y1 - 1) != replace_ColorRGB) {
-                                        q.add(new int[] { x1, y1 - 1 });
-                                        // System.out.println("f2irsy");
-                                }
-                                // east
-                                if (isInBound(x1 + 1, y1) && m.getRGB(x1 + 1, y1) != border_ColorRGB&& m.getRGB(x1+1, y1) != replace_ColorRGB) {
-                                        q.add(new int[] { x1 + 1, y1 });
-                                        // System.out.println("f3irsy");
-                                }
-                                // west
-                                if (isInBound(x1 - 1, y1) && m.getRGB(x1 - 1, y1) != border_ColorRGB&& m.getRGB(x1-1, y1) != replace_ColorRGB) {
-                                        q.add(new int[] { x1 - 1, y1 });
-                                        // System.out.println("fir4sy");
-                                }
-                        }
-                }
-
-                return m;
-        }
-        public static BufferedImage floodFill(BufferedImage m, int x, int y, Color border_Color) {
-                Queue<int[]> q = new LinkedList<>();
-                // Queue<int[]> q = new LinkedList<>();
+    public static BufferedImage floodFill(BufferedImage m, int x, int y, Color border_Color) {
+        Queue<int[]> q = new LinkedList<>();
+        // Queue<int[]> q = new LinkedList<>();
 
         q.add(new int[] { x, y });
         int border_ColorRGB = border_Color.getRGB();
