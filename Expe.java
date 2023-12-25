@@ -49,11 +49,15 @@ public class Expe extends JPanel {
         girl(g2d, buffer);
 
         cat(g2d, buffer, 30);
+        ballOnChristmas(g2d, buffer, 0,0, Color.decode("#9BD0DD"));
+        ballOnChristmas(g2d, buffer, 0,-30, Color.decode("#8984BF"));
+        ballOnChristmas(g2d, buffer, 16,-26, Color.decode("#D7482E"));
         christmasTree(g2d, buffer, 0, 0);
         lineOfLamp1(g2d, buffer,7,-29);
         lineOfLamp2(g2d, buffer,12,-50);
         lineOfLamp3(g2d, buffer,28,-69);
-        ballOnChristmas(g2d, buffer, 0,0, Color.decode("#9BD0DD"));
+
+
 
 
 
@@ -84,11 +88,10 @@ public class Expe extends JPanel {
         buffer = floodFill(buffer,46+startX+x,269+startY+y,Color.WHITE, color);
         buffer = floodFill(buffer,46+startX+x,266+startY+y,Color.WHITE, Color.decode("#EFEA43"));
 
-        g.setColor(Color.BLUE);
-        plot(g,46+startX+x,266+startY+y);
 
 
     }
+
 
 
     private void smallLamp(Graphics g, BufferedImage buffer, int x, int y){
@@ -110,6 +113,11 @@ public class Expe extends JPanel {
         buffer = floodFill(buffer, 23+x, 262+y, Color.WHITE, Color.decode("#EFEA43"));
         buffer = floodFill(buffer, 23+x, 264+y, Color.WHITE, Color.decode("#EFEA43"));
         buffer = floodFill(buffer, 21+x, 264+y, Color.WHITE, Color.decode("#EFEA43"));
+
+        buffer = floodFill(buffer, 21+x, 262+y, Color.decode("#19B24A"), Color.decode("#EFEA43"));
+        buffer = floodFill(buffer, 23+x, 262+y, Color.decode("#19B24A"), Color.decode("#EFEA43"));
+        buffer = floodFill(buffer, 23+x, 264+y, Color.decode("#19B24A"), Color.decode("#EFEA43"));
+        buffer = floodFill(buffer, 21+x, 264+y, Color.decode("#19B24A"), Color.decode("#EFEA43"));
 
     }
 
@@ -242,6 +250,13 @@ public class Expe extends JPanel {
         for (int i = 0; i < xPoints.length - 3; i+=3) {
             bezier_Curve(g, new int[] { (int)Math.round(xPoints[i])+x, (int)Math.round(xPoints[i+1])+x,  (int)Math.round(xPoints[i+2])+x, (int)Math.round(xPoints[i+3])+x}, new int[] { (int)Math.round(yPoints[i])+y, (int)Math.round(yPoints[i+1])+y, (int)Math.round(yPoints[i+2])+y, (int)Math.round(yPoints[i+3])+y});
         }
+
+        buffer = floodFill(buffer,56,190, Color.WHITE, Color.decode("#19B24A"));
+        buffer = floodFill(buffer,70,240, Color.WHITE, Color.decode("#19B24A"));
+        buffer = floodFill(buffer,70,270, Color.WHITE, Color.decode("#19B24A"));
+        buffer = floodFill(buffer,70,280, Color.decode("#80C014"), Color.decode("#19B24A"));
+        g.setColor(Color.BLUE);
+        plot(g,70,270);
 
 
     }
