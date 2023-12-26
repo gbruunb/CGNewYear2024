@@ -61,11 +61,11 @@ public class Expe extends JPanel {
 
 
 
-        gift(g2d, buffer, 0, 0-30, Color.decode("#F2F03B"));
-//        gift(g2d, buffer, -12, -16-30);
-//        gift(g2d, buffer, 18, -12-30);
-//        gift(g2d, buffer, 50, -12-30);
-//        gift(g2d, buffer, 77, -21-30);
+//        gift(g2d, buffer, 0, 0-30, Color.decode("#F2F03B"));
+        gift(g2d, buffer, -12, -16-30,Color.decode("#F2F03B"));
+        gift(g2d, buffer, 18, -12-30,Color.decode("#75CDD8"));
+        gift(g2d, buffer, 50, -12-30,Color.decode("#7C79B9"));
+        gift(g2d, buffer, 77, -21-30,Color.decode("#F2F03B"));
 
 
 
@@ -80,8 +80,23 @@ public class Expe extends JPanel {
         for (int i = 0; i < xPoints.length - 3; i+=3) {
             bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
         }
-        plot(g,22 + x,327 + y);
-        plot(g,22 + x,328 + y);
+
+        xPoints = new int[]{8+11,   8+11,   7+11,   6+11,   5+11,   3+11,   3+11,   3+11,   4+11,   5+11,   6+11,   8+11,   8+11};
+        yPoints = new int[]{310+15, 309+15, 308+15, 308+15, 307+15, 307+15, 308+15, 309+15, 310+15, 310+15, 311+15, 311+15, 310+15};
+
+
+        for (int i = 0; i < xPoints.length - 3; i+=3) {
+            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
+        }
+
+        xPoints = new int[]{16+12, 16+12,   18+12,  20+12,  21+12,  23+12,  23+12, 23+12,  22+12, 20+12,  18+12,  16+12, 16+12};
+        yPoints = new int[]{311+15, 310+15, 309+15, 309+15, 309+15, 309+15, 309+15, 309+15, 311+15, 311+15, 312+15, 311+15, 311+15};
+
+        for (int i = 0; i < xPoints.length - 3; i+=3) {
+            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
+        }
+
+        g.setColor(Color.black);
 
         xPoints = new int[]{11 + x, 24 + x, 39 + x, 39 + x, 24 + x, 11 + x};
         yPoints = new int[]{328 + y, 332 + y, 328 + y, 332 + y, 336 + y, 332 + y};
@@ -122,29 +137,41 @@ public class Expe extends JPanel {
 
         Color grassColor = Color.decode("#80C014");
         Color ribbon = Color.decode("#DB5A64");
+        buffer = floodFill2(buffer,31+x,328+y,Color.BLACK,boxColor);
+        buffer = floodFill2(buffer,35+x,328+y,Color.BLACK,boxColor);
+        buffer = floodFill2(buffer,34+x,331+y,Color.BLACK,boxColor);
+        buffer = floodFill2(buffer,24+x,331+y,Color.BLACK,boxColor);
+        buffer = floodFill2(buffer,26+x,333+y,Color.BLACK,boxColor);
+        buffer = floodFill2(buffer,22+x,333+y,Color.BLACK,boxColor);
+        buffer = floodFill2(buffer,15+x,332+y,Color.BLACK,boxColor);
+        buffer = floodFill2(buffer,15+x,328+y,Color.BLACK,boxColor);
+        buffer = floodFill2(buffer,19+x,327+y,Color.BLACK,boxColor);
+        buffer = floodFill2(buffer,15+x,336+y,Color.BLACK,boxColor);
+        buffer = floodFill2(buffer,22+x,336+y,Color.BLACK,boxColor);
+        buffer = floodFill2(buffer,26+x,336+y,Color.BLACK,boxColor);
+        buffer = floodFill2(buffer,33+x,336+y,Color.BLACK,boxColor);
+
+        buffer = floodFill2(buffer,18+x,336+y,Color.BLACK,ribbon);
+        buffer = floodFill2(buffer,18+x,332+y,Color.BLACK,ribbon);
+        buffer = floodFill2(buffer,18+x,329+y,Color.BLACK,ribbon);
+        buffer = floodFill2(buffer,31+x,332+y,Color.BLACK,ribbon);
+        buffer = floodFill2(buffer,29+x,329+y,Color.BLACK,ribbon);
+        buffer = floodFill2(buffer,27+x,328+y,Color.BLACK,ribbon);
+        buffer = floodFill2(buffer,29+x,338+y,Color.BLACK,ribbon);
+        buffer = floodFill2(buffer,24+x,327+y,Color.BLACK,ribbon);
+
+        buffer = floodFill2(buffer,13+x,324+y,Color.BLACK,ribbon);
+        buffer = floodFill2(buffer,14+x,325+y,Color.BLACK,ribbon);
+        buffer = floodFill2(buffer,20+x,325+y,Color.BLACK,ribbon);
+        buffer = floodFill2(buffer,19+x,324+y,Color.BLACK,ribbon);
+        buffer = floodFill2(buffer,18+x,322+y,Color.BLACK,ribbon);
+        buffer = floodFill2(buffer,30+x,323+y,Color.BLACK,ribbon);
+        buffer = floodFill2(buffer,32+x,322+y,Color.BLACK,ribbon);
+        buffer = floodFill2(buffer,36+x,324+y,Color.BLACK,ribbon);
+        buffer = floodFill2(buffer,34+x,326+y,Color.BLACK,ribbon);
+
         g.setColor(Color.BLUE);
-        buffer = floodFill(buffer,31+x,328+y,grassColor,boxColor);
-        buffer = floodFill(buffer,35+x,328+y,grassColor,boxColor);
-        buffer = floodFill(buffer,34+x,331+y,grassColor,boxColor);
-        buffer = floodFill(buffer,24+x,331+y,grassColor,boxColor);
-        buffer = floodFill(buffer,26+x,333+y,grassColor,boxColor);
-        buffer = floodFill(buffer,22+x,333+y,grassColor,boxColor);
-        buffer = floodFill(buffer,15+x,332+y,grassColor,boxColor);
-        buffer = floodFill(buffer,15+x,328+y,grassColor,boxColor);
-        buffer = floodFill(buffer,19+x,327+y,grassColor,boxColor);
-        buffer = floodFill(buffer,15+x,336+y,grassColor,boxColor);
-        buffer = floodFill(buffer,22+x,336+y,grassColor,boxColor);
-        buffer = floodFill(buffer,26+x,336+y,grassColor,boxColor);
-        buffer = floodFill(buffer,33+x,336+y,grassColor,boxColor);
-
-        buffer = floodFill(buffer,18+x,336+y,grassColor,ribbon);
-        buffer = floodFill(buffer,18+x,332+y,grassColor,ribbon);
-        buffer = floodFill(buffer,18+x,329+y,grassColor,ribbon);
-
-        plot(g,18+x,332+y);
-
-
-
+        plot(g,30+x,325+y);
 
     }
 
@@ -165,6 +192,7 @@ public class Expe extends JPanel {
 
         buffer = floodFill2(buffer,46+startX+x,269+startY+y,borderColor, color);
         buffer = floodFill2(buffer,46+startX+x,266+startY+y,borderColor, Color.decode("#EFEA43"));
+
 
 
 
