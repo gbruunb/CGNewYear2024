@@ -796,6 +796,7 @@ public class Expe extends JPanel {
 
         private void firework(Graphics2D g2d,BufferedImage buffer) {
                 fireworkPoint1(g2d,buffer,  0, 0, Color.decode("#EA4645"));
+                fireworkPoint1(g2d,buffer,  80, 80, Color.GREEN);
 
         }
 
@@ -908,7 +909,7 @@ public class Expe extends JPanel {
                 bezier_Curve(g2d, new int[] { 452 + x, 451 + x, 447 + x }, new int[] { 64 + y, 71 + y, 78 + y });
                 // 35
                 bezier_Curve(g2d, new int[] { 459 + x, 465 + x, 470 + x }, new int[] { 62 + y, 63 + y, 68 + y });
-                bezier_Curve(g2d, new int[] { 459 + x, 463 + x, 470 + x }, new int[] { 62 + y, 66 + y, 68 });
+                bezier_Curve(g2d, new int[] { 459 + x, 463 + x, 470 + x }, new int[] { 62 + y, 66 + y, 68 + y });
 
                 bezier_Curve(g2d, new int[] { 462 + x, 465 + x, 469 + x }, new int[] { 58 + y, 56 + y, 56 + y });
                 bezier_Curve(g2d, new int[] { 462 + x, 466 + x, 469 + x }, new int[] { 58 + y, 58 + y, 56 + y });
@@ -1557,8 +1558,6 @@ buffer = floodFill(buffer, 200+x, 458+y, Color.WHITE);
         public static BufferedImage floodFill2(BufferedImage m, int x, int y, Color border_Color, Color replacement_Color) {
                 // System.out.println("work");
                 Queue<int[]> q = new LinkedList<>();
-                // Queue<int[]> q = new LinkedList<>();
-
                 q.add(new int[] { x, y });
                 int border_ColorRGB = border_Color.getRGB();
                 int replace_ColorRGB = replacement_Color.getRGB();
