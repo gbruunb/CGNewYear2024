@@ -59,17 +59,95 @@ public class Expe extends JPanel {
 
 
 
-        gift(g2d, buffer, 0, 0-30);
-       gift(g2d, buffer, -12, -16-30);
-       gift(g2d, buffer, 18, -12-30);
-       gift(g2d, buffer, 50, -12-30);
-       gift(g2d, buffer, 77, -21-30);
+
+
+        gift(g2d, buffer, 0, 0-30, Color.decode("#F2F03B"));
+//        gift(g2d, buffer, -12, -16-30);
+//        gift(g2d, buffer, 18, -12-30);
+//        gift(g2d, buffer, 50, -12-30);
+//        gift(g2d, buffer, 77, -21-30);
 
 
 
         g.drawImage(buffer, 0, 0, null);
 
     }
+
+    private void gift(Graphics g, BufferedImage buffer, int x, int y, Color boxColor){
+        g.setColor(Color.black);
+        int[] xPoints = {22, 20, 20, 18, 15, 13, 12, 12, 15, 18, 18, 21, 21, 23, 24, 25, 26, 27, 27, 27, 28, 29, 31, 34, 36, 37, 38, 38, 37, 35, 34, 29, 28, 26, 27, 25, 23, 22, 22};
+        int[] yPoints = {326, 327, 327, 327, 328, 326, 325, 322, 321, 321, 321, 323, 325, 325, 325, 325, 325, 325, 326, 326, 325, 323, 322, 321, 322, 323, 324, 326, 327, 327, 328, 328, 326, 327, 328, 329, 328, 328, 326};
+        for (int i = 0; i < xPoints.length - 3; i+=3) {
+            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
+        }
+        plot(g,22 + x,327 + y);
+        plot(g,22 + x,328 + y);
+
+        xPoints = new int[]{11 + x, 24 + x, 39 + x, 39 + x, 24 + x, 11 + x};
+        yPoints = new int[]{328 + y, 332 + y, 328 + y, 332 + y, 336 + y, 332 + y};
+
+        g.drawPolygon(xPoints, yPoints, xPoints.length);
+        bresenhamLine(g, 24 + x, 336 + y, 24 + x,332 + y);
+
+        xPoints = new int[]{12 + x, 12 + x, 24 + x, 24 + x};
+        yPoints = new int[]{333 + y, 347 + y, 353 + y, 336 + y};
+
+        g.drawPolygon(xPoints, yPoints, xPoints.length);
+
+        xPoints = new int[]{24 + x, 24 + x, 38 + x, 38 + x};
+        yPoints = new int[]{336 + y, 353 + y, 346 + y, 332 + y};
+
+        g.drawPolygon(xPoints, yPoints, xPoints.length);
+        bresenhamLine(g, 11 + x, 328 + y,15 + x,327 + y);
+        bresenhamLine(g, 39 + x, 328 + y,35 + x,327 + y);
+
+        bresenhamLine(g,23+x,328+y,19+x, 330+y);
+        bresenhamLine(g,21+x,326+y,16+x, 330+y);
+
+        bresenhamLine(g,19+x,333+y,19+x, 330+y);
+        bresenhamLine(g,16+x,333+y,16+x, 330+y);
+
+        bresenhamLine(g,17+x,335+y,17+x, 350+y);
+        bresenhamLine(g,20+x,336+y,20+x, 352+y);
+
+        //right ribbon
+        bresenhamLine(g,26+x,328+y,29+x, 331+y);
+        bresenhamLine(g,27+x,327+y,32+x, 330+y);
+
+        bresenhamLine(g,29+x,334+y,29+x, 331+y);
+        bresenhamLine(g,32+x,333+y,32+x, 330+y);
+
+        bresenhamLine(g,28+x,335+y,28+x, 351+y);
+        bresenhamLine(g,31+x,334+y,31+x, 350+y);
+
+        Color grassColor = Color.decode("#80C014");
+        Color ribbon = Color.decode("#DB5A64");
+        g.setColor(Color.BLUE);
+        buffer = floodFill(buffer,31+x,328+y,grassColor,boxColor);
+        buffer = floodFill(buffer,35+x,328+y,grassColor,boxColor);
+        buffer = floodFill(buffer,34+x,331+y,grassColor,boxColor);
+        buffer = floodFill(buffer,24+x,331+y,grassColor,boxColor);
+        buffer = floodFill(buffer,26+x,333+y,grassColor,boxColor);
+        buffer = floodFill(buffer,22+x,333+y,grassColor,boxColor);
+        buffer = floodFill(buffer,15+x,332+y,grassColor,boxColor);
+        buffer = floodFill(buffer,15+x,328+y,grassColor,boxColor);
+        buffer = floodFill(buffer,19+x,327+y,grassColor,boxColor);
+        buffer = floodFill(buffer,15+x,336+y,grassColor,boxColor);
+        buffer = floodFill(buffer,22+x,336+y,grassColor,boxColor);
+        buffer = floodFill(buffer,26+x,336+y,grassColor,boxColor);
+        buffer = floodFill(buffer,33+x,336+y,grassColor,boxColor);
+
+        buffer = floodFill(buffer,18+x,336+y,grassColor,ribbon);
+        buffer = floodFill(buffer,18+x,332+y,grassColor,ribbon);
+        buffer = floodFill(buffer,18+x,329+y,grassColor,ribbon);
+
+        plot(g,18+x,332+y);
+
+
+
+
+    }
+
 
     private void ballOnChristmas(Graphics g, BufferedImage buffer, int x, int y, Color color){
         int startX = 0;
@@ -165,53 +243,6 @@ public class Expe extends JPanel {
     }
 
 
-    private void gift(Graphics g, BufferedImage buffer, int x, int y){
-        g.setColor(Color.black);
-        int[] xPoints = {22, 20, 20, 18, 15, 13, 12, 12, 15, 18, 18, 21, 21, 23, 24, 25, 26, 27, 27, 27, 28, 29, 31, 34, 36, 37, 38, 38, 37, 35, 34, 29, 28, 26, 27, 25, 23, 22, 22};
-        int[] yPoints = {326, 327, 327, 327, 328, 326, 325, 322, 321, 321, 321, 323, 325, 325, 325, 325, 325, 325, 326, 326, 325, 323, 322, 321, 322, 323, 324, 326, 327, 327, 328, 328, 326, 327, 328, 329, 328, 328, 326};
-        for (int i = 0; i < xPoints.length - 3; i+=3) {
-            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
-        }
-        plot(g,22 + x,327 + y);
-        plot(g,22 + x,328 + y);
-
-        xPoints = new int[]{11 + x, 24 + x, 39 + x, 39 + x, 24 + x, 11 + x};
-        yPoints = new int[]{328 + y, 332 + y, 328 + y, 332 + y, 336 + y, 332 + y};
-
-        g.drawPolygon(xPoints, yPoints, xPoints.length);
-        bresenhamLine(g, 24 + x, 336 + y, 24 + x,332 + y);
-
-        xPoints = new int[]{12 + x, 12 + x, 24 + x, 24 + x};
-        yPoints = new int[]{333 + y, 347 + y, 353 + y, 336 + y};
-
-        g.drawPolygon(xPoints, yPoints, xPoints.length);
-
-        xPoints = new int[]{24 + x, 24 + x, 38 + x, 38 + x};
-        yPoints = new int[]{336 + y, 353 + y, 346 + y, 332 + y};
-
-        g.drawPolygon(xPoints, yPoints, xPoints.length);
-        bresenhamLine(g, 11 + x, 328 + y,15 + x,327 + y);
-        bresenhamLine(g, 39 + x, 328 + y,35 + x,327 + y);
-
-        bresenhamLine(g,23+x,328+y,19+x, 330+y);
-        bresenhamLine(g,21+x,326+y,16+x, 330+y);
-
-
-        bresenhamLine(g,19+x,333+y,19+x, 330+y);
-        bresenhamLine(g,16+x,333+y,16+x, 330+y);
-
-        bresenhamLine(g,17+x,335+y,17+x, 350+y);
-        bresenhamLine(g,20+x,336+y,20+x, 352+y);
-
-        g.setColor(Color.BLUE);
-
-//        plot(g,19+x,326+y);
-//        plot(g,16+x,330+y);
-//        plot(g,20+x,331+y);
-
-
-
-    }
 
     private void christmasTree(Graphics g, BufferedImage buffer, int x, int y) {
         g.setColor(Color.black);
@@ -642,6 +673,20 @@ public class Expe extends JPanel {
                             (int) Math.round(yPoints[i + 2]) + y,
                             (int) Math.round(yPoints[i + 3]) + y });
         }
+
+        // เงา
+        // เสื้อ
+//         bezier_Curve(g2d, new int[]{410+x, 410+x, 411+x, 412+x}, new int[]{252+y, 252+y, 253+y, 253+y});
+// bezier_Curve(g2d, new int[]{412+x, 413+x, 414+x, 415+x}, new int[]{253+y, 253+y, 253+y, 253+y});
+// bezier_Curve(g2d, new int[]{415+x, 416+x, 416+x, 417+x}, new int[]{253+y, 253+y, 253+y, 253+y});
+// bezier_Curve(g2d, new int[]{417+x, 417+x, 417+x, 417+x}, new int[]{253+y, 253+y, 253+y, 252+y});
+// bezier_Curve(g2d, new int[]{417+x, 418+x, 420+x, 419+x}, new int[]{252+y, 251+y, 247+y, 246+y});
+// bezier_Curve(g2d, new int[]{419+x, 418+x, 410+x, 410+x}, new int[]{246+y, 245+y, 251+y, 252+y});
+
+
+        
+
+
         // g2d.fillRect(435, 217, 1, 1);
         Color borderColor = Color.decode("#000000");
         // hair
@@ -837,8 +882,8 @@ public class Expe extends JPanel {
         buffer = floodFill2(buffer, 383, 331, borderColor, handColor);
         // sock
         Color sockColor = Color.decode("#666AB0");
-        // buffer = floodFill2(buffer, 368, 334, borderColor, sockColor);
-        // buffer = floodFill2(buffer, 380, 336, borderColor, sockColor);
+        buffer = floodFill2(buffer, 368, 334, borderColor, sockColor);
+        buffer = floodFill2(buffer, 380, 336, borderColor, sockColor);
         // // shoe
         Color shoeColor = Color.decode("#F4823F");
         buffer = floodFill2(buffer, 370, 345, borderColor, shoeColor);
@@ -1230,9 +1275,9 @@ public class Expe extends JPanel {
 
     private static void grass(Graphics g, BufferedImage buffer) {
 
-        g.setColor(Color.decode("#80C014"));
+        g.setColor(Color.decode("#A8DF8E"));
         bezier_Curve(g, new int[] { 0, 500, 620, }, new int[] { 280, 280, 320 });
-        buffer = floodFill(buffer, 0, 599 - 30, Color.decode("#80C014"));
+        buffer = floodFill(buffer, 0, 599 - 30, Color.decode("#A8DF8E"));
 
     }
 
