@@ -12,10 +12,12 @@ public class IllustratorHack {
             FileWriter myWriter = new FileWriter("filename.txt");
             while (input.hasNextLine()) {
                 String[] splt = input.nextLine().split(" ");
-                for (int i = 0; i < splt.length / 2; i += 2) {
-                    if (!splt[i].equals("c") || !splt[i].equals("m")|| !splt[i].equals("l")) {
-                        xPointArrl.add((int)Math.round(Double.parseDouble(splt[i])));
-                        yPointArrl.add((int)Math.round(Double.parseDouble(splt[i+1])));
+                for (int i = 0; i < splt.length; i++) {
+                    if (!splt[i].equals("c") && !splt[i].equals("m")&& !splt[i].equals("l")) {
+                        if(i%2==0)
+                            xPointArrl.add((int)Math.round(Double.parseDouble(splt[i])));
+                        else
+                            yPointArrl.add((int)Math.round(Double.parseDouble(splt[i])));
                     }
                 }
                 myWriter.write("\n");
