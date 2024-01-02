@@ -52,6 +52,11 @@ public class Expe extends JPanel {
         ballOnChristmas(g2d, buffer, 0,0, Color.decode("#9BD0DD"));
         ballOnChristmas(g2d, buffer, 0,-30, Color.decode("#8984BF"));
         ballOnChristmas(g2d, buffer, 16,-26, Color.decode("#D7482E"));
+       gift(g2d, buffer, 0, 0-30, Color.decode("#F2F03B"));
+        gift(g2d, buffer, -12, -16-30,Color.decode("#F2F03B"));
+        gift(g2d, buffer, 18, -12-30,Color.decode("#75CDD8"));
+        gift(g2d, buffer, 50, -12-30,Color.decode("#7C79B9"));
+        gift(g2d, buffer, 77, -21-30,Color.decode("#F2F03B"));
         christmasTree(g2d, buffer, 0, 0);
         lineOfLamp1(g2d, buffer,7,-29);
         lineOfLamp2(g2d, buffer,12,-50);
@@ -61,11 +66,11 @@ public class Expe extends JPanel {
 
 
 
-//        gift(g2d, buffer, 0, 0-30, Color.decode("#F2F03B"));
-        gift(g2d, buffer, -12, -16-30,Color.decode("#F2F03B"));
-        gift(g2d, buffer, 18, -12-30,Color.decode("#75CDD8"));
-        gift(g2d, buffer, 50, -12-30,Color.decode("#7C79B9"));
-        gift(g2d, buffer, 77, -21-30,Color.decode("#F2F03B"));
+    //    gift(g2d, buffer, 0, 0-30, Color.decode("#F2F03B"));
+    //     gift(g2d, buffer, -12, -16-30,Color.decode("#F2F03B"));
+    //     gift(g2d, buffer, 18, -12-30,Color.decode("#75CDD8"));
+    //     gift(g2d, buffer, 50, -12-30,Color.decode("#7C79B9"));
+        // gift(g2d, buffer, 77, -21-30,Color.decode("#F2F03B"));
 
 
 
@@ -702,14 +707,7 @@ public class Expe extends JPanel {
                             (int) Math.round(yPoints[i + 3]) + y });
         }
 
-        // เงา
-        // เสื้อ
-//         bezier_Curve(g2d, new int[]{410+x, 410+x, 411+x, 412+x}, new int[]{252+y, 252+y, 253+y, 253+y});
-// bezier_Curve(g2d, new int[]{412+x, 413+x, 414+x, 415+x}, new int[]{253+y, 253+y, 253+y, 253+y});
-// bezier_Curve(g2d, new int[]{415+x, 416+x, 416+x, 417+x}, new int[]{253+y, 253+y, 253+y, 253+y});
-// bezier_Curve(g2d, new int[]{417+x, 417+x, 417+x, 417+x}, new int[]{253+y, 253+y, 253+y, 252+y});
-// bezier_Curve(g2d, new int[]{417+x, 418+x, 420+x, 419+x}, new int[]{252+y, 251+y, 247+y, 246+y});
-// bezier_Curve(g2d, new int[]{419+x, 418+x, 410+x, 410+x}, new int[]{246+y, 245+y, 251+y, 252+y});
+        
 
 
         
@@ -746,6 +744,20 @@ public class Expe extends JPanel {
         buffer = floodFill2(buffer, 426, 335, borderColor, shoe);
         //      r
         buffer = floodFill2(buffer, 431, 345, borderColor, shoe);
+
+        // เงา
+            // เสื้อ
+        g2d.setColor(Color.black);
+        bezier_Curve(g2d, new int[]{431,433,436}, new int[]{259,269,282});
+        g2d.setColor(Color.decode("#1A5C77"));
+        
+        bezier_Curve(g2d, new int[]{428+x, 427+x, 428+x, 428+x}, new int[]{238+y, 238+y, 240+y, 241+y});
+bezier_Curve(g2d, new int[]{428+x, 429+x, 430+x, 430+x}, new int[]{241+y, 243+y, 245+y, 245+y});
+bezier_Curve(g2d, new int[]{430+x, 431+x, 428+x, 428+x}, new int[]{245+y, 245+y, 238+y, 238+y});
+
+// bezier_Curve(g2d, new int[]{430+x, 430+x, 430+x, 429+x}, new int[]{252+y, 252+y, 254+y, 255+y});
+// bezier_Curve(g2d, new int[]{429+x, 429+x, 430+x, 430+x}, new int[]{255+y, 260+y, 264+y, 264+y});
+// bezier_Curve(g2d, new int[]{430+x, 431+x, 431+x, 430+x}, new int[]{264+y, 264+y, 252+y, 252+y});
 
 
 
@@ -918,6 +930,16 @@ public class Expe extends JPanel {
         // g2d.setColor(Color.red);
         // // g2d.fillRect(380, 345, 1, 1);
         buffer = floodFill2(buffer, 379, 345, borderColor, shoeColor);
+
+
+        // shadow
+        g2d.setColor(Color.decode("#C83132"));
+        bezier_Curve(g2d, new int[]{368,371,373},new int[]{273,270,266});
+        bezier_Curve(g2d, new int[]{375,380,386},new int[]{259,266,273});
+        bezier_Curve(g2d, new int[]{363+x, 363+x, 362+x, 362+x}, new int[]{253+y, 253+y, 255+y, 257+y});
+        bezier_Curve(g2d, new int[]{362+x, 360+x, 359+x, 359+x}, new int[]{257+y, 258+y, 260+y, 260+y});
+        bezier_Curve(g2d, new int[]{359+x, 358+x, 363+x, 363+x}, new int[]{260+y, 259+y, 253+y, 253+y});
+        bezier_Curve(g2d, new int[]{368+x, 368+x, 367+x, 367+x}, new int[]{255+y, 255+y, 257+y, 259+y});
 
     }
 
@@ -1303,9 +1325,9 @@ public class Expe extends JPanel {
 
     private static void grass(Graphics g, BufferedImage buffer) {
 
-        g.setColor(Color.decode("#A8DF8E"));
+        g.setColor(Color.decode("#80C014"));
         bezier_Curve(g, new int[] { 0, 500, 620, }, new int[] { 280, 280, 320 });
-        buffer = floodFill(buffer, 0, 599 - 30, Color.decode("#A8DF8E"));
+        buffer = floodFill(buffer, 0, 599 - 30, Color.decode("#80C014"));
 
     }
 

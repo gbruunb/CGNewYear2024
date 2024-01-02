@@ -102,6 +102,7 @@ public class kuy {
                     str = String.format("bezier_Curve(g2d, new int[]{%d+x, %d+x, %d+x, %d+x}, new int[]{%d+y, %d+y, %d+y, %d+y});\n",startAndEnd.x,list.get(1).x,list.get(2).x, list.get(0).x, startAndEnd.y, list.get(1).y, list.get(2).y, list.get(0).y);
                 } else {
                     System.out.println("oldEnd:"+oldEndPoint.get(countLine-2));
+                    System.out.println("List: "+list);
                     System.out.println("c1"+list.get(1));
                     System.out.println("c2"+list.get(2));
                     System.out.println("end"+list.get(0));
