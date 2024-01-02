@@ -30,20 +30,20 @@ public class Expe extends JPanel {
         g2d.setColor(Color.WHITE);
         g2d.fillRect(0, 0, 600, 600);
 //         sky
-        // sky(g2d, buffer);
-        // // star
-        // star(g2d);
-        // // graass
-        // grass(g2d, buffer);
-        // // table
-        // table(g2d, buffer);
-        // // computer
-        // computer(g2d, buffer);
-        // // cup
-        // cup(g2d,buffer, 0, -35);
-        // // mattress
-        // mattress(g2d);
-        // firework(g2d, buffer);
+        sky(g2d, buffer);
+        // star
+        star(g2d);
+        // graass
+        grass(g2d, buffer);
+        // table
+        table(g2d, buffer);
+        // computer
+        computer(g2d, buffer);
+        // cup
+        cup(g2d,buffer, 0, -35);
+        // mattress
+        mattress(g2d);
+        firework(g2d, buffer);
 
         girl(g2d, buffer,0,0);
         boy(g2d, buffer, 0, 0);
