@@ -78,7 +78,9 @@ public class Expe extends JPanel {
 
     private void ajmo(Graphics g, BufferedImage buffer, int x, int y) {
         g.setColor(Color.black);
+        Color grassColor = Color.decode("#3F5E09");
 
+        //face-border
         int[] xPoints = {
                 413, 415, 414, 416, 416, 417, 422, 428, 438, 440, 443, 453,
                 465, 468, 478, 483, 484, 484, 489, 491, 491, 493, 497, 498,
@@ -104,6 +106,7 @@ public class Expe extends JPanel {
         }
 
 
+        //hair
         xPoints = new int[]{
                 498, 501, 501, 503, 504, 504, 506, 507, 506, 507, 507, 508,
                 509, 509, 506, 506, 504, 504, 501, 495, 495, 493, 489, 482,
@@ -120,8 +123,178 @@ public class Expe extends JPanel {
             bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
         }
 
-//        g.setColor(Color.BLUE);
-//        plot(g,379,550);
+        Color eyeColor = Color.decode("#22130A");
+        //left-eye
+        g.setColor(Color.decode("#2F1B17"));
+        xPoints = new int[]{ 448, 448, 446, 446, 442, 435, 430, 448 };
+        yPoints = new int[]{ 478, 477, 476, 476, 473, 473, 478, 478 };
+
+        for (int i = 0; i < xPoints.length - 3; i+=3) {
+            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
+        }
+
+        xPoints = new int[]{ 448, 447, 444, 441, 437, 434, 432, 448 };
+        yPoints = new int[]{ 478, 478, 480, 480, 479, 477, 476, 478 };
+
+        for (int i = 0; i < xPoints.length - 3; i+=3) {
+            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
+        }
+
+        g.setColor(eyeColor);
+
+        xPoints = new int[]{ 436, 436, 436, 437, 438, 439, 441, 443, 443, 444, 436 };
+        yPoints = new int[]{ 475, 475, 476, 477, 478, 478, 478, 477, 475, 475, 475 };
+
+        for (int i = 0; i < xPoints.length - 3; i+=3) {
+            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
+        }
+
+        buffer = floodFill(buffer, 438, 476,grassColor,eyeColor);
+
+        g.setColor(Color.decode("#5D5C67"));
+        plot(g,438,475);
+
+        floodFill(buffer, 435, 476,grassColor,Color.decode("#BDB3B2"));
+        floodFill(buffer, 436, 477,grassColor,Color.decode("#BDB3B2"));
+        floodFill(buffer, 440, 478,grassColor,Color.decode("#BDB3B2"));
+        floodFill(buffer, 444, 477,grassColor,Color.decode("#BDB3B2"));
+        g.setColor(Color.decode("#BDB3B2"));
+        plot(g,441,478);
+        plot(g,437,477);
+
+
+        //eyebrow-left
+        g.setColor(Color.decode("#8E7967"));
+
+        xPoints = new int[]{ 451, 451, 448, 447, 443, 439, 437, 434, 433, 432, 431, 432, 433, 433, 434, 435, 435, 436, 438, 443, 444, 446, 447, 451, 451 };
+        yPoints = new int[]{ 465, 464, 462, 462, 460, 461, 461, 461, 462, 463, 464, 466, 467, 467, 467, 467, 467, 467, 467, 467, 467, 467, 467, 466, 465 };
+
+        for (int i = 0; i < xPoints.length - 3; i+=3) {
+            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
+        }
+        buffer = floodFill2(buffer, 442,463,Color.decode("#8E7967"),Color.decode("#8E7967"));
+
+
+        //eyebrow-right
+        g.setColor(Color.decode("#8E7967"));
+
+        xPoints = new int[]{ 468, 468, 469, 470, 476, 487, 487, 487, 486, 475, 471, 468, 468 };
+        yPoints = new int[]{ 467, 466, 465, 464, 460, 466, 468, 468, 468, 468, 468, 468, 467 };
+
+        for (int i = 0; i < xPoints.length - 3; i+=3) {
+            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
+        }
+        buffer = floodFill2(buffer, 442,463,Color.decode("#8E7967"),Color.decode("#8E7967"));
+        buffer = floodFill2(buffer, 472,464,Color.decode("#8E7967"),Color.decode("#8E7967"));
+
+
+//        g.setColor(Color.decode("#"));
+        g.setColor(Color.BLUE);
+        plot(g,472,463);
+
+
+
+
+
+        //right-eye
+        g.setColor(Color.decode("#2F1B17"));
+        xPoints = new int[]{ 469, 470, 471, 472, 475, 482, 487, 469 };
+        yPoints = new int[]{ 480, 478, 477, 477, 474, 476, 481, 480 };
+
+        for (int i = 0; i < xPoints.length - 3; i+=3) {
+            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
+        }
+
+        xPoints = new int[]{ 469, 470, 472, 476, 479, 482, 484, 469 };
+        yPoints = new int[]{ 480, 480, 481, 482, 482, 480, 480, 480 };
+
+        for (int i = 0; i < xPoints.length - 3; i+=3) {
+            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
+        }
+
+        g.setColor(eyeColor);
+        xPoints = new int[]{ 473, 473, 473, 475, 475, 476, 478, 478, 478, 479, 473 };
+        yPoints = new int[]{ 477, 477, 478, 479, 479, 479, 479, 478, 477, 477, 477 };
+
+        for (int i = 0; i < xPoints.length - 3; i+=3) {
+            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
+        }
+        buffer = floodFill2(buffer, 474,477,Color.decode("#2F1B17"),eyeColor);
+
+        buffer = floodFill(buffer, 474, 480,grassColor,Color.decode("#BDB3B2"));
+
+        g.setColor(Color.decode("#5D5C67"));
+        plot(g,474,477);
+
+
+
+
+
+
+        //nose
+        g.setColor(Color.decode("#8C5137"));
+        xPoints = new int[]{ 448, 447, 446, 446, 445, 445, 447, 447, 448, 449, 449, 449, 450, 450, 450, 451, 451, 452, 453, 454, 454, 455, 455, 455, 456, 456, 456, 457, 457, 458, 459, 459, 459, 460, 460, 461, 463, 464, 465, 466, 466, 466, 467, 467, 468, 469, 469, 469, 469, 468, 468, 467, 448 };
+        yPoints = new int[]{ 495, 495, 496, 498, 500, 503, 504, 504, 504, 504, 503, 502, 502, 501, 501, 501, 500, 500, 500, 499, 500, 501, 501, 501, 503, 504, 504, 505, 505, 505, 505, 504, 503, 503, 502, 501, 501, 501, 502, 503, 504, 504, 505, 505, 504, 504, 502, 500, 500, 499, 498, 497, 495 };
+
+        for (int i = 0; i < xPoints.length - 3; i+=3) {
+            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
+        }
+
+        g.setColor(Color.decode("#100D0C"));
+        xPoints = new int[]{ 450, 450, 450, 450, 451, 454, 454, 454, 453, 453, 452, 451, 450 };
+        yPoints = new int[]{ 503, 502, 501, 501, 500, 501, 502, 502, 503, 503, 503, 504, 503 };
+
+        for (int i = 0; i < xPoints.length - 3; i+=3) {
+            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
+        }
+
+        x += 10;
+
+        g.setColor(Color.decode("#100D0C"));
+        xPoints = new int[]{ 450, 450, 450, 450, 451, 454, 454, 454, 453, 453, 452, 451, 450 };
+        yPoints = new int[]{ 503, 502, 501, 501, 500, 501, 502, 502, 503, 503, 503, 504, 503 };
+
+        for (int i = 0; i < xPoints.length - 3; i+=3) {
+            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
+        }
+
+        buffer = floodFill2(buffer, 451,501,Color.decode("#100D0C"),Color.decode("#100D0C"));
+        buffer = floodFill2(buffer, 461,501,Color.decode("#100D0C"),Color.decode("#100D0C"));
+
+
+        //mouth
+        x -= 10;
+        y+=4;
+        g.setColor(Color.decode("#C8795A"));
+        xPoints = new int[]{ 442, 442, 443, 444, 445, 446, 449, 452, 453, 454, 455, 455, 457, 458, 459, 461, 461, 462, 468, 468, 469, 469, 470, 470, 471, 471, 469, 468, 467, 467, 467, 466, 465, 461, 457, 455, 454, 449, 447, 444, 442 };
+        yPoints = new int[]{ 518, 518, 518, 518, 517, 516, 515, 512, 511, 512, 512, 513, 514, 514, 512, 512, 512, 511, 518, 518, 519, 519, 518, 518, 519, 519, 518, 520, 520, 521, 522, 522, 523, 524, 524, 524, 524, 523, 520, 518, 518 };
+
+        for (int i = 0; i < xPoints.length - 3; i+=3) {
+            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
+        }
+
+        x += 1;
+        y+=2;
+        xPoints = new int[]{ 445, 445, 446, 447, 449, 451, 452, 453, 452, 453, 454, 456, 458, 459, 459, 460, 461, 463, 467, 445 };
+        yPoints = new int[]{ 517, 517, 516, 516, 515, 514, 515, 516, 516, 517, 518, 518, 517, 516, 515, 515, 514, 515, 518, 517 };
+
+        for (int i = 0; i < xPoints.length - 3; i+=3) {
+            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
+        }
+        buffer = floodFill2(buffer, 455,518,Color.decode("#C8795A"),Color.decode("#D1927D"));
+
+
+
+
+
+        buffer = floodFill(buffer, 472,461,grassColor,Color.decode("#F6E2D6"));
+        buffer = floodFill(buffer, 472,421,grassColor,Color.decode("#BEB2A2"));
+
+
+
+
+
+
 
     }
 
