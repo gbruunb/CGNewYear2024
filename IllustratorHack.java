@@ -18,7 +18,7 @@ public class IllustratorHack {
             while (input.hasNextLine()) {
                 String[] splt = input.nextLine().split(" ");
                 for (int i = 0; i < splt.length; i++) {
-                    if (!splt[i].equals("c") && !splt[i].equals("m")&& !splt[i].equals("l")&& !splt[i].equals("y")) {
+                    if (!splt[i].equals("c") && !splt[i].equals("m")&& !splt[i].equals("l")&& !splt[i].equals("y")&& !splt[i].equals("v")) {
                         if(i%2==0)
                             xPointArrl.add((int)Math.round(Double.parseDouble(splt[i])));
                         else
@@ -29,9 +29,9 @@ public class IllustratorHack {
                 lineCount+=2;
             }
             myWriter.close();
-            // System.out.println(Arrays.toString(xPointArrl.toArray()));
-            // System.out.println("=====-----");
-            // System.out.println(Arrays.toString(yPointArrl.toArray()));
+            System.out.println(Arrays.toString(xPointArrl.toArray()));
+            System.out.println("=====-----");
+            System.out.println(Arrays.toString(yPointArrl.toArray()));
         } catch (Exception e) {
             e.printStackTrace();
         }
