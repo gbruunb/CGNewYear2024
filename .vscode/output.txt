@@ -1,3 +1,0 @@
-bezier_Curve(g2d, new int[]{444+x, 444+x, 444+x, 442+x}, new int[]{253+y, 253+y, 257+y, 260+y});
-bezier_Curve(g2d, new int[]{442+x, 441+x, 439+x, 438+x}, new int[]{260+y, 263+y, 266+y, 266+y});
-bezier_Curve(g2d, new int[]{438+x, 437+x, 443+x, 444+x}, new int[]{266+y, 266+y, 252+y, 253+y});

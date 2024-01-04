@@ -1,4 +1,4 @@
-myPath.move(to: CGPoint(x:443.8936, y:252.5319) )
-myPath.addCurve(to: CGPoint(x:442.4893, y:260.0638), controlPoint1: CGPoint(x:444.4584, y:252.7089), controlPoint2: CGPoint(x:443.9104, y:256.7794))
-myPath.addCurve(to: CGPoint(x:438.0213, y:266.1915), controlPoint1: CGPoint(x:441.0891, y:263.3001), controlPoint2: CGPoint(x:438.5362, y:266.4785))
-myPath.addCurve(to: CGPoint(x:443.8936, y:252.5319), controlPoint1: CGPoint(x:437.0412, y:265.6452), controlPoint2: CGPoint(x:442.8224, y:252.1962))
+myPath.move(to: CGPoint(x:427.5532, y:238.4894) )
+myPath.addCurve(to: CGPoint(x:429.2128, y:242.1915), controlPoint1: CGPoint(x:427.5573, y:238.4876), controlPoint2: CGPoint(x:428.4706, y:240.5238))
+myPath.addCurve(to: CGPoint(x:431.1277, y:246.5319), controlPoint1: CGPoint(x:430.1389, y:244.2726), controlPoint2: CGPoint(x:431.132, y:246.53))
+myPath.addLine(to: CGPoint(x:427.5532, y:238.4894) )

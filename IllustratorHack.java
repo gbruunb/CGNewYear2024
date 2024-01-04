@@ -35,47 +35,47 @@ public class IllustratorHack {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        int nowAt = 1;
         try {
-            String txt = """
-                 xPoints = new int[] { ,
-                };
-        yPoints = new int[] { 343, 343, 344, 345, 345, 347, 348, 351, 351, 351, 351, 352, 352, 351, 351, 350,
-                350, 349,
-                349, 348, 348, 347, 347, 344, 344, 343, 342, 342, 343, 344, 344, 344, 343 };
-        for (int i = 0; i < xPoints.length - 3; i += 3) {
-            bezier_Curve(g2d,
-                    new int[] { (int) Math.round(xPoints[i]) + x,
-                            (int) Math.round(xPoints[i + 1]) + x,
-                            (int) Math.round(xPoints[i + 2]) + x,
-                            (int) Math.round(xPoints[i + 3]) + x },
-                    new int[] { (int) Math.round(yPoints[i]) + y,
-                            (int) Math.round(yPoints[i + 1]) + y,
-                            (int) Math.round(yPoints[i + 2]) + y,
-                            (int) Math.round(yPoints[i + 3]) + y });
-        }
-                    
-                    """;
-            // BufferedWriter
-            BufferedWriter bw = new BufferedWriter(new FileWriter("output.txt"));
             BufferedReader br = new BufferedReader(new FileReader("filename.txt"));
-            int nowAt = 1;
-            String lines = "";
+            BufferedWriter bw = new BufferedWriter(new FileWriter("a2.txt"));
+            String lines;
             while ((lines = br.readLine()) != null) {
-                // System.out.println(nowAt);
-                nowAt++;
-                if (nowAt > lineCount - 1&&  nowAt  <= lineCount+1 ) {
-                    // System.out.println(lines);
-                    lines = lines.replace("[", "{");
-                    lines = lines.replace("]", "}");
-                    System.out.println(nowAt+""+lines);
+                if (nowAt <= lineCount - 2) {
+                    // System.out.println(nowAt);
+                    nowAt++;
+                    continue;
                 }
+                lines = lines.replace("[", "{");
+                lines = lines.replace("]", "}");
+                if (nowAt %2 != 0) {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("xPoints = new int[]" +lines+";\n");
+                    bw.write(sb.toString());
+
+                } else {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("yPoints = new int[]" +lines+";\n");
+                    bw.write(sb.toString());
+
+                }
+                nowAt++;
 
             }
-            System.out.println("aa"+lineCount);
-        } catch (IOException e) {
-
-            e.printStackTrace();
+            String str = """
+                  for (int i = 0; i < xPoints.length - 3; i += 3) {
+        bezier_Curve(g2d,
+                new int[] { (int) Math.round(xPoints[i]) + x, (int) Math.round(xPoints[i + 1]) + x,
+                        (int) Math.round(xPoints[i + 2]) + x, (int) Math.round(xPoints[i + 3]) + x },
+                new int[] { (int) Math.round(yPoints[i]) + y, (int) Math.round(yPoints[i + 1]) + y,
+                        (int) Math.round(yPoints[i + 2]) + y, (int) Math.round(yPoints[i + 3]) + y });
+    }
+                    
+                    """;
+                    bw.write(str);
+            bw.close();
+        } catch (IOException e1) {
+            e1.printStackTrace();
         }
 
     }
