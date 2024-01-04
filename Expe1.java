@@ -8,9 +8,9 @@ import java.util.Queue;
 // import java.util.Queue;
 import java.util.Random;
 
-public class Expe extends JPanel {
+public class Expe1 extends JPanel {
     public static void main(String[] args) {
-        Expe m = new Expe();
+        Expe1 m = new Expe1();
 
         JFrame f = new JFrame();
         f.add(m);

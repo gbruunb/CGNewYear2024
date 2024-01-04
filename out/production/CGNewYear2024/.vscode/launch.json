@@ -9,6 +9,13 @@
             "name": "Expe",
             "request": "launch",
             "mainClass": "Expe",
+            "projectName": "CGNewYear2024_4cacf8c1"
+        },
+        {
+            "type": "java",
+            "name": "Expe",
+            "request": "launch",
+            "mainClass": "Expe",
             "projectName": "CGNewYear2024_22d491d"
         },
         {
