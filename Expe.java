@@ -123,6 +123,43 @@ public class Expe extends JPanel {
         bresenhamLine(g,319+x,431+y,319+x,436+y);
         bresenhamLine(g,317+x,433+y,319+x,433+y);
 
+        //B
+        bresenhamLine(g,322+x,431+y,325+x,431+y);
+        bresenhamLine(g,325+x,431+y,325+x,435+y);
+        bresenhamLine(g,325+x,435+y,322+x,435+y);
+        bresenhamLine(g,322+x,435+y,322+x,431+y);
+        bresenhamLine(g,325+x,433+y,322+x,433+y);
+
+        //4
+        bresenhamLine(g,331+x,431+y,328+x,434+y);
+        bresenhamLine(g,328+x,434+y,334+x,434+y);
+        bresenhamLine(g,331+x,431+y,331+x,436+y);
+
+        //D
+        xPoints = new int[]{339, 339, 342, 342, 339, 339};
+        yPoints = new int[]{429, 436, 435, 431, 429, 429};
+
+        for (int i = 0; i < xPoints.length; i++) {
+            xPoints[i] += x;
+            yPoints[i] +=y;
+        }
+
+        g.drawPolygon(xPoints,yPoints,xPoints.length);
+
+        //u
+        bresenhamLine(g,344+x,431+y,344+x,436+y);
+        bresenhamLine(g,344+x,436+y,348+x,436+y);
+        bresenhamLine(g,348+x,436+y,348+x,431+y);
+
+        //e
+        bresenhamLine(g,350+x,433+y,354+x,433+y);
+        bresenhamLine(g,354+x,433+y,352+x,430+y);
+        bresenhamLine(g,352+x,430+y,350+x,435+y);
+        bresenhamLine(g,350+x,435+y,354+x,436+y);
+
+
+
+
         g.setColor(Color.BLUE);
         plot(g,301+x,430+y);
 
