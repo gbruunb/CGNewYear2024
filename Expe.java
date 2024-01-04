@@ -896,10 +896,18 @@ public class Expe extends JPanel {
         plot(g,498+x,460+y);
         plot(g,497+x,463+y);
 
+
+
         g.setColor(edgeHair);
         plot(g,454+x,444+y);
         plot(g,447+x,444+y);
         plot(g,448+x,443+y);
+
+        g.setColor(Color.BLUE);
+
+//        plot(g,454+x,444+y);
+
+
     }
 
 
@@ -2340,8 +2348,99 @@ bezier_Curve(g2d, new int[]{365+x, 366+x, 368+x, 367+x}, new int[]{286+y, 286+y,
         buffer = floodFill(buffer, 442 + x, 30 + y, color);
         buffer = floodFill(buffer, 427 + x, 38 + y, color);
         buffer = floodFill(buffer, 431 + x, 46 + y, color);
-        g2d.setColor(Color.magenta);
-        // g2d.drawRect(431, 46, 1, 1);
+        buffer = floodFill(buffer, 413 + x, 68 + y, color);
+        plot(g2d,409+ x,70+ y);
+        plot(g2d,410+ x,70+ y);
+        plot(g2d,410+ x,69+ y);
+        plot(g2d,437 +x,25+ y);
+        plot(g2d,447 +x,36+ y);
+        plot(g2d,448 +x,37+ y);
+        plot(g2d,446 +x,43+ y);
+        plot(g2d,448 +x,44+ y);
+        plot(g2d,420 +x,56+ y);
+        plot(g2d,418 +x,57+ y);
+        plot(g2d,415 +x,58+ y);
+        plot(g2d,419 +x,63+ y);
+        plot(g2d,420 +x,63+ y);
+        plot(g2d,421 +x,62+ y);
+        plot(g2d,411 +x,69+ y);
+        plot(g2d,408 +x,71+ y);
+        bresenhamLine(g2d, 419+x, 71+y, 424+x, 65+y);
+        plot(g2d,425 +x,65+ y);
+        plot(g2d,423 +x,67+ y);
+        plot(g2d,424 +x,66+ y);
+        plot(g2d,440 +x,63+ y);
+        plot(g2d,442 +x,62+ y);
+        plot(g2d,475 +x,44+ y);
+        plot(g2d,479 +x,50+ y);
+        plot(g2d,480 +x,50+ y);
+        plot(g2d,465 +x,65+ y);
+        plot(g2d,463 +x,64+ y);
+        plot(g2d,449 +x,70+ y);
+        plot(g2d,448 +x,73+ y);
+        buffer = floodFill(buffer, 420 + x, 81 + y, color);
+        bresenhamLine(g2d, 418+x, 82+y, 425+x, 76+y);
+        plot(g2d,418 +x,83+ y);
+        plot(g2d,419 +x,82+ y);
+        plot(g2d,421 +x,80+ y);
+        plot(g2d,429 +x,82+ y);
+        plot(g2d,430 +x,80+ y);
+        plot(g2d,431 +x,79+ y);
+        plot(g2d,432 +x,77+ y);
+        plot(g2d,436 +x,91+ y);
+        plot(g2d,435 +x,93+ y);
+        plot(g2d,438 +x,88+ y);
+        plot(g2d,438 +x,87+ y);
+        plot(g2d,437 +x,89+ y);
+        plot(g2d,439 +x,86+ y);
+        plot(g2d,440 +x,84+ y);
+        plot(g2d,441 +x,98+ y);
+        plot(g2d,441 +x,99+ y);
+        plot(g2d,440 +x,103+ y);
+        plot(g2d,451+x,78+ y);
+        plot(g2d,451+x,79+ y);
+        plot(g2d,451+x,80+ y);
+        plot(g2d,451+x,81+ y);
+        plot(g2d,450+x,83+ y);
+        plot(g2d,450+x,84+ y);
+        plot(g2d,450+x,85+ y);
+        plot(g2d,450+x,86+ y);
+        plot(g2d,450+x,87+ y);
+        plot(g2d,461 +x,79+ y);
+        plot(g2d,469 +x,74+ y);
+        plot(g2d,470 +x,75+ y);
+        plot(g2d,470 +x,76+ y);
+        plot(g2d,471 +x,76+ y);
+        plot(g2d,471 +x,77+ y);
+        plot(g2d,472 +x,79+ y);
+        plot(g2d,473 +x,81+ y);
+        plot(g2d,470 +x,85+ y);
+        plot(g2d,471 +x,89+ y);
+        plot(g2d,472 +x,92+ y);
+        plot(g2d,480 +x,77+ y);
+        plot(g2d,481 +x,78+ y);
+        plot(g2d,481 +x,79+ y);
+        plot(g2d,482 +x,80+ y);
+        plot(g2d,484 +x,70+ y);
+        plot(g2d,485 +x,71+ y);
+        plot(g2d,486 +x,72+ y);
+        plot(g2d,487 +x,73+ y);
+        plot(g2d,487 +x,74+ y);
+        plot(g2d,488 +x,75+ y);
+        plot(g2d,489 +x,76+ y);
+        plot(g2d,489 +x,77+ y);
+        plot(g2d,490 +x,78+ y);
+        plot(g2d,491 +x,79+ y);
+        plot(g2d,491 +x,80+ y);
+        plot(g2d,492 +x,81+ y);
+        plot(g2d,492 +x,82+ y);
+        plot(g2d,503 +x,56+ y);
+        // plot(g2d,419 +x,70+ y);
+        // g2d.fillRect(410, 70, 5, 5);
+        // g2d.fillRect(409, 70, 1, 1);
+        // bresenhamLine(g2d, 40, 50, 420, 60);
+        // bresenhamLine(g2d, 460, 0, 460, 600);
+        // g2d.drawRect(435, 20, 5, 5);
 
     }
 
@@ -2552,7 +2651,6 @@ bezier_Curve(g2d, new int[]{365+x, 366+x, 368+x, 367+x}, new int[]{286+y, 286+y,
     private void cup(Graphics g2d, BufferedImage buffer, int x, int y) {
         // bezier_Curve(g, new int[]{188, 195,,}, new int[]{425, 426,,});
         // g2d.setColor(Color.gray);
-        y +=3;
         g2d.setColor(Color.WHITE);
         // เงา
         int[] xPoints = new int[] { 188, 188, 187, 185, 184, 185, 186, 190, 193, 198, 201, 207, 210, 223, 221, 224, 226,
@@ -2639,7 +2737,11 @@ bezier_Curve(g2d, new int[]{365+x, 366+x, 368+x, 367+x}, new int[]{286+y, 286+y,
                             (int) Math.round(yPoints[i + 3]) + y });
         }
 
+        // ควัน
+
+        // g2d.setColor(Color.gray);
         buffer = floodFill(buffer, 250 + x, 428 + y, Color.black);
+        // g2d.fillRect(230, 428-30, 2, 2);
         buffer = floodFill(buffer, 232 + x, 428 + y, Color.black);
 
         // ควัน
