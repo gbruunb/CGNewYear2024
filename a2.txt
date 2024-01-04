@@ -1,0 +1,8 @@
+              for (int i = 0; i < xPoints.length - 3; i += 3) {
+    bezier_Curve(g2d,
+            new int[] { (int) Math.round(xPoints[i]) + x, (int) Math.round(xPoints[i + 1]) + x,
+                    (int) Math.round(xPoints[i + 2]) + x, (int) Math.round(xPoints[i + 3]) + x },
+            new int[] { (int) Math.round(yPoints[i]) + y, (int) Math.round(yPoints[i + 1]) + y,
+                    (int) Math.round(yPoints[i + 2]) + y, (int) Math.round(yPoints[i + 3]) + y });
+}
+

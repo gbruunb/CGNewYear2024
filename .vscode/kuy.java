@@ -13,7 +13,7 @@ public class kuy {
         // Point startAndEnd;
         int pointCount = 0;
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("output.txt", true));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("output.txt"));
             BufferedReader br = new BufferedReader(new FileReader("test.txt"));
             String lines;
             int countLine = 0;
@@ -102,11 +102,12 @@ public class kuy {
                     str = String.format("bezier_Curve(g2d, new int[]{%d+x, %d+x, %d+x, %d+x}, new int[]{%d+y, %d+y, %d+y, %d+y});\n",startAndEnd.x,list.get(1).x,list.get(2).x, list.get(0).x, startAndEnd.y, list.get(1).y, list.get(2).y, list.get(0).y);
                 } else {
                     System.out.println("oldEnd:"+oldEndPoint.get(countLine-2));
+                    System.out.println("List: "+list);
                     System.out.println("c1"+list.get(1));
                     System.out.println("c2"+list.get(2));
                     System.out.println("end"+list.get(0));
                     // str = String.format("bezier_CurveTest(g2d, %d, %d, %d, %d, %d, %d, %d, %d);\n", oldEndPoint.get(countLine-2).x, oldEndPoint.get(countLine-2).y, list.get(1).x, list.get(1).y, list.get(2).x, list.get(2).y, list.get(0).x, list.get(0).y);
-                    str = String.format("bezier_Curve(g2d, new int[]{%d,+x %d+x, %d+x, %d+x}, new int[]{%d+y, %d+y, %d+y, %d+y});\n",oldEndPoint.get(countLine-2).x,list.get(1).x,list.get(2).x, list.get(0).x, oldEndPoint.get(countLine-2).y, list.get(1).y, list.get(2).y, list.get(0).y);
+                    str = String.format("bezier_Curve(g2d, new int[]{%d+x, %d+x, %d+x, %d+x}, new int[]{%d+y, %d+y, %d+y, %d+y});\n",oldEndPoint.get(countLine-2).x,list.get(1).x,list.get(2).x, list.get(0).x, oldEndPoint.get(countLine-2).y, list.get(1).y, list.get(2).y, list.get(0).y);
                 }
                 System.out.println(str);
                 bw.append(str);
