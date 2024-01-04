@@ -14,7 +14,7 @@ public class Expe extends JPanel {
 
         JFrame f = new JFrame();
         f.add(m);
-        f.setTitle("Assignment1_521_870");
+        f.setTitle("Assignment1_65050521_65050870");
         f.setSize(600, 600);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
@@ -71,7 +71,7 @@ public class Expe extends JPanel {
 
 
         ajmo(g2d, buffer, 0, 0);
-        messageBox(g2d,buffer,5,-35);
+        messageBox(g2d,buffer,15,-35);
 
         g.drawImage(buffer, 0, 0, null);
 
@@ -82,10 +82,10 @@ public class Expe extends JPanel {
 
         //border
         g.setColor(Color.black);
-        int[] xPoints = {280+x, 397+x, 397+x, 280+x};
+        int[] xPoints = {289+x, 402+x, 402+x, 289+x};
         int[] yPoints = {418+y, 418+y, 458+y, 458+y};
         g.drawPolygon(xPoints,yPoints,xPoints.length);
-        buffer = floodFill(buffer,287,419,grassColor,Color.WHITE);
+        buffer = floodFill(buffer,300+x,419+y,grassColor,Color.WHITE);
 
 
         //assignment-icon
@@ -157,6 +157,109 @@ public class Expe extends JPanel {
         bresenhamLine(g,352+x,430+y,350+x,435+y);
         bresenhamLine(g,350+x,435+y,354+x,436+y);
 
+        //M
+        bresenhamLine(g,360+x,437+y,360+x,428+y);
+        bresenhamLine(g,360+x,428+y,363+x,437+y);
+        bresenhamLine(g,363+x,437+y,366+x,425+y);
+        bresenhamLine(g,366+x,425+y,367+x,438+y);
+
+        //o
+        xPoints = new int[]{372, 369, 369, 373, 372};
+        yPoints = new int[]{431, 431, 436, 436, 431};
+
+        for (int i = 0; i < xPoints.length; i++) {
+            xPoints[i] += x;
+            yPoints[i] +=y;
+        }
+
+        g.drawPolygon(xPoints,yPoints,xPoints.length);
+
+        //n
+        bresenhamLine(g,375+x,436+y,375+x,432+y);
+        bresenhamLine(g,375+x,432+y,379+x,432+y);
+        bresenhamLine(g,379+x,432+y,379+x,436+y);
+
+        //d
+        bresenhamLine(g,385+x,424+y,385+x,436+y);
+        bresenhamLine(g,385+x,436+y,381+x,436+y);
+        bresenhamLine(g,381+x,436+y,381+x,431+y);
+        bresenhamLine(g,381+x,431+y,385+x,431+y);
+
+        //a
+        bresenhamLine(g,387+x,432+y,390+x,432+y);
+        bresenhamLine(g,390+x,432+y,390+x,436+y);
+        bresenhamLine(g,390+x,436+y,387+x,436+y);
+        bresenhamLine(g,387+x,436+y,387+x,434+y);
+        bresenhamLine(g,387+x,434+y,390+x,434+y);
+
+        //y
+        bresenhamLine(g,391+x,431+y,393+x,434+y);
+        bresenhamLine(g,395+x,431+y,391+x,438+y);
+
+        //,
+        bresenhamLine(g,396+x,434+y,395+x,436+y);
+
+        //J
+        bresenhamLine(g,345+x,442+y,345+x,446+y);
+        bresenhamLine(g,345+x,446+y,344+x,447+y);
+        bresenhamLine(g,344+x,447+y,342+x,446+y);
+
+        y += 11;
+        x -= 39;
+        //a
+        bresenhamLine(g,387+x,432+y,390+x,432+y);
+        bresenhamLine(g,390+x,432+y,390+x,436+y);
+        bresenhamLine(g,390+x,436+y,387+x,436+y);
+        bresenhamLine(g,387+x,436+y,387+x,434+y);
+        bresenhamLine(g,387+x,434+y,390+x,434+y);
+
+        x += 39;
+
+
+        //n
+        x -= 21;
+        bresenhamLine(g,375+x,436+y,375+x,432+y);
+        bresenhamLine(g,375+x,432+y,379+x,432+y);
+        bresenhamLine(g,379+x,432+y,379+x,436+y);
+
+        x += 21;
+
+        y -= 11;
+
+        //1
+        x += 2;
+        bresenhamLine(g,360+x,444+y,362+x,442+y);
+        bresenhamLine(g,362+x,442+y,362+x,448+y);
+
+        //,
+        bresenhamLine(g,368+x,447+y,367+x,449+y);
+
+        //2
+        bresenhamLine(g,372+x,443+y,375+x,441+y);
+        bresenhamLine(g,375+x,442+y,375+x,444+y);
+        bresenhamLine(g,375+x,444+y,372+x,447+y);
+        bresenhamLine(g,372+x,447+y,375+x,448+y);
+
+        //0
+        bresenhamLine(g,381+x,442+y,378+x,445+y);
+        bresenhamLine(g,378+x,445+y,381+x,448+y);
+        bresenhamLine(g,381+x,448+y,382+x,445+y);
+        bresenhamLine(g,382+x,445+y,381+x,442+y);
+
+        //2
+        x += 13;
+        bresenhamLine(g,372+x,443+y,375+x,441+y);
+        bresenhamLine(g,375+x,442+y,375+x,444+y);
+        bresenhamLine(g,375+x,444+y,372+x,447+y);
+        bresenhamLine(g,372+x,447+y,375+x,448+y);
+        x -= 13;
+
+        //4
+        bresenhamLine(g,390+x,446+y,394+x,442+y);
+        bresenhamLine(g,394+x,442+y,394+x,449+y);
+        bresenhamLine(g,390+x,446+y,396+x,446+y);
+
+
 
 
 
@@ -166,7 +269,9 @@ public class Expe extends JPanel {
     }
 
     private void ajmo(Graphics g, BufferedImage buffer, int x, int y) {
-        g.setColor(Color.black);
+        Color edgeHair = Color.decode("#766455");
+        Color edgeFace = Color.decode("#B48F71");
+        g.setColor(edgeFace);
         Color grassColor = Color.decode("#3F5E09");
 
         //face-border
@@ -208,6 +313,7 @@ public class Expe extends JPanel {
                 413, 409, 409, 410, 410, 415, 417, 419, 424, 436, 441, 444,
                 450, 451, 452, 458, 462, 465, 469, 470, 472, 475, 491 };
 
+        g.setColor(edgeHair);
         for (int i = 0; i < xPoints.length - 3; i+=3) {
             bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
         }
@@ -401,8 +507,6 @@ public class Expe extends JPanel {
         }
 
 
-        //under-left-eye
-//        y -= 6;
         y +=1;
         g.setColor(underEye);
         xPoints = new int[]{469, 469, 470, 472, 473, 473, 474, 477, 481, 481, 481, 479, 476, 472, 470, 470, 469, 468, 469};
@@ -637,11 +741,53 @@ public class Expe extends JPanel {
         buffer = floodFill2(buffer, 429,446,Color.decode("#766455"),hair);
         plot(g,443,443);
 
+        g.setColor(Color.BLACK);
+        //body
+        xPoints = new int[]{421, 420, 419, 420, 420, 423, 424, 434, 499, 509, 516, 521, 530, 544, 550, 566, 575, 585, 585, 584, 565, 565, 564, 581, 582, 582, 578, 578, 567, 557, 556, 548, 532, 494, 421};
+        yPoints = new int[]{533, 535, 539, 544, 550, 555, 557, 574, 559, 557, 555, 553, 553, 551, 554, 553, 551, 549, 548, 546, 546, 545, 543, 542, 540, 538, 538, 538, 535, 541, 542, 545, 542, 513, 533};
+
+        for (int i = 0; i < xPoints.length - 3; i+=3) {
+            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
+        }
+
+        //left-arm
+        xPoints = new int[]{422, 421, 421, 418, 417, 416, 415, 410, 408, 405, 403, 401, 402, 403, 418, 425, 428, 427, 427, 422};
+        yPoints = new int[]{552, 553, 557, 560, 560, 561, 562, 564, 561, 563, 564, 566, 568, 570, 571, 566, 561, 555, 563, 552};
+
+        for (int i = 0; i < xPoints.length - 3; i+=3) {
+            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
+        }
+
+        //right-arm
+        xPoints = new int[]{500, 500, 501, 503, 503, 504, 506, 507, 509, 510, 522, 529, 530, 530, 529, 528, 525, 518, 501, 495, 494, 494, 491, 495, 495, 494, 493, 493, 500};
+        yPoints = new int[]{540, 542, 551, 558, 559, 561, 563, 564, 564, 564, 563, 563, 565, 565, 566, 567, 568, 570, 570, 569, 568, 568, 564, 559, 550, 545, 542, 540, 540};
+
+        for (int i = 0; i < xPoints.length - 3; i+=3) {
+            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
+        }
+
+        //tummy
+        xPoints = new int[]{423, 421, 421, 423, 424, 427, 430, 434, 437, 438, 441, 454, 494, 423};
+        yPoints = new int[]{555, 552, 549, 548, 546, 547, 549, 551, 553, 554, 557, 558, 552, 555};
+
+        for (int i = 0; i < xPoints.length - 3; i+=3) {
+            bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
+        }
+
+        buffer = floodFill(buffer, 430,561,grassColor,Color.decode("#F0F1F0"));
+        buffer = floodFill(buffer, 430,545,grassColor,Color.decode("#7D758A"));
+        buffer = floodFill(buffer, 420,565,grassColor,Color.decode("#7D758A"));
+        buffer = floodFill(buffer, 500,565,grassColor,Color.decode("#7D758A"));
+
+
+        g.setColor(Color.decode("#7D758A"));
+
+        bresenhamLine(g,500,560,503,560);
+        bresenhamLine(g,503,561,495,561);
+
         g.setColor(Color.BLUE);
 
-        plot(g,429,446);
-
-
+        plot(g,500,560);
 
     }
 
@@ -811,8 +957,8 @@ public class Expe extends JPanel {
         bezier_Curve(g, new int[] { 337, 336, 335, 335}, new int[] { 553, 556, 556, 558});
         bezier_Curve(g, new int[] { 335, 335, 335, 335}, new int[] { 558, 559, 560, 562});
         bezier_Curve(g, new int[] { 335, 335, 335, 335}, new int[] { 562, 563, 565, 567});
-        bezier_Curve(g, new int[] { 335, 336, 352, 394}, new int[] { 567, 570, 566, 568});
-        bezier_Curve(g, new int[] { 394, 394, 394, 395}, new int[] { 568, 568, 568, 568});
+        bezier_Curve(g, new int[] { 335, 336, 352, 394}, new int[] { 567, 573, 571, 571});
+        bezier_Curve(g, new int[] { 394, 394, 394, 395}, new int[] { 571, 568, 568, 568});
         bezier_Curve(g, new int[] { 395, 399, 397, 394}, new int[] { 568, 567, 536, 532});
         bezier_Curve(g, new int[] { 394, 393, 392, 388}, new int[] { 532, 531, 532, 531});
         bezier_Curve(g, new int[] { 388, 385, 384, 382}, new int[] { 531, 530, 529, 530});
