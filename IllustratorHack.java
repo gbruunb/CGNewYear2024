@@ -30,7 +30,7 @@ public class IllustratorHack {
             }
             myWriter.close();
             // System.out.println(Arrays.toString(xPointArrl.toArray()));
-            // System.out.println("=====");
+            // System.out.println("=====-----");
             // System.out.println(Arrays.toString(yPointArrl.toArray()));
         } catch (Exception e) {
             e.printStackTrace();
