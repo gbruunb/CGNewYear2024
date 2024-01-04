@@ -260,12 +260,6 @@ public class Expe extends JPanel {
         bresenhamLine(g,390+x,446+y,396+x,446+y);
 
 
-
-
-
-        g.setColor(Color.BLUE);
-        plot(g,301+x,430+y);
-
     }
 
     private void ajmo(Graphics g, BufferedImage buffer, int x, int y) {
@@ -317,6 +311,46 @@ public class Expe extends JPanel {
         for (int i = 0; i < xPoints.length - 3; i+=3) {
             bezier_Curve(g, new int[] { xPoints[i]+x, xPoints[i+1]+x,  xPoints[i+2]+x, xPoints[i+3]+x}, new int[] { yPoints[i]+y, yPoints[i+1]+y, yPoints[i+2]+y, yPoints[i+3]+y});
         }
+
+        bresenhamLine(g,497+x,490+y,497+x,465+y);
+        bresenhamLine(g,498+x,490+y,498+x,474+y);
+        bresenhamLine(g,496+x,466+y,496+x,463+y);
+        bresenhamLine(g,495+x,463+y,495+x,460+y);
+        bresenhamLine(g,495+x,462+y,495+x,460+y);
+        bresenhamLine(g,494+x,459+y,494+x,457+y);
+        bresenhamLine(g,493+x,457+y,493+x,455+y);
+        bresenhamLine(g,492+x,455+y,492+x,453+y);
+        bresenhamLine(g,491+x,454+y,491+x,452+y);
+        bresenhamLine(g,489+x,452+y,489+x,450+y);
+        plot(g,488+x,451+y);
+        plot(g,487+x,449+y);
+        plot(g,488+x,450+y);
+        plot(g,487+x,448+y);
+        bresenhamLine(g,487+x,450+y,489+x,449+y);
+        plot(g,461+x,444+y);
+        plot(g,460+x,445+y);
+        plot(g,459+x,445+y);
+        plot(g,458+x,446+y);
+        bresenhamLine(g,455+x,445+y,458+x,445+y);
+        plot(g,453+x,444+y);
+        plot(g,452+x,444+y);
+        bresenhamLine(g,421+x,456+y,421+x,463+y);
+        bresenhamLine(g,420+x,462+y,420+x,465+y);
+        bresenhamLine(g,419+x,463+y,419+x,466+y);
+        bresenhamLine(g,419+x,463+y,419+x,466+y);
+        bresenhamLine(g,419+x,466+y,419+x,463+y);
+        bresenhamLine(g,418+x,466+y,418+x,463+y);
+        bresenhamLine(g,417+x,466+y,417+x,468+y);
+        bresenhamLine(g,416+x,467+y,416+x,472+y);
+        bresenhamLine(g,415+x,471+y,415+x,475+y);
+        bresenhamLine(g,414+x,474+y,414+x,482+y);
+        plot(g,413+x,480+y);
+        bresenhamLine(g,411+x,478+y,408+x,474+y);
+        plot(g,410+x,476+y);
+        plot(g,408+x,474+y);
+
+
+
 
 
         g.setColor(Color.decode("#FDD4C1"));
@@ -790,6 +824,41 @@ public class Expe extends JPanel {
         g.setColor(Color.BLUE);
 
         plot(g,500,560);
+
+        //delete-edge-in-hair
+        g.setColor(hair);
+        bresenhamLine(g,421+x,453+y,421+x,439+y);
+        bresenhamLine(g,421+x,439+y,450+x,429+y);
+        bresenhamLine(g,435+x,435+y,452+x,429+y);
+        bresenhamLine(g,452+x,429+y,472+x,430+y);
+        bresenhamLine(g,459+x,430+y,462+x,430+y);
+        bresenhamLine(g,472+x,431+y,478+x,431+y);
+        bresenhamLine(g,478+x,431+y,483+x,436+y);
+        plot(g,483+x,436+y);
+        bresenhamLine(g,484+x,436+y,495+x,447+y);
+        plot(g,495+x,447+y);
+        bresenhamLine(g,496+x,447+y,501+x,452+y);
+        bresenhamLine(g,501+x,452+y,497+x,465+y);
+        plot(g,497+x,465+y);
+
+        buffer = floodFill(buffer,495+x,465+y,face,edgeHair);
+        buffer = floodFill(buffer,492+x,457+y,face,edgeHair);
+        buffer = floodFill(buffer,490+x,453+y,face,edgeHair);
+        buffer = floodFill(buffer,486+x,450+y,face,edgeHair);
+        plot(g,498+x,460+y);
+        plot(g,497+x,463+y);
+
+
+
+        g.setColor(edgeHair);
+        plot(g,454+x,444+y);
+        plot(g,447+x,444+y);
+        plot(g,448+x,443+y);
+
+        g.setColor(Color.BLUE);
+
+//        plot(g,454+x,444+y);
+
 
     }
 
@@ -2242,7 +2311,7 @@ bezier_Curve(g2d, new int[]{365+x, 366+x, 368+x, 367+x}, new int[]{286+y, 286+y,
 
     private static void sky(Graphics g, BufferedImage buffer) {
         g.setColor(new Color(9, 30, 60));
-        bezier_Curve(g, new int[] { 0, 500, 620, }, new int[] { 280, 280, 320 });
+        bezier_Curve(g, new int[] { 0, 500, 620 }, new int[] { 280, 280, 320 });
         Color colorStart = new Color(39, 104, 151);
         Color colorEnd = new Color(4, 24, 57);
 
